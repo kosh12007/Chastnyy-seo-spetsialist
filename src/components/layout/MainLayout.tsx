@@ -5,6 +5,7 @@ import { Footer } from '@components/layout/Footer';
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs/Breadcrumbs';
 import { ScrollToTop } from '@components/common/ScrollToTop';
 import { CallbackButton } from '@components/common/CallbackButton';
+import { CookieBanner } from '@components/common/CookieBanner/CookieBanner';
 
 export const MainLayout: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ export const MainLayout: React.FC = () => {
       </main>
       <Footer />
       <CallbackButton />
+      <CookieBanner />
     </div>
   );
 };

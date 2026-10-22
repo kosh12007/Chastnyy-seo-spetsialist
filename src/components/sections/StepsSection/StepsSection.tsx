@@ -1,58 +1,80 @@
 import React from 'react';
-import { Button } from '@ui/Button';
+import { CheckCircle } from 'lucide-react';
 
 const steps = [
-  { num: '01', title: 'Консультация', desc: 'Бесплатно обсуждаем ваш проект, цели и задачи' },
-  { num: '02', title: 'Анализ сайта', desc: 'Технический аудит, позиции, трафик, конкуренты' },
-  { num: '03', title: 'Расчёт стоимости', desc: 'Называю точную стоимость работ' },
-  { num: '04', title: 'Договор и оплата', desc: 'Подписываем договор, вы оплачиваете' },
-  { num: '05', title: 'Старт работ', desc: 'Начинаю работу над вашим сайтом' },
-  { num: '06', title: 'Мониторинг', desc: 'Отслеживаю позиции, трафик, конверсии' },
-  { num: '07', title: 'Отчётность', desc: 'Ежемесячные отчёты с позициями и заявками' },
+  {
+    num: '01. Диагностика',
+    desc: 'Аудит технических ошибок, проверка индексации, анализ коммерческих факторов и конкурентов в выдаче.',
+  },
+  {
+    num: '02. Стратегия',
+    desc: 'Сбор семантического спроса через Keys.so, проектирование структуры страниц с самым быстрым потенциалом возврата.',
+  },
+  {
+    num: '03. Внедрение',
+    desc: 'Устранение дублей, оптимизация скорости, внедрение микроразметки, составление ТЗ копирайтерам и программистам.',
+  },
+  {
+    num: '04. Рост видимости',
+    desc: 'Расширение охвата, точечная работа со сниппетами в ТОП-10, безопасное ссылочное усиление и карты (Яндекс/2ГИС).',
+  },
+  {
+    num: '05. Контроль KPI',
+    desc: 'Ежемесячный прозрачный отчёт: динамика позиций, целевой трафик, конверсии и план спринта на следующий месяц.',
+  },
 ];
 
 export const StepsSection: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 bg-dark-50">
+    <section id="process" className="py-16 md:py-20 bg-dark-50 border-b border-dark-200">
       <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">Как я работаю</h2>
-          <p className="text-lg text-dark-800 max-w-2xl mx-auto">
-            Прозрачный процесс от заявки до результата за 7 шагов
+        <div className="max-w-3xl mb-12">
+          <div className="text-xs font-mono uppercase tracking-widest text-accent-700 font-bold mb-2">
+            Методология
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-dark-950 tracking-tight mb-3">
+            Понятный процесс от диагностики до регулярных продаж
+          </h2>
+          <p className="text-dark-600 text-sm sm:text-base leading-relaxed">
+            Никаких «размытых часов». Каждый этап решает конкретную бизнес-задачу.
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {steps.slice(0, 4).map((step, i) => (
-              <div key={i} className="relative">
-                <div className="bg-white rounded-xl p-6 shadow-sm">
-                  <div className="text-4xl font-bold text-primary-200 mb-2">{step.num}</div>
-                  <h3 className="text-lg font-bold font-heading mb-2">{step.title}</h3>
-                  <p className="text-sm text-dark-800">{step.desc}</p>
-                </div>
-                {i < 3 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-primary-300" />
-                )}
+        {/* 5 шагов процесса */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 font-mono text-xs mb-10">
+          {steps.map((step, idx) => (
+            <div key={idx} className="p-5 rounded-2xl bg-white border border-dark-200 shadow-clean-card space-y-2">
+              <div className="text-accent-600 font-bold text-sm">{step.num}</div>
+              <div className="font-sans text-dark-600 text-xs leading-relaxed">
+                {step.desc}
               </div>
-            ))}
-          </div>
-          <div className="grid md:grid-cols-3 gap-6 mt-6 max-w-3xl mx-auto">
-            {steps.slice(4).map((step, i) => (
-              <div key={i} className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="text-4xl font-bold text-primary-200 mb-2">{step.num}</div>
-                <h3 className="text-lg font-bold font-heading mb-2">{step.title}</h3>
-                <p className="text-sm text-dark-800">{step.desc}</p>
-              </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
-        <div className="text-center mt-10">
-          <Button variant="primary" size="lg">
-            Начать с бесплатного аудита
-          </Button>
+        {/* Что получает бизнес на практике */}
+        <div className="p-6 rounded-2xl bg-white border border-dark-200 shadow-clean-card">
+          <div className="font-bold text-dark-900 text-sm mb-4 font-heading">
+            Что получает ваш бизнес на практике:
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-sans text-dark-700">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-accent-600 shrink-0" />
+              <span>Технически здоровый сайт без скрытых ошибок</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-accent-600 shrink-0" />
+              <span>Максимальный охват спроса вашей ниши</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-accent-600 shrink-0" />
+              <span>Привлекательные сниппеты с ценами и звездами</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-accent-600 shrink-0" />
+              <span>Снижение стоимости привлечения клиента</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

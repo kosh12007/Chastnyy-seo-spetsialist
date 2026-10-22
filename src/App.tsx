@@ -1,13 +1,12 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { LoadingSpinner } from '@components/common';
 
 /**
  * Ленивая загрузка страниц (код-сплиттинг).
- * Каждая страница попадает в отдельный чанк и грузится по требованию,
- * что уменьшает размер основного бандла.
+ * Каждая страница попадает в отдельный чанк и грузится по требованию.
  */
 const HomePage = lazy(() => import('@/pages/HomePage/HomePage').then(({ HomePage }) => ({ default: HomePage })));
 const ServicesPage = lazy(() =>
@@ -24,6 +23,9 @@ const NotFoundPage = lazy(() =>
   import('@/pages/NotFoundPage/NotFoundPage').then(({ NotFoundPage }) => ({ default: NotFoundPage }))
 );
 const PrivacyPage = lazy(() => import('@/pages/PrivacyPage/PrivacyPage').then(({ PrivacyPage }) => ({ default: PrivacyPage })));
+const RequisitesPage = lazy(() =>
+  import('@/pages/RequisitesPage/RequisitesPage').then(({ RequisitesPage }) => ({ default: RequisitesPage }))
+);
 
 const PageFallback: React.FC = () => (
   <div className="flex items-center justify-center min-h-[60vh]">
@@ -49,8 +51,17 @@ export const App: React.FC = () => {
               <Route path="/kontakty/" element={<ContactsPage />} />
               <Route path="/blog/" element={<BlogPage />} />
               <Route path="/blog/:slug/" element={<ArticlePage />} />
+
+              {/* Юридические страницы (152-ФЗ и 422-ФЗ) */}
               <Route path="/politika-konfidentsialnosti/" element={<PrivacyPage type="privacy" />} />
               <Route path="/soglasie-opd/" element={<PrivacyPage type="consent" />} />
+              <Route path="/rekvizity/" element={<RequisitesPage />} />
+
+              {/* Алиасы для удобства перехода */}
+              <Route path="/privacy/" element={<Navigate to="/politika-konfidentsialnosti/" replace />} />
+              <Route path="/consent/" element={<Navigate to="/soglasie-opd/" replace />} />
+              <Route path="/requisites/" element={<Navigate to="/rekvizity/" replace />} />
+
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>

@@ -30,13 +30,13 @@ export const Textarea: React.FC<TextareaProps> = ({
             'w-full rounded-lg border border-dark-100 px-4 py-3 text-dark-900 placeholder:text-dark-500',
             'focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600/20',
             'transition-colors duration-200 resize-y min-h-[120px]',
-            error && 'border-accent-600 focus:border-accent-600 focus:ring-accent-600/20',
+            error && 'border-destructive-600 focus:border-destructive-600 focus:ring-destructive-600/20',
             className
           )
         )}
         {...props}
       />
-      {error && <span className="text-sm text-accent-600">{error}</span>}
+      {error && <span className="text-sm text-destructive-600">{error}</span>}
     </div>
   );
 };

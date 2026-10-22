@@ -21,7 +21,7 @@ export default defineConfig({
     host: true,
     strictPort: true,
     // Разрешаем проксирование запросов от Nginx и локальных хостов
-    // @ts-ignore - параметр поддерживается в Vite 5.4+ / 6.x
+    // @ts-expect-error - параметр поддерживается в Vite 5.4+ / 6.x
     allowedHosts: true,
   },
   build: {

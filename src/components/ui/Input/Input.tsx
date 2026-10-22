@@ -43,7 +43,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
               'transition-colors duration-200',
               leftIcon && 'pl-10',
               rightIcon && 'pr-10',
-              error && 'border-accent-600 focus:border-accent-600 focus:ring-accent-600/20',
+              error && 'border-destructive-600 focus:border-destructive-600 focus:ring-destructive-600/20',
               className
             )
           )}
@@ -55,7 +55,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
           </div>
         )}
       </div>
-      {error && <span className="text-sm text-accent-600">{error}</span>}
+      {error && <span className="text-sm text-destructive-600">{error}</span>}
     </div>
   );
 });

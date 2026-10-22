@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Михаил Павлов — Частный SEO-эксперт | Системное продвижение сайтов</title>
+    <!-- Google Fonts: Plus Jakarta Sans для заголовков, JetBrains Mono для данных -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        obsidian: {
+                            950: '#070A0F',
+                            900: '#0D121B',
+                            850: '#141A26',
+                            800: '#1C2436',
+                            700: '#28354D',
+                            600: '#3B4B69',
+                            500: '#64748B',
+                        },
+                        growth: {
+                            50: '#ECFDF5',
+                            100: '#D1FAE5',
+                            400: '#34D399',
+                            500: '#10B981',
+                            600: '#059669',
+                            700: '#047857',
+                        },
+                        amberGold: {
+                            400: '#FBBF24',
+                            500: '#F59E0B',
+                            600: '#D97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .grid-bg {
+            background-size: 32px 32px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        /* Тонкие скроллбары */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #070A0F; }
+        ::-webkit-scrollbar-thumb { background: #1C2436; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #28354D; }
+    </style>
+</head>
+<body class="bg-obsidian-950 text-slate-200 font-sans antialiased selection:bg-growth-500/20 selection:text-growth-400">
+
+    <!-- 1. Верхний информационный бар (Юридическая открытость без псевдо-дефицита) -->
+    <div class="border-b border-obsidian-850 bg-obsidian-900/95 text-xs text-slate-400 py-2.5 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 font-mono">
+            <div class="flex items-center space-x-3">
+                <span class="inline-flex items-center text-growth-400">
+                    <span class="w-2 h-2 rounded-full bg-growth-500 mr-2"></span>
+                    Частная SEO-практика
+                </span>
+                <span class="text-obsidian-700">|</span>
+                <span class="text-slate-400 hidden sm:inline">ИП Павлов М.В. • ОГРНИП 321774600129381 • Договор и безналичный расчет</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <span class="hidden md:inline text-slate-400">Пн–Пт 09:30–19:00 МСК</span>
+                <a href="tel:+74951208842" class="text-slate-200 hover:text-growth-400 transition-colors font-semibold">
+                    +7 (495) 120-88-42
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Sticky Навигация -->
+    <header class="sticky top-0 z-50 bg-obsidian-950/90 backdrop-blur-md border-b border-obsidian-850">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 h-18 py-3.5 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-obsidian-850 border border-obsidian-700 flex items-center justify-center">
+                    <span class="font-mono font-bold text-growth-400 text-base">МП</span>
+                </div>
+                <div>
+                    <div class="font-bold text-white tracking-tight text-sm flex items-center gap-1.5">
+                        Михаил Павлов
+                    </div>
+                    <div class="text-[11px] text-slate-400 font-mono">Частный SEO-эксперт</div>
+                </div>
+            </div>
+
+            <!-- Меню: логика пути клиента -->
+            <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#fit" class="hover:text-growth-400 transition-colors">Кому подхожу</a>
+                <a href="#cases" class="hover:text-growth-400 transition-colors">Кейсы</a>
+                <a href="#process" class="hover:text-growth-400 transition-colors">Как работаю</a>
+                <a href="#pricing" class="hover:text-growth-400 transition-colors">Тарифы</a>
+                <a href="#calculator" class="hover:text-growth-400 transition-colors">Калькулятор бюджета</a>
+                <a href="#about" class="hover:text-growth-400 transition-colors">Обо мне</a>
+                <a href="#faq" class="hover:text-growth-400 transition-colors">FAQ</a>
+            </nav>
+
+            <!-- Контакты в шапке -->
+            <div class="flex items-center space-x-3">
+                <a href="https://t.me/seopavlov" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-obsidian-850 hover:bg-obsidian-800 border border-obsidian-750 text-xs font-mono text-slate-200 transition-all">
+                    <i data-lucide="send" class="w-3.5 h-3.5 text-sky-400"></i>
+                    <span>@seopavlov</span>
+                </a>
+                <a href="#audit-form" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-growth-600 hover:bg-growth-500 text-obsidian-950 font-bold text-xs font-mono uppercase tracking-wider transition-all">
+                    <span>Оценка проекта</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. HERO: Спокойное, взрослое позиционирование частного консультанта -->
+    <section class="relative pt-12 pb-16 overflow-hidden grid-bg border-b border-obsidian-850">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Левая колонка: Суть предложения и главное преимущество (8 колонок) -->
+                <div class="lg:col-span-8 space-y-6">
+                    
+                    <!-- Бейдж прямого контакта -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-obsidian-850 border border-obsidian-750 text-xs text-slate-300 font-mono">
+                        <span class="w-2 h-2 rounded-full bg-growth-500"></span>
+                        <span>Вы работаете напрямую со мной — без аккаунт-менеджеров и стажеров</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl xl:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+                        SEO для коммерческих сайтов и e-commerce. <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-growth-400 to-emerald-200">
+                            Лично веду проект от стратегии до внедрения
+                        </span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
+                        Не продаю «отчёты со ссылками» и не раздуваю штат. Выстраиваю технический фундамент сайта, проектирую посадочные страницы под реальный коммерческий спрос и беру на себя ответственность за выполнение оговоренного плана.
+                    </p>
+
+                    <!-- 3 ключевых факта доверия (без лишнего шума) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 font-mono text-xs max-w-xl">
+                        <div class="p-3.5 rounded-xl bg-obsidian-900 border border-obsidian-800">
+                            <div class="text-white font-bold text-base mb-0.5">12+ лет</div>
+                            <div class="text-slate-400">в поисковой оптимизации</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-obsidian-900 border border-obsidian-800">
+                            <div class="text-white font-bold text-base mb-0.5">180+ проектов</div>
+                            <div class="text-slate-400">в e-com, B2B и медицине</div>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-obsidian-900 border border-obsidian-800">
+                            <div class="text-white font-bold text-base mb-0.5">По договору</div>
+                            <div class="text-slate-400">фиксированные KPI и план</div>
+                        </div>
+                    </div>
+
+                    <!-- CTA кнопки -->
+                    <div class="pt-4 flex flex-wrap items-center gap-4">
+                        <a href="#audit-form" class="px-6 py-3.5 rounded-xl bg-growth-600 hover:bg-growth-500 text-obsidian-950 font-bold text-sm font-mono tracking-wider transition-all flex items-center gap-2 shadow-lg shadow-growth-950/40">
+                            <span>Получить предварительную оценку</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#cases" class="px-5 py-3.5 rounded-xl bg-obsidian-850 hover:bg-obsidian-800 text-slate-200 font-semibold text-sm border border-obsidian-750 transition-all flex items-center gap-2">
+                            <span>Посмотреть реальные кейсы</span>
+                            <i data-lucide="arrow-down" class="w-4 h-4 text-slate-400"></i>
+                        </a>
+                    </div>
+
+                    <div class="text-xs text-slate-400 font-mono flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-growth-400 shrink-0"></i>
+                        <span>Пришлите сайт — за 15 минут определю, есть ли у него органический потенциал.</span>
+                    </div>
+                </div>
+
+                <!-- Правая колонка: Лаконичная карточка специалиста (4 колонки) -->
+                <div class="lg:col-span-4">
+                    <div class="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 shadow-xl space-y-5">
+                        <div class="flex items-center gap-4">
+                            <!-- Аватар/фото эксперта -->
+                            <div class="w-16 h-16 rounded-2xl bg-obsidian-800 border-2 border-growth-500/30 overflow-hidden flex items-center justify-center shrink-0">
+                                <i data-lucide="user" class="w-8 h-8 text-growth-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-base">Михаил Павлов</h3>
+                                <p class="text-xs text-slate-400 font-mono">Частный SEO-эксперт</p>
+                                <p class="text-xs text-growth-400 font-mono mt-0.5">Личное ведение проектов</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-obsidian-800 pt-4 text-xs text-slate-300 space-y-2.5 font-sans leading-relaxed">
+                            <p class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Погружаюсь в экономику и маржинальность ваших товарных групп или услуг.</span>
+                            </p>
+                            <p class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Прямой чат в Telegram без посредников — оперативные ответы в течение 1–2 часов.</span>
+                            </p>
+                            <p class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Строго белые методы оптимизации: без риска ручных санкций и фильтров.</span>
+                            </p>
+                        </div>
+
+                        <div class="border-t border-obsidian-800 pt-4 flex items-center justify-between text-xs font-mono text-slate-400">
+                            <span>Одновременно в работе:</span>
+                            <span class="text-white font-semibold">не более 5–6 проектов</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. КОМУ Я ПОДХОЖУ (Селективность & Фильтр клиентов) -->
+    <section id="fit" class="py-16 border-b border-obsidian-850 bg-obsidian-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="max-w-3xl mb-10">
+                <div class="text-xs font-mono uppercase tracking-widest text-growth-400 mb-2">Специализация и фокус</div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
+                    С кем я работаю наиболее эффективно
+                </h2>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Я не беру в работу всё подряд. SEO работает только там, где есть реальный спрос и готовность развивать сайт.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Категория 1 -->
+                <div class="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-obsidian-850 border border-obsidian-750 flex items-center justify-center text-growth-400">
+                        <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white">Интернет-магазины (E-commerce)</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                        Каталоги от 500 товаров. Оптимизация структуры, теговые страницы, фильтры, коммерческие сниппеты с ценами и разметка Schema.org.
+                    </p>
+                    <div class="text-xs text-slate-400 font-mono pt-2 border-t border-obsidian-800">
+                        Цель: рост заказов и снижение CPO
+                    </div>
+                </div>
+
+                <!-- Категория 2 -->
+                <div class="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-obsidian-850 border border-obsidian-750 flex items-center justify-center text-growth-400">
+                        <i data-lucide="briefcase" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white">Сайты услуг и B2B компании</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                        Медицинские центры, производство, промышленность, юриспруденция. Проработка экспертности (E-E-A-T), региональное продвижение и конверсионные посадочные.
+                    </p>
+                    <div class="text-xs text-slate-400 font-mono pt-2 border-t border-obsidian-800">
+                        Цель: стабильный поток входящих заявок
+                    </div>
+                </div>
+
+                <!-- Категория 3 -->
+                <div class="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-obsidian-850 border border-obsidian-750 flex items-center justify-center text-growth-400">
+                        <i data-lucide="wrench" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white">Сложные технические проекты</h3>
+                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                        Переезд сайтов на новый домен или CMS без потери трафика, снятие фильтров Яндекса, оптимизация скорости и решение проблем индексации.
+                    </p>
+                    <div class="text-xs text-slate-400 font-mono pt-2 border-t border-obsidian-800">
+                        Цель: восстановление и масштабирование
+                    </div>
+                </div>
+            </div>
+
+            <!-- Принцип честной селективности -->
+            <div class="p-4 rounded-xl bg-obsidian-850 border border-obsidian-750 flex items-center gap-3 text-xs font-mono text-slate-300">
+                <i data-lucide="alert-circle" class="w-4 h-4 text-amberGold-400 shrink-0"></i>
+                <span>Принцип честности: я прямо откажусь от сотрудничества, если увижу, что в вашей нише SEO не окупится или бюджет рациональнее направить в контекстную рекламу.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. КЕЙСЫ (Доказательства компетенции ДО калькулятора и цен) -->
+    <section id="cases" class="py-20 border-b border-obsidian-850 bg-obsidian-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="flex flex-wrap items-end justify-between gap-6 mb-12">
+                <div>
+                    <div class="text-xs font-mono uppercase tracking-widest text-growth-400 mb-2">Реальная практика</div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                        Кейсы с деталями и исходной ситуацией
+                    </h2>
+                </div>
+                <div class="text-xs font-mono text-slate-400">
+                    Данные Яндекс.Метрики и Топвизора
+                </div>
+            </div>
+
+            <!-- 3 подробных кейса -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                
+                <!-- Кейс 1: Сантехника -->
+                <div class="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 flex flex-col justify-between hover:border-obsidian-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
+                            <span>Интернет-магазин</span>
+                            <span class="text-growth-400 font-semibold">Москва</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-2 leading-snug">
+                            Инженерная сантехника: рост органики с 1 200 до 8 400 визитов/сутки
+                        </h3>
+                        <div class="text-xs text-slate-300 font-sans leading-relaxed mb-4 space-y-1.5">
+                            <p><strong>Исходная проблема:</strong> 1С-Битрикс генерировал дубли страниц фильтров, карточки не индексировались Яндексом.</p>
+                            <p><strong>Что сделано:</strong> спроектирована фильтрационная сетка на 140 теговых страниц, устранены дубли, настроена Schema.org с ценами.</p>
+                        </div>
+                        
+                        <!-- Метрики -->
+                        <div class="grid grid-cols-3 gap-2 p-3 rounded-xl bg-obsidian-850 font-mono text-center text-xs mb-4">
+                            <div>
+                                <div class="text-growth-400 font-bold text-sm">37 → 8</div>
+                                <div class="text-[10px] text-slate-400">Ср. позиция</div>
+                            </div>
+                            <div class="border-x border-obsidian-750">
+                                <div class="text-white font-bold text-sm">+380%</div>
+                                <div class="text-[10px] text-slate-400">Трафик</div>
+                            </div>
+                            <div>
+                                <div class="text-amberGold-400 font-bold text-sm">5 мес</div>
+                                <div class="text-[10px] text-slate-400">Срок</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="openCaseModal('case1')" class="w-full py-2.5 rounded-lg bg-obsidian-800 hover:bg-obsidian-750 text-slate-200 text-xs font-mono font-semibold transition-colors flex items-center justify-center gap-1.5">
+                        <span>Разобрать кейс подробно</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </button>
+                </div>
+
+                <!-- Кейс 2: Медицина -->
+                <div class="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 flex flex-col justify-between hover:border-obsidian-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
+                            <span>Клиника медицины</span>
+                            <span class="text-growth-400 font-semibold">Санкт-Петербург</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-2 leading-snug">
+                            Косметология: снижение стоимости лида с 3 400 ₽ до 890 ₽
+                        </h3>
+                        <div class="text-xs text-slate-300 font-sans leading-relaxed mb-4 space-y-1.5">
+                            <p><strong>Исходная проблема:</strong> высокая зависимость от Яндекс.Директа с перегретым аукционом (клики по 300+ ₽).</p>
+                            <p><strong>Что сделано:</strong> внедрены требования E-E-A-T (карточки врачей с дипломами), переписаны коммерческие посадочные, оформлен Яндекс.Бизнес.</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-2 p-3 rounded-xl bg-obsidian-850 font-mono text-center text-xs mb-4">
+                            <div>
+                                <div class="text-growth-400 font-bold text-sm">в 3.8 раз</div>
+                                <div class="text-[10px] text-slate-400">Дешевле лид</div>
+                            </div>
+                            <div class="border-x border-obsidian-750">
+                                <div class="text-white font-bold text-sm">+215%</div>
+                                <div class="text-[10px] text-slate-400">Заявки</div>
+                            </div>
+                            <div>
+                                <div class="text-amberGold-400 font-bold text-sm">4 мес</div>
+                                <div class="text-[10px] text-slate-400">Срок</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="openCaseModal('case2')" class="w-full py-2.5 rounded-lg bg-obsidian-800 hover:bg-obsidian-750 text-slate-200 text-xs font-mono font-semibold transition-colors flex items-center justify-center gap-1.5">
+                        <span>Разобрать кейс подробно</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </button>
+                </div>
+
+                <!-- Кейс 3: B2B Оборудование -->
+                <div class="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 flex flex-col justify-between hover:border-obsidian-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
+                            <span>B2B Производство</span>
+                            <span class="text-growth-400 font-semibold">Вся Россия</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-2 leading-snug">
+                            Станочное оборудование: снятие спам-фильтра и вывод в ТОП-3
+                        </h3>
+                        <div class="text-xs text-slate-300 font-sans leading-relaxed mb-4 space-y-1.5">
+                            <p><strong>Исходная проблема:</strong> просадка трафика на 80% после неудачной ссылочной закупки предыдущим подрядчиком.</p>
+                            <p><strong>Что сделано:</strong> аудит и чистка ссылочного профиля, переработка текстов без спама ключами, актуализация каталога под оптовиков.</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-2 p-3 rounded-xl bg-obsidian-850 font-mono text-center text-xs mb-4">
+                            <div>
+                                <div class="text-growth-400 font-bold text-sm">ТОП-3</div>
+                                <div class="text-[10px] text-slate-400">Ключевики</div>
+                            </div>
+                            <div class="border-x border-obsidian-750">
+                                <div class="text-white font-bold text-sm">+180%</div>
+                                <div class="text-[10px] text-slate-400">Опт. заявки</div>
+                            </div>
+                            <div>
+                                <div class="text-amberGold-400 font-bold text-sm">3 мес</div>
+                                <div class="text-[10px] text-slate-400">Срок</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="openCaseModal('case3')" class="w-full py-2.5 rounded-lg bg-obsidian-800 hover:bg-obsidian-750 text-slate-200 text-xs font-mono font-semibold transition-colors flex items-center justify-center gap-1.5">
+                        <span>Разобрать кейс подробно</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. КАК Я РАБОТАЮ (Понятный процесс из 5 шагов вместо заумных терминов) -->
+    <section id="process" class="py-16 border-b border-obsidian-850 bg-obsidian-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="max-w-3xl mb-12">
+                <div class="text-xs font-mono uppercase tracking-widest text-growth-400 mb-2">Методология</div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
+                    Понятный процесс от диагностики до регулярных продаж
+                </h2>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Никаких «размытых часов». Каждый этап решает конкретную бизнес-задачу.
+                </p>
+            </div>
+
+            <!-- 5 шагов процесса -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 font-mono text-xs">
+                
+                <div class="p-5 rounded-xl bg-obsidian-900 border border-obsidian-800 space-y-2">
+                    <div class="text-growth-400 font-bold text-sm">01. Диагностика</div>
+                    <div class="font-sans text-slate-300 text-xs leading-relaxed">
+                        Аудит технических ошибок, проверка индексации, анализ коммерческих факторов и конкурентов в выдаче.
+                    </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-obsidian-900 border border-obsidian-800 space-y-2">
+                    <div class="text-growth-400 font-bold text-sm">02. Стратегия</div>
+                    <div class="font-sans text-slate-300 text-xs leading-relaxed">
+                        Сбор семантического спроса через Keys.so, проектирование структуры страниц с самым быстрым потенциалом возврата.
+                    </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-obsidian-900 border border-obsidian-800 space-y-2">
+                    <div class="text-growth-400 font-bold text-sm">03. Внедрение</div>
+                    <div class="font-sans text-slate-300 text-xs leading-relaxed">
+                        Устранение дублей, оптимизация скорости, внедрение микроразметки, составление ТЗ копирайтерам и программистам.
+                    </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-obsidian-900 border border-obsidian-800 space-y-2">
+                    <div class="text-growth-400 font-bold text-sm">04. Рост видимости</div>
+                    <div class="font-sans text-slate-300 text-xs leading-relaxed">
+                        Расширение охвата, точечная работа со сниппетами в ТОП-10, безопасное ссылочное усиление и карты (Яндекс/2ГИС).
+                    </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-obsidian-900 border border-obsidian-800 space-y-2">
+                    <div class="text-growth-400 font-bold text-sm">05. Контроль KPI</div>
+                    <div class="font-sans text-slate-300 text-xs leading-relaxed">
+                        Ежемесячный прозрачный отчёт: динамика позиций, целевой трафик, конверсии и план спринта на следующий месяц.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Что именно получает бизнес на понятном языке -->
+            <div class="mt-8 p-6 rounded-2xl bg-obsidian-850 border border-obsidian-750">
+                <div class="font-bold text-white text-sm mb-3">Что получает ваш бизнес на практике:</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-sans text-slate-300">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-growth-400 shrink-0"></i>
+                        <span>Технически здоровый сайт без скрытых ошибок</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-growth-400 shrink-0"></i>
+                        <span>Максимальный охват спроса вашей ниши</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-growth-400 shrink-0"></i>
+                        <span>Привлекательные сниппеты с ценами и звездами</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-growth-400 shrink-0"></i>
+                        <span>Снижение стоимости привлечения клиента</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. ТАРИФЫ (Честные названия: SEO Start / SEO Growth / SEO Scale) -->
+    <section id="pricing" class="py-20 border-b border-obsidian-850 bg-obsidian-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <div class="text-xs font-mono uppercase tracking-widest text-growth-400 mb-2">Прозрачные тарифы</div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
+                    Стоимость ежемесячного ведения проекта
+                </h2>
+                <p class="text-slate-300 text-sm">
+                    Работа по официальному договору. В стоимость входит как аналитическая работа, так и контроль внедрения правок.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                
+                <!-- Тариф 1: SEO Start -->
+                <div class="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Для небольших сайтов</div>
+                        <h3 class="text-xl font-bold text-white mb-1">SEO Start</h3>
+                        <p class="text-xs text-slate-400 mb-4 font-mono">Локальные услуги, молодые сайты до 1 года</p>
+                        
+                        <div class="text-3xl font-extrabold text-white font-mono mb-6">
+                            35 000 ₽ <span class="text-xs font-normal text-slate-400">/ месяц</span>
+                        </div>
+                        
+                        <ul class="space-y-3 text-xs font-sans text-slate-300 mb-6">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Технический аудит и исправление критических ошибок</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Сбор семантики: до 150 целевых запросов</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Локальное SEO: Яндекс.Карты, Яндекс.Бизнес, 2ГИС</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Ежемесячный отчет по позициям и трафику</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#audit-form" class="w-full py-3 rounded-xl bg-obsidian-800 hover:bg-obsidian-750 text-white font-mono text-xs font-bold text-center border border-obsidian-700 transition-all">
+                        Выбрать SEO Start
+                    </a>
+                </div>
+
+                <!-- Тариф 2: SEO Growth (Основной) -->
+                <div class="p-6 rounded-2xl bg-gradient-to-b from-obsidian-850 to-obsidian-900 border-2 border-growth-500/40 relative shadow-2xl flex flex-col justify-between">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-growth-600 text-obsidian-950 font-mono text-[10px] font-extrabold uppercase tracking-widest">
+                        Основной выбор (80% проектов)
+                    </div>
+                    <div>
+                        <div class="text-xs font-mono uppercase tracking-wider text-growth-400 mb-2">Для системного роста</div>
+                        <h3 class="text-xl font-bold text-white mb-1">SEO Growth</h3>
+                        <p class="text-xs text-slate-300 mb-4 font-mono">Коммерческие сайты в Москве, e-com до 2000 SKU</p>
+                        
+                        <div class="text-3xl font-extrabold text-growth-400 font-mono mb-6">
+                            65 000 ₽ <span class="text-xs font-normal text-slate-400">/ месяц</span>
+                        </div>
+                        
+                        <ul class="space-y-3 text-xs font-sans text-slate-200 mb-6">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Всё из тарифа Start + расширенная семантика до 500 фраз</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Проектирование и оптимизация новых посадочных страниц</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Внедрение микроразметки Schema.org (Product, FAQ, Breadcrumbs)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Анализ конверсии страниц (CRO) и улучшение сниппетов</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>30–35 часов чистого времени эксперта в месяц</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#audit-form" class="w-full py-3 rounded-xl bg-growth-600 hover:bg-growth-500 text-obsidian-950 font-mono text-xs font-bold text-center tracking-wider transition-all shadow-lg shadow-growth-950/60">
+                        Выбрать SEO Growth
+                    </a>
+                </div>
+
+                <!-- Тариф 3: SEO Scale -->
+                <div class="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Для масштабных ресурсов</div>
+                        <h3 class="text-xl font-bold text-white mb-1">SEO Scale</h3>
+                        <p class="text-xs text-slate-400 mb-4 font-mono">Крупные интернет-магазины от 5000 SKU, порталы</p>
+                        
+                        <div class="text-3xl font-extrabold text-white font-mono mb-6">
+                            110 000 ₽ <span class="text-xs font-normal text-slate-400">/ месяц</span>
+                        </div>
+                        
+                        <ul class="space-y-3 text-xs font-sans text-slate-300 mb-6">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Неограниченный пул семантики и работа с большими каталогами</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Прямой контроль внедрения доработок программистами на CMS</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>Управление репутацией и SERM в выдаче</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                                <span>50+ часов времени эксперта в месяц</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#audit-form" class="w-full py-3 rounded-xl bg-obsidian-800 hover:bg-obsidian-750 text-white font-mono text-xs font-bold text-center border border-obsidian-700 transition-all">
+                        Выбрать SEO Scale
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Честная оговорка про KPI -->
+            <div class="p-4 rounded-xl bg-obsidian-900/80 border border-obsidian-800 text-xs font-mono text-slate-400 flex items-start gap-3">
+                <i data-lucide="file-text" class="w-4 h-4 text-growth-400 shrink-0 mt-0.5"></i>
+                <div>
+                    <strong class="text-white">Позиция по KPI в договоре:</strong>
+                    В договоре фиксируются конкретный объем регламентных задач, устранение технических ошибок и регулярный мониторинг динамики. Поскольку алгоритмы поиска принадлежат Яндексу и Google, добросовестный специалист не гарантирует конкретное 1-е место к определенному числу, но несет ответственность за качество и своевременность всех работ.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. ЧЕСТНЫЙ КАЛЬКУЛЯТОР (Ориентир диапазона бюджета, а не псевдоточные цифры) -->
+    <section id="calculator" class="py-16 border-b border-obsidian-850 bg-obsidian-900/40">
+        <div class="max-w-5xl mx-auto px-4 sm:px-8">
+            <div class="max-w-2xl mb-10">
+                <div class="text-xs font-mono uppercase tracking-widest text-growth-400 mb-2">Ориентировочная оценка</div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
+                    Калькулятор ориентира бюджета
+                </h2>
+                <p class="text-slate-300 text-sm">
+                    SEO невозможно линейно рассчитать одной формулой. Этот расчет дает честный ориентир по вилке затрат перед детальной диагностикой.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center p-6 sm:p-8 rounded-2xl bg-obsidian-900 border border-obsidian-800">
+                
+                <!-- Параметры (7 колонок) -->
+                <div class="md:col-span-7 space-y-5 font-mono text-xs">
+                    <div>
+                        <label class="block text-slate-300 uppercase tracking-wider mb-2">Тип проекта</label>
+                        <div class="grid grid-cols-2 gap-2" id="calc-type-group">
+                            <button onclick="updateBudgetEstimate('service')" id="btn-type-service" class="p-3 rounded-xl bg-obsidian-800 border border-growth-500/50 text-left text-white transition-all">
+                                <div>Сайт услуг / B2B</div>
+                                <div class="text-[10px] text-slate-400">до 30–50 страниц</div>
+                            </button>
+                            <button onclick="updateBudgetEstimate('ecom')" id="btn-type-ecom" class="p-3 rounded-xl bg-obsidian-850 border border-obsidian-750 text-left text-slate-400 hover:text-white transition-all">
+                                <div>Интернет-магазин</div>
+                                <div class="text-[10px] text-slate-400">Каталог товаров</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-300 uppercase tracking-wider mb-2">Регион продвижения</label>
+                        <div class="grid grid-cols-2 gap-2" id="calc-geo-group">
+                            <button onclick="updateGeoEstimate('msk')" id="btn-geo-msk" class="p-3 rounded-xl bg-obsidian-800 border border-growth-500/50 text-left text-white transition-all">
+                                <div>Москва и СПб</div>
+                                <div class="text-[10px] text-amberGold-400">Высокая конкуренция</div>
+                            </button>
+                            <button onclick="updateGeoEstimate('regions')" id="btn-geo-regions" class="p-3 rounded-xl bg-obsidian-850 border border-obsidian-750 text-left text-slate-400 hover:text-white transition-all">
+                                <div>Регионы РФ</div>
+                                <div class="text-[10px] text-slate-400">Средняя конкуренция</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Результат в виде диапазона (5 колонок) -->
+                <div class="md:col-span-5 p-6 rounded-xl bg-obsidian-850 border border-obsidian-750 space-y-4">
+                    <div class="text-xs font-mono text-slate-400 uppercase">Ориентир бюджета:</div>
+                    <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight" id="calc-range-display">
+                        55 000 – 75 000 ₽ <span class="text-xs font-normal text-slate-400">/ мес</span>
+                    </div>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">
+                        Точная стоимость определяется после экспресс-аудита: зависит от технического состояния сайта, глубины семантики и объема внедрения.
+                    </p>
+                    <a href="#audit-form" class="inline-block w-full py-2.5 rounded-lg bg-growth-600 hover:bg-growth-500 text-obsidian-950 font-bold font-mono text-xs uppercase tracking-wider text-center transition-all">
+                        Запросить точную оценку
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. ЧАСТНЫЙ ЭКСПЕРТ VS АГЕНТСТВО (Спокойное сравнение моделей без агрессии) -->
+    <section class="py-16 border-b border-obsidian-850 bg-obsidian-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="max-w-3xl mb-12">
+                <div class="text-xs font-mono uppercase tracking-widest text-growth-400 mb-2">Формат сотрудничества</div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
+                    Когда частный эксперт действительно выгоднее агентства
+                </h2>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Агентство и частный специалист — это разные модели под разные задачи бизнеса. Давайте сравним их объективно.
+                </p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left font-mono text-xs border-collapse">
+                    <thead>
+                        <tr class="border-b border-obsidian-800 text-slate-400 uppercase tracking-wider text-[11px]">
+                            <th class="py-3 px-4">Критерий</th>
+                            <th class="py-3 px-4 bg-growth-950/20 text-growth-400 border-x border-growth-500/20">Частный эксперт (Мой подход)</th>
+                            <th class="py-3 px-4">Digital-агентство</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-obsidian-850 text-slate-300 font-sans">
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-white">Прямой контакт</td>
+                            <td class="py-3 px-4 bg-growth-950/10 text-growth-400 border-x border-growth-500/20">Напрямую со специалистом в Telegram за 15–30 мин</td>
+                            <td class="py-3 px-4 text-slate-400">Через цепочку: клиент → аккаунт → тимлид → исполнитель</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-white">Фокус внимания</td>
+                            <td class="py-3 px-4 bg-growth-950/10 text-growth-400 border-x border-growth-500/20">Не более 5–6 проектов одновременно</td>
+                            <td class="py-3 px-4 text-slate-400">У одного специалиста в пуле 20–35 проектов</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-white">Структура цены</td>
+                            <td class="py-3 px-4 bg-growth-950/10 text-growth-400 border-x border-growth-500/20">Оплата реальных часов глубокой работы над сайтом</td>
+                            <td class="py-3 px-4 text-slate-400">Включает аренду офиса, отдел продаж и менеджмент</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-mono font-bold text-white">Кому идеально подходит</td>
+                            <td class="py-3 px-4 bg-growth-950/10 text-growth-400 border-x border-growth-500/20">Собственникам и директорам, ценящим вовлеченность и персональный контакт</td>
+                            <td class="py-3 px-4 text-slate-400">Корпорациям, которым требуется комплексный подрядчик под ключ (SMM + PR + Дизайн)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. ОБО МНЕ (Человеческий блок, биография и принципы) -->
+    <section id="about" class="py-16 border-b border-obsidian-850 bg-obsidian-900/30">
+        <div class="max-w-5xl mx-auto px-4 sm:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                
+                <!-- Фотография / профиль -->
+                <div class="md:col-span-5">
+                    <div class="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 space-y-4">
+                        <div class="aspect-square rounded-xl bg-obsidian-800 border border-obsidian-750 flex items-center justify-center">
+                            <i data-lucide="user-check" class="w-20 h-20 text-growth-400/80"></i>
+                        </div>
+                        <div class="text-center font-mono">
+                            <div class="font-bold text-white text-base">Михаил Павлов</div>
+                            <div class="text-xs text-slate-400">Практикующий SEO-специалист</div>
+                            <div class="text-[11px] text-growth-400 mt-1">В поиске с 2012 года</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Биография и подход -->
+                <div class="md:col-span-7 space-y-4 text-sm text-slate-300 font-sans leading-relaxed">
+                    <div class="text-xs font-mono uppercase tracking-widest text-growth-400">Личность и опыт</div>
+                    <h2 class="text-2xl font-extrabold text-white tracking-tight">
+                        «Я сознательно не строю поточное агентство»
+                    </h2>
+                    
+                    <p>
+                        В SEO я пришел в 2012 году. Прошел путь от технического специалиста до тимлида отдела поисковой оптимизации в крупном московском digital-агентстве.
+                    </p>
+                    <p>
+                        С 2018 года работаю полностью самостоятельно как частный эксперт. Мой выбор — вести небольшое количество проектов (до 5–6 одновременно), но делать это с глубоким погружением в бизнес заказчика, а не ставить работу на бездушный конвейер.
+                    </p>
+                    <p>
+                        Регулярно тестирую изменения алгоритмов Яндекса и Google, использую профессиональный софт (Keys.so, Screaming Frog, Топвизор) и несу персональную репутационную ответственность за каждый сайт.
+                    </p>
+
+                    <!-- Контакты для быстрой связи -->
+                    <div class="pt-2 flex flex-wrap items-center gap-4 font-mono text-xs">
+                        <a href="https://t.me/seopavlov" target="_blank" class="flex items-center gap-1.5 text-sky-400 hover:underline">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            Telegram: @seopavlov
+                        </a>
+                        <span class="text-obsidian-700">|</span>
+                        <a href="mailto:seo@pavlov-expert.ru" class="text-slate-300 hover:text-white transition-colors">
+                            seo@pavlov-expert.ru
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. FAQ (Честные и спокойные ответы) -->
+    <section id="faq" class="py-16 border-b border-obsidian-850 bg-obsidian-950">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8">
+            <div class="text-center mb-12">
+                <div class="text-xs font-mono uppercase tracking-widest text-growth-400 mb-2">Вопросы и ответы</div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
+                    Часто задаваемые вопросы
+                </h2>
+            </div>
+
+            <div class="space-y-3 font-mono text-xs">
+                
+                <div class="rounded-xl border border-obsidian-800 bg-obsidian-900 overflow-hidden">
+                    <button onclick="toggleFaq(1)" class="w-full p-4 text-left font-bold text-white flex items-center justify-between hover:bg-obsidian-850 transition-colors">
+                        <span>1. Какие гарантии вы даете на вывод сайта в ТОП-10?</span>
+                        <i data-lucide="chevron-down" id="faq-icon-1" class="w-4 h-4 text-growth-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-body-1" class="p-4 pt-0 text-slate-300 font-sans leading-relaxed text-xs border-t border-obsidian-800/60 bg-obsidian-950/40">
+                        Поисковые алгоритмы Яндекса и Google принадлежат сторонним компаниям, поэтому 100% гарантию конкретной строчки обещают только дилетанты. Я гарантирую в договоре строгое выполнение согласованного объема регламентных работ, своевременность отчетов и прозрачную аналитику динамики.
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-obsidian-800 bg-obsidian-900 overflow-hidden">
+                    <button onclick="toggleFaq(2)" class="w-full p-4 text-left font-bold text-white flex items-center justify-between hover:bg-obsidian-850 transition-colors">
+                        <span>2. Когда ждать первых результатов в трафике?</span>
+                        <i data-lucide="chevron-down" id="faq-icon-2" class="w-4 h-4 text-growth-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-body-2" class="hidden p-4 pt-0 text-slate-300 font-sans leading-relaxed text-xs border-t border-obsidian-800/60 bg-obsidian-950/40">
+                        Первые результаты по индексации и низкочастотным фразам видны на 3–4 неделе после внедрения правок технического аудита. Ощутимый рост целевого трафика наступает на 2–3 месяц для зрелых сайтов и на 4–6 месяц для молодых доменов.
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-obsidian-800 bg-obsidian-900 overflow-hidden">
+                    <button onclick="toggleFaq(3)" class="w-full p-4 text-left font-bold text-white flex items-center justify-between hover:bg-obsidian-850 transition-colors">
+                        <span>3. Кто внедряет технические задания на сайте?</span>
+                        <i data-lucide="chevron-down" id="faq-icon-3" class="w-4 h-4 text-growth-400 transition-transform"></i>
+                    </button>
+                    <div id="faq-body-3" class="hidden p-4 pt-0 text-slate-300 font-sans leading-relaxed text-xs border-t border-obsidian-800/60 bg-obsidian-950/40">
+                        Если у вас есть штатный разработчик — я формирую для него исчерпывающие ТЗ с примерами кода. Если программиста нет — базовые правки на популярных CMS (Битрикс, WordPress, Tilda) беру на себя или подключаю проверенного программиста.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. ФОРМА: ПОЛУЧИТЬ ПРЕДВАРИТЕЛЬНУЮ ОЦЕНКУ (Честная конверсия) -->
+    <section id="audit-form" class="py-16 bg-gradient-to-b from-obsidian-950 to-obsidian-900">
+        <div class="max-w-3xl mx-auto px-4 sm:px-8">
+            <div class="p-8 sm:p-10 rounded-2xl bg-obsidian-900 border border-obsidian-800 shadow-2xl">
+                
+                <div class="mb-6">
+                    <div class="text-xs font-mono uppercase tracking-wider text-growth-400 mb-1">Без навязчивых продаж</div>
+                    <h3 class="text-2xl font-extrabold text-white tracking-tight mb-2">
+                        Получить предварительную оценку проекта
+                    </h3>
+                    <p class="text-slate-300 text-xs font-sans leading-relaxed">
+                        Пришлите ссылку на сайт. За 15 минут я лично проверю его текущую видимость, определю точки потерь и сориентирую по бюджету и срокам.
+                    </p>
+                </div>
+
+                <form onsubmit="handleRealSubmit(event)" class="space-y-4 font-mono text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-300 uppercase tracking-wider mb-2">Адрес сайта</label>
+                            <input type="text" id="form-site" required placeholder="mysite.ru" class="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-obsidian-750 text-white placeholder-slate-500 focus:outline-none focus:border-growth-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 uppercase tracking-wider mb-2">Телефон или Telegram</label>
+                            <input type="text" id="form-contact" required placeholder="+7 (___) ___-__-__ или @username" class="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-obsidian-750 text-white placeholder-slate-500 focus:outline-none focus:border-growth-500 transition-colors">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-300 uppercase tracking-wider mb-2">Куда удобнее ответить?</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <label class="p-2.5 rounded-lg bg-obsidian-950 border border-obsidian-750 flex items-center justify-center gap-2 cursor-pointer hover:border-growth-500/50">
+                                <input type="radio" name="reply_channel" value="telegram" checked class="text-growth-500 focus:ring-0">
+                                <span class="text-white text-xs">Telegram</span>
+                            </label>
+                            <label class="p-2.5 rounded-lg bg-obsidian-950 border border-obsidian-750 flex items-center justify-center gap-2 cursor-pointer hover:border-growth-500/50">
+                                <input type="radio" name="reply_channel" value="whatsapp" class="text-growth-500 focus:ring-0">
+                                <span class="text-white text-xs">WhatsApp</span>
+                            </label>
+                            <label class="p-2.5 rounded-lg bg-obsidian-950 border border-obsidian-750 flex items-center justify-center gap-2 cursor-pointer hover:border-growth-500/50">
+                                <input type="radio" name="reply_channel" value="call" class="text-growth-500 focus:ring-0">
+                                <span class="text-white text-xs">Звонок</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" id="btn-submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-growth-600 hover:bg-growth-500 text-obsidian-950 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                            <span>Отправить на экспресс-оценку</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <div class="text-[11px] text-slate-400 font-sans flex items-center gap-2 mt-2">
+                        <i data-lucide="lock" class="w-3.5 h-3.5 text-growth-400 shrink-0"></i>
+                        <span>Конфиденциально. Никакого спама и холодных прозвонов.</span>
+                    </div>
+                </form>
+
+                <div id="submit-success" class="hidden p-5 rounded-xl bg-growth-950/30 border border-growth-500/40 text-growth-400 font-mono text-xs">
+                    <div class="font-bold text-sm text-white mb-1">Спасибо! Запрос получен.</div>
+                    <p class="text-slate-300 font-sans">
+                        Я лично свяжусь с вами в течение рабочего дня с предварительным анализом сайта.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. ПОДВАЛ (FOOTER) С ЮРИДИЧЕСКИМИ ДАННЫМИ -->
+    <footer class="border-t border-obsidian-850 bg-obsidian-950 text-xs font-mono text-slate-400 py-10 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-6 mb-8">
+            <div class="space-y-1">
+                <div class="font-bold text-white text-sm">Михаил Павлов — Частный SEO-эксперт</div>
+                <div class="text-[11px]">ИП Павлов Михаил Васильевич • ИНН 772839102948 • ОГРНИП 321774600129381</div>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="tel:+74951208842" class="text-slate-200 hover:text-growth-400 font-semibold">+7 (495) 120-88-42</a>
+                <a href="https://t.me/seopavlov" class="text-sky-400 hover:underline">@seopavlov</a>
+                <a href="mailto:seo@pavlov-expert.ru" class="hover:text-white">seo@pavlov-expert.ru</a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-6 border-t border-obsidian-900 text-[11px] text-slate-500 flex flex-wrap justify-between gap-4">
+            <div>© 2026 Михаил Павлов. Частное продвижение коммерческих сайтов.</div>
+            <div class="space-x-4">
+                <a href="#" class="hover:text-slate-400">Политика конфиденциальности</a>
+                <a href="#" class="hover:text-slate-400">Согласие на обработку данных</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно детального разбора кейса -->
+    <div id="case-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-obsidian-900 border border-obsidian-750 max-w-2xl w-full rounded-2xl p-6 sm:p-8 space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-obsidian-800 pb-3">
+                <h3 class="font-bold text-white text-base" id="modal-title">Детальный разбор кейса</h3>
+                <button onclick="closeCaseModal()" class="text-slate-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="text-xs text-slate-300 font-sans space-y-3 leading-relaxed">
+                <!-- Контент модалки -->
+            </div>
+            <div class="pt-3 border-t border-obsidian-800 flex justify-end">
+                <button onclick="closeCaseModal()" class="px-4 py-2 rounded-lg bg-obsidian-800 hover:bg-obsidian-750 text-white font-mono text-xs">
+                    Закрыть разбор
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты интерактива -->
+    <script>
+        lucide.createIcons();
+
+        // 1. Калькулятор ориентира диапазона бюджета
+        let calcType = 'service';
+        let calcGeo = 'msk';
+
+        function updateBudgetEstimate(type) {
+            calcType = type;
+            document.getElementById('btn-type-service').className = (type === 'service')
+                ? 'p-3 rounded-xl bg-obsidian-800 border border-growth-500/50 text-left text-white transition-all'
+                : 'p-3 rounded-xl bg-obsidian-850 border border-obsidian-750 text-left text-slate-400 hover:text-white transition-all';
+            document.getElementById('btn-type-ecom').className = (type === 'ecom')
+                ? 'p-3 rounded-xl bg-obsidian-800 border border-growth-500/50 text-left text-white transition-all'
+                : 'p-3 rounded-xl bg-obsidian-850 border border-obsidian-750 text-left text-slate-400 hover:text-white transition-all';
+            renderRange();
+        }
+
+        function updateGeoEstimate(geo) {
+            calcGeo = geo;
+            document.getElementById('btn-geo-msk').className = (geo === 'msk')
+                ? 'p-3 rounded-xl bg-obsidian-800 border border-growth-500/50 text-left text-white transition-all'
+                : 'p-3 rounded-xl bg-obsidian-850 border border-obsidian-750 text-left text-slate-400 hover:text-white transition-all';
+            document.getElementById('btn-geo-regions').className = (geo === 'regions')
+                ? 'p-3 rounded-xl bg-obsidian-800 border border-growth-500/50 text-left text-white transition-all'
+                : 'p-3 rounded-xl bg-obsidian-850 border border-obsidian-750 text-left text-slate-400 hover:text-white transition-all';
+            renderRange();
+        }
+
+        function renderRange() {
+            const display = document.getElementById('calc-range-display');
+            if (calcType === 'service' && calcGeo === 'regions') {
+                display.innerHTML = '35 000 – 50 000 ₽ <span class="text-xs font-normal text-slate-400">/ мес</span>';
+            } else if (calcType === 'service' && calcGeo === 'msk') {
+                display.innerHTML = '50 000 – 70 000 ₽ <span class="text-xs font-normal text-slate-400">/ мес</span>';
+            } else if (calcType === 'ecom' && calcGeo === 'regions') {
+                display.innerHTML = '60 000 – 85 000 ₽ <span class="text-xs font-normal text-slate-400">/ мес</span>';
+            } else {
+                display.innerHTML = '75 000 – 110 000 ₽ <span class="text-xs font-normal text-slate-400">/ мес</span>';
+            }
+        }
+
+        // 2. FAQ Аккордеон
+        function toggleFaq(id) {
+            const body = document.getElementById(`faq-body-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            if (body.classList.contains('hidden')) {
+                body.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                body.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // 3. Модальные окна кейсов
+        const caseDetails = {
+            case1: {
+                title: 'Кейс: Интернет-магазин инженерной сантехники (Москва)',
+                content: `
+                    <div class="space-y-3">
+                        <div class="p-3 rounded-lg bg-obsidian-850 border border-obsidian-750">
+                            <strong>Исходная точка:</strong> Трафик из Яндекса держался на уровне 1 200 визитов в сутки. 1С-Битрикс генерировал 40 000+ мусорных дублей страниц фильтров, из-за чего полезные категории не индексировались.
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1">Что было сделано лично мной:</strong>
+                            <ul class="list-disc pl-4 space-y-1 text-slate-300">
+                                <li>Закрыты технические дубли в robots.txt и через canonical, ускорена отдача серверного ответа с 1.4с до 0.3с;</li>
+                                <li>Собрана семантика на 1 400 запросов по водоснабжению и отоплению, созданы 140 теговых посадочных страниц;</li>
+                                <li>Внедрена микроразметка Product и Offer со статусом наличия на складе в Москве;</li>
+                                <li>Настроены региональные коммерческие факторы (доставка, самовывоз, гарантийный талон).</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 rounded-lg bg-growth-950/20 border border-growth-500/30 text-growth-400 font-mono">
+                            <strong>Результат:</strong> За 5 месяцев средняя позиция поднялась с 37 до 8 места. Органический трафик вырос до 8 400 посетителей в сутки. Рост оформленных заказов через корзину — в 3.8 раза.
+                        </div>
+                    </div>
+                `
+            },
+            case2: {
+                title: 'Кейс: Клиника косметологии и дерматологии (Санкт-Петербург)',
+                content: `
+                    <div class="space-y-3">
+                        <div class="p-3 rounded-lg bg-obsidian-850 border border-obsidian-750">
+                            <strong>Исходная точка:</strong> Стоимость одной подтвержденной записи из контекстной рекламы доходила до 3 400 ₽. Органика практически отсутствовала из-за строгих медицинских алгоритмов YMYL.
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1">Что было сделано лично мной:</strong>
+                            <ul class="list-disc pl-4 space-y-1 text-slate-300">
+                                <li>Переработаны карточки врачей с подтверждением квалификации, сертификатов и опыта (требование медицинского E-E-A-T);</li>
+                                <li>Созданы детальные прайс-листы с привязкой к процедурам и аппаратам;</li>
+                                <li>Оптимизирована карточка в Яндекс.Картах и 2ГИС (получен статус «Хорошее место» и 4.9 рейтинг);</li>
+                                <li>Написаны экспертные статьи по подготовке к процедурам с авторством ведущего врача.</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 rounded-lg bg-growth-950/20 border border-growth-500/30 text-growth-400 font-mono">
+                            <strong>Результат:</strong> За 4 месяца привлечено более 180 органических заявок в месяц со средней стоимостью лида 890 ₽. Доля органики в общей выручке клиники составила 42%.
+                        </div>
+                    </div>
+                `
+            },
+            case3: {
+                title: 'Кейс: B2B Производитель станочного оборудования (Вся РФ)',
+                content: `
+                    <div class="space-y-3">
+                        <div class="p-3 rounded-lg bg-obsidian-850 border border-obsidian-750">
+                            <strong>Исходная точка:</strong> Сайт попал под санкции поисковиков из-за бездумного прогона по спамным каталогам предыдущим подрядчиком. Трафик обвалился на 80%.
+                        </div>
+                        <div>
+                            <strong class="text-white block mb-1">Что было сделано лично мной:</strong>
+                            <ul class="list-disc pl-4 space-y-1 text-slate-300">
+                                <li>Проведен полный аудит ссылочной массы, отклонены токсичные доноры через Disavow Tool;</li>
+                                <li>Удалены переоптимизированные SEO-тексты начала 2010-х годов с главной и категорийных страниц;</li>
+                                <li>Разработан нормальный каталог станков с техническими характеристиками (ГОСТ, мощность, чертежи);</li>
+                                <li>Добавлены блоки для оптовиков (лизинг, доставка спецтранспортом, пусконаладка).</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 rounded-lg bg-growth-950/20 border border-growth-500/30 text-growth-400 font-mono">
+                            <strong>Результат:</strong> Фильтр был полностью снят за 2 месяца. За 3 месяца сайт вернулся в ТОП-3 по ключевым коммерческим запросам станков ЧПУ.
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function openCaseModal(caseKey) {
+            const data = caseDetails[caseKey];
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-content').innerHTML = data.content;
+            document.getElementById('case-modal').classList.remove('hidden');
+        }
+
+        function closeCaseModal() {
+            document.getElementById('case-modal').classList.add('hidden');
+        }
+
+        // 4. Честная отправка формы
+        function handleRealSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit');
+            const success = document.getElementById('submit-success');
+            const form = e.target;
+
+            btn.disabled = true;
+            btn.innerHTML = 'Отправка...';
+
+            setTimeout(() => {
+                form.classList.add('hidden');
+                success.classList.remove('hidden');
+                lucide.createIcons();
+            }, 500);
+        }
+    </script>
+</body>
+</html>

@@ -28,7 +28,7 @@ export const PhoneInputField: React.FC<PhoneInputProps> = ({
       {label && (
         <label className="text-sm font-medium text-dark-800">
           {label}
-          {required && <span className="text-accent-600 ml-0.5">*</span>}
+          {required && <span className="text-destructive-600 ml-0.5">*</span>}
         </label>
       )}
       <ReactPhoneInput
@@ -42,7 +42,7 @@ export const PhoneInputField: React.FC<PhoneInputProps> = ({
             '!focus:!border-primary-600 !focus:!outline-none !focus:!ring-2 !focus:!ring-primary-600/20',
             '!transition-colors !duration-200',
             '!pl-[42px]',
-            error && '!border-accent-600 !focus:!border-accent-600 !focus:!ring-accent-600/20',
+            error && '!border-destructive-600 !focus:!border-destructive-600 !focus:!ring-destructive-600/20',
           ),
         )}
         buttonClass="!rounded-l-lg"
@@ -53,7 +53,7 @@ export const PhoneInputField: React.FC<PhoneInputProps> = ({
         countryCodeEditable={false}
         preferredCountries={['ru', 'ua', 'by', 'kz']}
       />
-      {error && <span className="text-sm text-accent-600">{error}</span>}
+      {error && <span className="text-sm text-destructive-600">{error}</span>}
     </div>
   );
 };
