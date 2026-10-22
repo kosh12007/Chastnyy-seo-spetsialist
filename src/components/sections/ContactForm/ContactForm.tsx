@@ -5,8 +5,7 @@ import { z } from 'zod';
 import { Link } from 'react-router-dom';
 import { Input } from '@ui/Input';
 import { Textarea } from '@ui/Textarea';
-import { Button } from '@ui/Button';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Send } from 'lucide-react';
 
 const contactFormSchema = z.object({
   name: z.string().min(2, 'Минимум 2 символа'),
@@ -21,8 +20,8 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 /**
- * Форма обратной связи для страницы контактов.
- * Соответствует 152-ФЗ: содержит чекбокс согласия со ссылками на политику и согласие.
+ * Форма обратной связи для страницы контактов в стиле Obsidian.
+ * Соответствует 152-ФЗ: содержит неотмеченный чекбокс со ссылками на Политику и Согласие.
  */
 export const ContactForm: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -101,21 +100,21 @@ export const ContactForm: React.FC = () => {
         {...register('message')}
       />
 
-      {/* 152-ФЗ Чекбокс согласия (не предзаполнен!) */}
-      <div className="space-y-1">
+      {/* 152-ФЗ Чекбокс согласия (НЕ предзаполнен!) */}
+      <div className="space-y-1 pt-1">
         <div className="flex items-start gap-2.5">
           <input
             type="checkbox"
             id="contact-agree"
-            className="mt-1 w-4 h-4 rounded border-dark-300 text-primary-600 focus:ring-primary-500 cursor-pointer"
+            className="mt-1 w-4 h-4 rounded border-obsidian-700 bg-obsidian-950 text-growth-500 focus:ring-0 cursor-pointer"
             {...register('agree')}
           />
-          <label htmlFor="contact-agree" className="text-xs text-dark-800 leading-relaxed cursor-pointer select-none">
+          <label htmlFor="contact-agree" className="text-[11px] text-slate-400 font-sans leading-relaxed cursor-pointer select-none">
             Я даю согласие на обработку моих персональных данных в соответствии с{' '}
             <Link
               to="/soglasie-opd/"
               target="_blank"
-              className="text-primary-600 underline hover:text-primary-700 font-medium"
+              className="text-growth-400 underline hover:text-growth-300 font-medium"
             >
               Согласием на обработку данных
             </Link>{' '}
@@ -123,18 +122,23 @@ export const ContactForm: React.FC = () => {
             <Link
               to="/politika-konfidentsialnosti/"
               target="_blank"
-              className="text-primary-600 underline hover:text-primary-700 font-medium"
+              className="text-growth-400 underline hover:text-growth-300 font-medium"
             >
               Политики конфиденциальности
             </Link> *
           </label>
         </div>
-        {errors.agree && <p className="text-xs text-destructive-600">{errors.agree.message}</p>}
+        {errors.agree && <p className="text-xs text-red-400 font-mono">{errors.agree.message}</p>}
       </div>
 
-      <Button variant="primary" size="lg" className="w-full" isLoading={isSubmitting}>
-        Отправить сообщение
-      </Button>
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full py-3.5 rounded-xl bg-growth-600 hover:bg-growth-500 active:bg-growth-700 text-obsidian-950 font-bold text-xs uppercase tracking-wider font-mono transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-growth-950/40 disabled:opacity-50"
+      >
+        <span>{isSubmitting ? 'Отправка...' : 'Отправить сообщение'}</span>
+        <Send className="w-4 h-4" />
+      </button>
     </form>
   );
 };

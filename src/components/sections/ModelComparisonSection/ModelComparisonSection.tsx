@@ -75,3 +75,4 @@ export const ModelComparisonSection: React.FC = () => {
     </section>
   );
 };
+

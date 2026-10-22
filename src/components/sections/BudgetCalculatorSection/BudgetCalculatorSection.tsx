@@ -130,3 +130,4 @@ export const BudgetCalculatorSection: React.FC = () => {
     </section>
   );
 };
+

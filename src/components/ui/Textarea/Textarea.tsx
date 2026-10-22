@@ -19,7 +19,7 @@ export const Textarea: React.FC<TextareaProps> = ({
   return (
     <div className="flex flex-col gap-1.5">
       {label && (
-        <label htmlFor={textareaId} className="text-sm font-medium text-dark-800">
+        <label htmlFor={textareaId} className="text-xs font-mono uppercase tracking-wider text-slate-300">
           {label}
         </label>
       )}
@@ -27,16 +27,16 @@ export const Textarea: React.FC<TextareaProps> = ({
         id={textareaId}
         className={twMerge(
           clsx(
-            'w-full rounded-lg border border-dark-100 px-4 py-3 text-dark-900 placeholder:text-dark-500',
-            'focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600/20',
-            'transition-colors duration-200 resize-y min-h-[120px]',
-            error && 'border-destructive-600 focus:border-destructive-600 focus:ring-destructive-600/20',
+            'w-full rounded-xl bg-obsidian-950 border border-obsidian-750 px-4 py-3 text-white placeholder:text-slate-500 text-sm font-sans',
+            'focus:border-growth-500 focus:outline-none focus:ring-1 focus:ring-growth-500',
+            'transition-colors duration-200 resize-y min-h-[110px]',
+            error && 'border-red-500 focus:border-red-500 focus:ring-red-500',
             className
           )
         )}
         {...props}
       />
-      {error && <span className="text-sm text-destructive-600">{error}</span>}
+      {error && <span className="text-xs text-red-400 font-mono">{error}</span>}
     </div>
   );
 };

@@ -79,3 +79,4 @@ export const AboutExpertSection: React.FC = () => {
     </section>
   );
 };
+

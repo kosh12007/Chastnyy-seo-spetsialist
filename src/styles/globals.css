@@ -3,42 +3,62 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
   body {
-    @apply bg-white text-dark-950 font-sans selection:bg-primary-100 selection:text-primary-800 antialiased;
+    @apply bg-obsidian-950 text-slate-100 font-sans antialiased selection:bg-growth-500/20 selection:text-growth-300;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading tracking-tight text-dark-900;
+    @apply font-heading tracking-tight text-white;
   }
 }
 
 @layer components {
-  /* Чистые карточки с четкой геометрией и мягкой тенью */
+  /* Карточки в стиле макета mockup-v2 */
   .glass-card {
-    @apply bg-white border border-dark-200/90 shadow-clean-card hover:shadow-clean-hover transition-all duration-300;
+    @apply bg-obsidian-900 border border-obsidian-800 shadow-clean-card hover:border-obsidian-750 transition-all duration-300;
   }
   
-  /* Деликатная фоновая сетка без визуального шума */
-  .tech-grid {
+  /* Фоновая сетка обсидиана из макета v2 */
+  .grid-bg {
+    background-size: 32px 32px;
     background-image: 
-      linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
-    background-size: 48px 48px;
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   }
 
-  .tech-grid-small {
-    background-image: 
-      linear-gradient(to right, rgba(15, 23, 42, 0.015) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(15, 23, 42, 0.015) 1px, transparent 1px);
+  .grid-bg-dense {
     background-size: 16px 16px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   }
 
-  /* Благородный градиент для акцентных фраз: глубокий сапфировый -> изумрудный рост */
-  .text-gradient-blue {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-700 via-primary-600 to-accent-600;
+  /* Градиент акцентного текста */
+  .text-gradient-growth {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-growth-400 via-emerald-300 to-teal-200;
   }
 }
 
-html {
-  scroll-behavior: smooth;
+/* Стилизация скроллбара под тему Obsidian */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070A0F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1C2436;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #28354D;
 }
