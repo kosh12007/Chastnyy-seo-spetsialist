@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { ThemeProvider } from '@/context/ThemeContext';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { LoadingSpinner } from '@components/common';
 
@@ -35,38 +36,40 @@ const PageFallback: React.FC = () => (
 
 export const App: React.FC = () => {
   return (
-    <HelmetProvider>
-      <BrowserRouter>
-        <Suspense fallback={<PageFallback />}>
-          <Routes>
-            <Route element={<MainLayout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/uslugi/" element={<ServicesPage />} />
-              <Route path="/uslugi/:slug/" element={<ServicesPage />} />
-              <Route path="/ceny/" element={<PricingPage />} />
-              <Route path="/portfolio/" element={<CasesPage />} />
-              <Route path="/portfolio/:slug/" element={<CasesPage />} />
-              <Route path="/otzyvy/" element={<ReviewsPage />} />
-              <Route path="/obo-mne/" element={<AboutPage />} />
-              <Route path="/kontakty/" element={<ContactsPage />} />
-              <Route path="/blog/" element={<BlogPage />} />
-              <Route path="/blog/:slug/" element={<ArticlePage />} />
+    <ThemeProvider>
+      <HelmetProvider>
+        <BrowserRouter>
+          <Suspense fallback={<PageFallback />}>
+            <Routes>
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/uslugi/" element={<ServicesPage />} />
+                <Route path="/uslugi/:slug/" element={<ServicesPage />} />
+                <Route path="/ceny/" element={<PricingPage />} />
+                <Route path="/portfolio/" element={<CasesPage />} />
+                <Route path="/portfolio/:slug/" element={<CasesPage />} />
+                <Route path="/otzyvy/" element={<ReviewsPage />} />
+                <Route path="/obo-mne/" element={<AboutPage />} />
+                <Route path="/kontakty/" element={<ContactsPage />} />
+                <Route path="/blog/" element={<BlogPage />} />
+                <Route path="/blog/:slug/" element={<ArticlePage />} />
 
-              {/* Юридические страницы (152-ФЗ и 422-ФЗ) */}
-              <Route path="/politika-konfidentsialnosti/" element={<PrivacyPage type="privacy" />} />
-              <Route path="/soglasie-opd/" element={<PrivacyPage type="consent" />} />
-              <Route path="/rekvizity/" element={<RequisitesPage />} />
+                {/* Юридические страницы (152-ФЗ и 422-ФЗ) */}
+                <Route path="/politika-konfidentsialnosti/" element={<PrivacyPage type="privacy" />} />
+                <Route path="/soglasie-opd/" element={<PrivacyPage type="consent" />} />
+                <Route path="/rekvizity/" element={<RequisitesPage />} />
 
-              {/* Алиасы для удобства перехода */}
-              <Route path="/privacy/" element={<Navigate to="/politika-konfidentsialnosti/" replace />} />
-              <Route path="/consent/" element={<Navigate to="/soglasie-opd/" replace />} />
-              <Route path="/requisites/" element={<Navigate to="/rekvizity/" replace />} />
+                {/* Алиасы для удобства перехода */}
+                <Route path="/privacy/" element={<Navigate to="/politika-konfidentsialnosti/" replace />} />
+                <Route path="/consent/" element={<Navigate to="/soglasie-opd/" replace />} />
+                <Route path="/requisites/" element={<Navigate to="/rekvizity/" replace />} />
 
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </HelmetProvider>
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </HelmetProvider>
+    </ThemeProvider>
   );
 };

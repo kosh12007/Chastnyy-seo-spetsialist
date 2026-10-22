@@ -8,7 +8,7 @@ import { ShieldCheck } from 'lucide-react';
 
 /**
  * Страница тарифов и расчета стоимости поискового продвижения.
- * Полностью оформлена в премиальной темной теме Obsidian & Emerald Growth.
+ * Поддерживает адаптивную светлую тему и ночную эстетику Dark Obsidian & Emerald Growth.
  */
 export const PricingPage: React.FC = () => {
   const seo = getSeoData('pricing');
@@ -27,16 +27,16 @@ export const PricingPage: React.FC = () => {
 
       <AnimatedSection variant="fade" duration={0.8}>
         {/* Шапка страницы тарифов */}
-        <section className="py-12 md:py-16 bg-obsidian-950 border-b border-obsidian-850 grid-bg">
+        <section className="py-12 md:py-16 bg-slate-50 dark:bg-obsidian-950 border-b border-slate-200 dark:border-obsidian-850 grid-bg transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-growth-500/10 border border-growth-500/20 text-growth-400 font-mono text-xs uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-growth-500/10 border border-growth-500/20 text-growth-700 dark:text-growth-400 font-mono text-xs uppercase tracking-wider mb-4 font-semibold">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Фиксация условий в договоре с самозанятым</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
               Тарифы и стоимость SEO-продвижения
             </h1>
-            <p className="text-slate-300 text-sm sm:text-base max-w-2xl font-sans leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-2xl font-sans leading-relaxed">
               Прозрачные ежемесячные бюджеты без скрытых доплат. Точная смета формируется после экспресс-оценки текущего состояния сайта и объема спроса.
             </p>
           </div>

@@ -5,34 +5,34 @@ import { contactInfo } from '@data/contactInfo';
 
 /**
  * Секция "Обо мне" — человечный блок эксперта с личной позицией и биографией.
- * Оформлен в темной эстетике Dark Obsidian & Emerald Growth точно как в mockup-v2.html.
+ * Поддерживает адаптивную светлую тему и ночную эстетику Dark Obsidian & Emerald Growth.
  */
 export const AboutExpertSection: React.FC = () => {
   return (
-    <section id="about" className="py-16 md:py-24 border-b border-obsidian-850 bg-obsidian-900/60">
+    <section id="about" className="py-16 md:py-24 border-b border-slate-200 dark:border-obsidian-850 bg-slate-100/60 dark:bg-obsidian-900/60 transition-colors">
       <div className="max-w-5xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           
           {/* Фото / Профиль */}
           <div className="md:col-span-5">
-            <div className="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 space-y-4 shadow-xl">
-              <div className="aspect-square rounded-xl bg-obsidian-850 border border-obsidian-750 flex items-center justify-center">
-                <UserCheck className="w-20 h-20 text-growth-400" />
+            <div className="p-6 rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 space-y-4 shadow-xl transition-colors">
+              <div className="aspect-square rounded-xl bg-slate-100 dark:bg-obsidian-850 border border-slate-200 dark:border-obsidian-750 flex items-center justify-center">
+                <UserCheck className="w-20 h-20 text-growth-600 dark:text-growth-400" />
               </div>
               <div className="text-center font-mono">
-                <div className="font-bold text-white text-base">Михаил Павлов</div>
-                <div className="text-xs text-slate-400">Практикующий SEO-специалист</div>
-                <div className="text-[11px] text-growth-400 mt-1">В поиске с 2012 года</div>
+                <div className="font-bold text-slate-900 dark:text-white text-base">Михаил Павлов</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400">Практикующий SEO-специалист</div>
+                <div className="text-[11px] text-growth-700 dark:text-growth-400 font-semibold mt-1">В поиске с 2012 года</div>
               </div>
             </div>
           </div>
 
           {/* Биография и философия */}
-          <div className="md:col-span-7 space-y-4 text-sm text-slate-300 font-sans leading-relaxed">
-            <div className="text-xs font-mono uppercase tracking-widest text-growth-400">
+          <div className="md:col-span-7 space-y-4 text-sm text-slate-700 dark:text-slate-300 font-sans leading-relaxed">
+            <div className="text-xs font-mono uppercase tracking-widest text-growth-600 dark:text-growth-400 font-semibold">
               Личность и опыт
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               «Я сознательно не строю поточное агентство»
             </h2>
             
@@ -51,23 +51,23 @@ export const AboutExpertSection: React.FC = () => {
                 href={`https://t.me/${contactInfo.telegram}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sky-400 hover:underline font-semibold"
+                className="flex items-center gap-1.5 text-sky-600 dark:text-sky-400 hover:underline font-semibold"
               >
                 <Send className="w-4 h-4" />
                 <span>Telegram: @{contactInfo.telegram}</span>
               </a>
-              <span className="text-obsidian-700">|</span>
+              <span className="text-slate-300 dark:text-obsidian-700">|</span>
               <a
                 href={`mailto:${contactInfo.email}`}
-                className="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors"
+                className="flex items-center gap-1.5 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4 text-slate-400" />
                 <span>{contactInfo.email}</span>
               </a>
-              <span className="text-obsidian-700">|</span>
+              <span className="text-slate-300 dark:text-obsidian-700">|</span>
               <Link
                 to="/rekvizity/"
-                className="flex items-center gap-1 text-growth-400 hover:text-growth-300 transition-colors underline"
+                className="flex items-center gap-1 text-growth-700 dark:text-growth-400 hover:text-growth-800 dark:hover:text-growth-300 transition-colors underline font-medium"
               >
                 <FileText className="w-3.5 h-3.5" />
                 <span>Реквизиты</span>

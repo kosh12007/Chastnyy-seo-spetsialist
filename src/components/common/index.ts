@@ -6,4 +6,5 @@ export { CallbackModal } from './CallbackModal/CallbackModal';
 export { DiscussionButton } from './DiscussionButton/DiscussionButton';
 export { DiscussionModal } from './DiscussionModal/DiscussionModal';
 export { CookieBanner } from './CookieBanner/CookieBanner';
+export { ThemeToggle } from './ThemeToggle/ThemeToggle';
 export { default as AnimatedSection } from './AnimatedSection/AnimatedSection';

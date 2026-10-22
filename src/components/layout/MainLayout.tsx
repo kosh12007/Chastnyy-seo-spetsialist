@@ -9,11 +9,11 @@ import { CookieBanner } from '@components/common/CookieBanner/CookieBanner';
 
 /**
  * Основной макет приложения.
- * Выдержан в премиальной темной эстетике Obsidian & Emerald Growth.
+ * Поддерживает адаптивную светлую тему и премиальную темную Obsidian & Emerald Growth.
  */
 export const MainLayout: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-obsidian-950 text-slate-100 font-sans selection:bg-growth-500/20 selection:text-growth-300">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-obsidian-950 dark:text-slate-100 font-sans selection:bg-growth-500/20 selection:text-growth-700 dark:selection:text-growth-300 transition-colors duration-200">
       <ScrollToTop />
       <Header />
       <Breadcrumbs />

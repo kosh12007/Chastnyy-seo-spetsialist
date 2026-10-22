@@ -20,7 +20,8 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 /**
- * Форма обратной связи для страницы контактов в стиле Obsidian.
+ * Форма обратной связи для страницы контактов.
+ * Поддерживает адаптивную светлую тему и ночную Obsidian & Emerald Growth.
  * Соответствует 152-ФЗ: содержит неотмеченный чекбокс со ссылками на Политику и Согласие.
  */
 export const ContactForm: React.FC = () => {
@@ -50,18 +51,18 @@ export const ContactForm: React.FC = () => {
 
   if (isSuccess) {
     return (
-      <div className="p-6 rounded-xl bg-growth-950/40 border border-growth-500/40 text-growth-400 font-mono text-sm">
-        <div className="flex items-center gap-3 text-white font-bold text-lg mb-2">
-          <CheckCircle className="w-6 h-6 text-growth-400" />
+      <div className="p-6 rounded-xl bg-emerald-50 dark:bg-growth-950/40 border border-emerald-300 dark:border-growth-500/40 text-emerald-950 dark:text-growth-400 font-mono text-sm animate-fade-in transition-colors">
+        <div className="flex items-center gap-3 text-slate-900 dark:text-white font-bold text-lg mb-2">
+          <CheckCircle className="w-6 h-6 text-growth-600 dark:text-growth-400" />
           <span>Сообщение успешно отправлено!</span>
         </div>
-        <p className="text-slate-300 font-sans leading-relaxed text-sm">
+        <p className="text-slate-700 dark:text-slate-300 font-sans leading-relaxed text-sm">
           Спасибо за обращение. Я лично отвечу вам в течение одного рабочего дня.
         </p>
         <button
           type="button"
           onClick={() => setIsSuccess(false)}
-          className="mt-4 text-xs text-slate-400 hover:text-white underline font-mono"
+          className="mt-4 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white underline font-mono cursor-pointer"
         >
           Отправить еще одно сообщение
         </button>
@@ -70,7 +71,7 @@ export const ContactForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 font-mono text-xs">
       <Input
         label="Ваше имя *"
         type="text"
@@ -106,15 +107,15 @@ export const ContactForm: React.FC = () => {
           <input
             type="checkbox"
             id="contact-agree"
-            className="mt-1 w-4 h-4 rounded border-obsidian-700 bg-obsidian-950 text-growth-500 focus:ring-0 cursor-pointer"
+            className="mt-1 w-4 h-4 rounded border-slate-300 dark:border-obsidian-700 bg-white dark:bg-obsidian-950 text-growth-600 dark:text-growth-500 focus:ring-0 cursor-pointer"
             {...register('agree')}
           />
-          <label htmlFor="contact-agree" className="text-[11px] text-slate-400 font-sans leading-relaxed cursor-pointer select-none">
+          <label htmlFor="contact-agree" className="text-[11px] text-slate-600 dark:text-slate-400 font-sans leading-relaxed cursor-pointer select-none">
             Я даю согласие на обработку моих персональных данных в соответствии с{' '}
             <Link
               to="/soglasie-opd/"
               target="_blank"
-              className="text-growth-400 underline hover:text-growth-300 font-medium"
+              className="text-growth-700 dark:text-growth-400 underline hover:text-growth-800 dark:hover:text-growth-300 font-medium"
             >
               Согласием на обработку данных
             </Link>{' '}
@@ -122,19 +123,19 @@ export const ContactForm: React.FC = () => {
             <Link
               to="/politika-konfidentsialnosti/"
               target="_blank"
-              className="text-growth-400 underline hover:text-growth-300 font-medium"
+              className="text-growth-700 dark:text-growth-400 underline hover:text-growth-800 dark:hover:text-growth-300 font-medium"
             >
               Политики конфиденциальности
             </Link> *
           </label>
         </div>
-        {errors.agree && <p className="text-xs text-red-400 font-mono">{errors.agree.message}</p>}
+        {errors.agree && <p className="text-xs text-red-500 font-mono">{errors.agree.message}</p>}
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-3.5 rounded-xl bg-growth-600 hover:bg-growth-500 active:bg-growth-700 text-obsidian-950 font-bold text-xs uppercase tracking-wider font-mono transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-growth-950/40 disabled:opacity-50"
+        className="w-full py-3.5 rounded-xl bg-growth-600 hover:bg-growth-500 active:bg-growth-700 text-obsidian-950 font-bold text-xs uppercase tracking-wider font-mono transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-growth-950/20 dark:shadow-growth-950/40 disabled:opacity-50"
       >
         <span>{isSubmitting ? 'Отправка...' : 'Отправить сообщение'}</span>
         <Send className="w-4 h-4" />

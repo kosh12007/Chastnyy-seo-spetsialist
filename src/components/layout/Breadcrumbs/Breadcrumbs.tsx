@@ -33,22 +33,22 @@ export const Breadcrumbs: React.FC = () => {
     const service = services.find((s) => s.slug === serviceMatch[1]);
     if (service) {
       return (
-        <div className="border-b border-obsidian-850/60 bg-obsidian-950/40">
+        <div className="border-b border-slate-200 bg-slate-100/60 dark:border-obsidian-850/60 dark:bg-obsidian-950/40 transition-colors">
           <nav className="max-w-7xl mx-auto px-4 sm:px-8 py-3" aria-label="Хлебные крошки">
-            <ol className="flex items-center gap-2 text-xs font-mono text-slate-400 flex-wrap">
+            <ol className="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 flex-wrap">
               <li>
-                <Link to="/" className="flex items-center gap-1 hover:text-growth-400 transition-colors">
+                <Link to="/" className="flex items-center gap-1 hover:text-growth-600 dark:hover:text-growth-400 transition-colors">
                   <Home className="w-3.5 h-3.5" />
                   <span>Главная</span>
                 </Link>
               </li>
               <li className="flex items-center gap-2">
-                <ChevronRight className="w-3.5 h-3.5 text-obsidian-700" />
-                <Link to="/uslugi/" className="hover:text-growth-400 transition-colors">Услуги</Link>
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
+                <Link to="/uslugi/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Услуги</Link>
               </li>
               <li className="flex items-center gap-2">
-                <ChevronRight className="w-3.5 h-3.5 text-obsidian-700" />
-                <span className="text-slate-200">{service.title}</span>
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
+                <span className="text-slate-900 dark:text-slate-200 font-medium">{service.title}</span>
               </li>
             </ol>
           </nav>
@@ -61,24 +61,24 @@ export const Breadcrumbs: React.FC = () => {
   if (breadcrumbs.length === 0) return null;
 
   return (
-    <div className="border-b border-obsidian-850/60 bg-obsidian-950/40">
+    <div className="border-b border-slate-200 bg-slate-100/60 dark:border-obsidian-850/60 dark:bg-obsidian-950/40 transition-colors">
       <nav className="max-w-7xl mx-auto px-4 sm:px-8 py-3" aria-label="Хлебные крошки">
-        <ol className="flex items-center gap-2 text-xs font-mono text-slate-400 flex-wrap">
+        <ol className="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 flex-wrap">
           <li>
-            <Link to="/" className="flex items-center gap-1 hover:text-growth-400 transition-colors">
+            <Link to="/" className="flex items-center gap-1 hover:text-growth-600 dark:hover:text-growth-400 transition-colors">
               <Home className="w-3.5 h-3.5" />
               <span>Главная</span>
             </Link>
           </li>
           {breadcrumbs.map((item, index) => (
             <li key={index} className="flex items-center gap-2">
-              <ChevronRight className="w-3.5 h-3.5 text-obsidian-700" />
+              <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
               {item.href ? (
-                <Link to={item.href} className="hover:text-growth-400 transition-colors">
+                <Link to={item.href} className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">
                   {item.label}
                 </Link>
               ) : (
-                <span className="text-slate-200">{item.label}</span>
+                <span className="text-slate-900 dark:text-slate-200 font-medium">{item.label}</span>
               )}
             </li>
           ))}

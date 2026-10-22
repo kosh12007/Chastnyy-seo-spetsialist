@@ -14,6 +14,10 @@ interface PhoneInputProps {
   defaultCountry?: string;
 }
 
+/**
+ * Адаптивное поле ввода телефона с выбором страны.
+ * Поддерживает светлую и темную темы оформления.
+ */
 export const PhoneInputField: React.FC<PhoneInputProps> = ({
   label,
   value,
@@ -26,9 +30,9 @@ export const PhoneInputField: React.FC<PhoneInputProps> = ({
   return (
     <div className="flex flex-col gap-1.5 font-mono text-xs">
       {label && (
-        <label className="text-xs font-mono uppercase tracking-wider text-slate-300">
+        <label className="text-xs font-mono uppercase tracking-wider text-slate-700 dark:text-slate-300 font-semibold">
           {label}
-          {required && <span className="text-red-400 ml-0.5">*</span>}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
       )}
       <ReactPhoneInput
@@ -38,22 +42,22 @@ export const PhoneInputField: React.FC<PhoneInputProps> = ({
         placeholder={placeholder}
         inputClass={twMerge(
           clsx(
-            '!w-full !rounded-xl !bg-obsidian-950 !border !border-obsidian-750 !py-3 !text-white !placeholder:text-slate-500 !text-sm !font-sans',
+            '!w-full !rounded-xl !bg-slate-50 dark:!bg-obsidian-950 !border !border-slate-300 dark:!border-obsidian-750 !py-3 !text-slate-900 dark:!text-white !placeholder:text-slate-400 dark:!placeholder:text-slate-500 !text-sm !font-sans',
             '!focus:!border-growth-500 !focus:!outline-none !focus:!ring-1 !focus:!ring-growth-500',
             '!transition-colors !duration-200',
             '!pl-[46px]',
             error && '!border-red-500 !focus:!border-red-500',
           ),
         )}
-        buttonClass="!bg-obsidian-950 !border-obsidian-750 !rounded-l-xl"
-        dropdownClass="!bg-obsidian-900 !border-obsidian-750 !text-white !shadow-2xl"
-        searchClass="!bg-obsidian-950 !border-obsidian-750 !text-white !px-2 !py-1 !mb-1"
+        buttonClass="!bg-slate-50 dark:!bg-obsidian-950 !border-slate-300 dark:!border-obsidian-750 !rounded-l-xl"
+        dropdownClass="!bg-white dark:!bg-obsidian-900 !border-slate-200 dark:!border-obsidian-750 !text-slate-900 dark:!text-white !shadow-2xl"
+        searchClass="!bg-slate-50 dark:!bg-obsidian-950 !border-slate-300 dark:!border-obsidian-750 !text-slate-900 dark:!text-white !px-2 !py-1 !mb-1"
         enableSearch
         disableSearchIcon
         countryCodeEditable={false}
         preferredCountries={['ru', 'by', 'kz']}
       />
-      {error && <span className="text-xs text-red-400 font-mono">{error}</span>}
+      {error && <span className="text-xs text-red-500 mt-1 block font-mono">{error}</span>}
     </div>
   );
 };

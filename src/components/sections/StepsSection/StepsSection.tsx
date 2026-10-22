@@ -26,22 +26,22 @@ const steps = [
 
 /**
  * Секция методологии: "Как я работаю (5 шагов процесса)".
- * Полностью выдержана в темной эстетике Dark Obsidian & Emerald Growth из mockup-v2.html.
+ * Поддерживает адаптивную светлую тему и ночную эстетику Dark Obsidian & Emerald Growth.
  */
 export const StepsSection: React.FC = () => {
   return (
-    <section id="process" className="py-16 md:py-24 border-b border-obsidian-850 bg-obsidian-900/40">
+    <section id="process" className="py-16 md:py-24 border-b border-slate-200 dark:border-obsidian-850 bg-slate-100/50 dark:bg-obsidian-900/40 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         
         {/* Заголовок секции */}
         <div className="max-w-3xl mb-12">
-          <div className="text-xs font-mono uppercase tracking-widest text-growth-400 mb-2">
+          <div className="text-xs font-mono uppercase tracking-widest text-growth-600 dark:text-growth-400 mb-2 font-semibold">
             Методология
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
             Понятный процесс от диагностики до регулярных продаж
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-sans">
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-sans">
             Никаких «размытых часов». Каждый этап решает конкретную бизнес-задачу.
           </p>
         </div>
@@ -51,10 +51,10 @@ export const StepsSection: React.FC = () => {
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-xl bg-obsidian-900 border border-obsidian-800 space-y-2 hover:border-obsidian-750 transition-colors"
+              className="p-5 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 space-y-2 hover:border-slate-300 dark:hover:border-obsidian-750 shadow-sm transition-all"
             >
-              <div className="text-growth-400 font-bold text-sm">{step.num}</div>
-              <div className="font-sans text-slate-300 text-xs leading-relaxed">
+              <div className="text-growth-600 dark:text-growth-400 font-bold text-sm">{step.num}</div>
+              <div className="font-sans text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                 {step.desc}
               </div>
             </div>
@@ -62,25 +62,25 @@ export const StepsSection: React.FC = () => {
         </div>
 
         {/* Что получает бизнес на практике */}
-        <div className="mt-8 p-6 rounded-2xl bg-obsidian-850 border border-obsidian-750">
-          <div className="font-bold text-white text-sm mb-3 font-mono">
+        <div className="mt-8 p-6 rounded-2xl bg-white dark:bg-obsidian-850 border border-slate-200 dark:border-obsidian-750 shadow-sm transition-colors">
+          <div className="font-bold text-slate-900 dark:text-white text-sm mb-3 font-mono">
             Что получает ваш бизнес на практике:
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-sans text-slate-300">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-sans text-slate-700 dark:text-slate-300">
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-growth-400 shrink-0" />
+              <CheckCircle className="w-4 h-4 text-growth-600 dark:text-growth-400 shrink-0" />
               <span>Технически здоровый сайт без скрытых ошибок</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-growth-400 shrink-0" />
+              <CheckCircle className="w-4 h-4 text-growth-600 dark:text-growth-400 shrink-0" />
               <span>Максимальный охват спроса вашей ниши</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-growth-400 shrink-0" />
+              <CheckCircle className="w-4 h-4 text-growth-600 dark:text-growth-400 shrink-0" />
               <span>Привлекательные сниппеты с ценами и звездами</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-growth-400 shrink-0" />
+              <CheckCircle className="w-4 h-4 text-growth-600 dark:text-growth-400 shrink-0" />
               <span>Снижение стоимости привлечения клиента</span>
             </div>
           </div>
