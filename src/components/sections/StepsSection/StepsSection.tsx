@@ -24,28 +24,37 @@ const steps = [
   },
 ];
 
+/**
+ * Секция методологии: "Как я работаю (5 шагов процесса)".
+ * Полностью выдержана в темной эстетике Dark Obsidian & Emerald Growth из mockup-v2.html.
+ */
 export const StepsSection: React.FC = () => {
   return (
-    <section id="process" className="py-16 md:py-20 bg-dark-50 border-b border-dark-200">
-      <div className="container">
+    <section id="process" className="py-16 md:py-24 border-b border-obsidian-850 bg-obsidian-900/40">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+        
+        {/* Заголовок секции */}
         <div className="max-w-3xl mb-12">
-          <div className="text-xs font-mono uppercase tracking-widest text-accent-700 font-bold mb-2">
+          <div className="text-xs font-mono uppercase tracking-widest text-growth-400 mb-2">
             Методология
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-dark-950 tracking-tight mb-3">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
             Понятный процесс от диагностики до регулярных продаж
           </h2>
-          <p className="text-dark-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-sans">
             Никаких «размытых часов». Каждый этап решает конкретную бизнес-задачу.
           </p>
         </div>
 
         {/* 5 шагов процесса */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 font-mono text-xs mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 font-mono text-xs">
           {steps.map((step, idx) => (
-            <div key={idx} className="p-5 rounded-2xl bg-white border border-dark-200 shadow-clean-card space-y-2">
-              <div className="text-accent-600 font-bold text-sm">{step.num}</div>
-              <div className="font-sans text-dark-600 text-xs leading-relaxed">
+            <div
+              key={idx}
+              className="p-5 rounded-xl bg-obsidian-900 border border-obsidian-800 space-y-2 hover:border-obsidian-750 transition-colors"
+            >
+              <div className="text-growth-400 font-bold text-sm">{step.num}</div>
+              <div className="font-sans text-slate-300 text-xs leading-relaxed">
                 {step.desc}
               </div>
             </div>
@@ -53,29 +62,30 @@ export const StepsSection: React.FC = () => {
         </div>
 
         {/* Что получает бизнес на практике */}
-        <div className="p-6 rounded-2xl bg-white border border-dark-200 shadow-clean-card">
-          <div className="font-bold text-dark-900 text-sm mb-4 font-heading">
+        <div className="mt-8 p-6 rounded-2xl bg-obsidian-850 border border-obsidian-750">
+          <div className="font-bold text-white text-sm mb-3 font-mono">
             Что получает ваш бизнес на практике:
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-sans text-dark-700">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-sans text-slate-300">
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-accent-600 shrink-0" />
+              <CheckCircle className="w-4 h-4 text-growth-400 shrink-0" />
               <span>Технически здоровый сайт без скрытых ошибок</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-accent-600 shrink-0" />
+              <CheckCircle className="w-4 h-4 text-growth-400 shrink-0" />
               <span>Максимальный охват спроса вашей ниши</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-accent-600 shrink-0" />
+              <CheckCircle className="w-4 h-4 text-growth-400 shrink-0" />
               <span>Привлекательные сниппеты с ценами и звездами</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-accent-600 shrink-0" />
+              <CheckCircle className="w-4 h-4 text-growth-400 shrink-0" />
               <span>Снижение стоимости привлечения клиента</span>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
