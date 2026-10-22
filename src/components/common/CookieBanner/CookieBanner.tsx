@@ -25,8 +25,8 @@ export const CookieBanner: React.FC = () => {
 
   return (
     <aside
-      aria-label="Уведомление об использовании cookie"
-      className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 right-auto max-w-[calc(100vw-5.5rem)] sm:max-w-md z-50 p-4 rounded-xl bg-white/95 dark:bg-obsidian-900/95 border border-slate-300 dark:border-obsidian-800 backdrop-blur-md shadow-xl dark:shadow-2xl text-xs font-mono text-slate-700 dark:text-slate-300 flex items-center justify-between gap-4 animate-slide-up transition-colors"
+      aria-label="Уведомление для пользователей"
+      className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 right-auto w-auto max-w-[calc(100vw-5.5rem)] sm:max-w-md z-50 p-4 rounded-xl bg-white/95 dark:bg-obsidian-900/95 border border-slate-300 dark:border-obsidian-800 backdrop-blur-md shadow-xl dark:shadow-2xl text-xs font-mono text-slate-700 dark:text-slate-300 flex items-center justify-between gap-4 animate-slide-up transition-colors"
     >
       <div className="text-[11px] leading-relaxed font-sans text-slate-700 dark:text-slate-300">
         Сайт использует файлы cookie и сервисы веб-аналитики для сбора обезличенных данных. Подробнее — в{' '}
