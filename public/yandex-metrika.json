@@ -1,0 +1,10 @@
+{
+  "id": "108153325",
+  "options": {
+    "ssr": true,
+    "webvisor": true,
+    "clickmap": true,
+    "accurateTrackBounce": true,
+    "trackLinks": true
+  }
+}
