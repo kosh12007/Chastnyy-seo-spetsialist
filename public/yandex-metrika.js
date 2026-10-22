@@ -6,7 +6,7 @@
  * ВЫ МОЖЕТЕ ВСТАВИТЬ ВАШ КОД ИЗ ЯНДЕКС.МЕТРИКИ СЮДА ДВУМЯ СПОСОБАМИ:
  * 
  * СПОСОБ 1 (Самый простой):
- * Просто замените цифры 99999999 в строках 17 и 34 на реальный номер вашего счётчика.
+ * Просто замените цифры 99999999 в строке 32 на реальный номер вашего счётчика.
  * 
  * СПОСОБ 2 (Если скопировали код целиком из личного кабинета Метрики):
  * Замените содержимое функции runYandexMetrika() ниже на код из Метрики
@@ -64,9 +64,9 @@ function disableYandexMetrika() {
     
     for (var i = 0; i < ymCookies.length; i++) {
       var name = ymCookies[i];
-      document.cookie = name + '=; Max-Age=-99999999; path=/;';
-      document.cookie = name + '=; Max-Age=-99999999; path=/; domain=' + domain + ';';
-      document.cookie = name + '=; Max-Age=-99999999; path=/; domain=.' + domain + ';';
+      document.cookie = name + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = name + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + ';';
+      document.cookie = name + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + domain + ';';
     }
 
     if (window.ym && typeof window.ym === 'function') {
