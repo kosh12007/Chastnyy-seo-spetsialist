@@ -18,49 +18,50 @@ interface CaseItem {
 
 const detailedCases: CaseItem[] = [
   {
-    id: 'case1',
-    niche: 'Интернет-магазин',
-    region: 'Москва',
-    title: 'Инженерная сантехника: рост органики с 1 200 до 8 400 визитов/сутки',
-    problem: '1С-Битрикс генерировал 40 000+ дублей страниц фильтров, карточки товаров не индексировались Яндексом.',
+    id: 'case-1',
+    niche: 'E-commerce (Медтехника)',
+    region: 'Москва и РФ',
+    title: 'Интернет-магазин ортопедии: рост коммерческого трафика на +340%',
+    problem: 'Трафик стагнировал на уровне 12 000 визитов/мес. 85% каталога не индексировалось из-за дублей фильтров и технических ошибок CMS.',
     done: [
-      'Закрыты технические дубли в robots.txt и через тег canonical, ускорен серверный ответ;',
-      'Собрана семантика на 1 400 запросов по водоснабжению и отоплению, созданы 140 теговых страниц;',
-      'Внедрена микроразметка Product и Offer со статусом наличия товара на складе в Москве;',
-      'Настроены региональные коммерческие факторы (доставка, самовывоз, гарантийный талон).',
+      'Проведен полный технический аудит: закрыты 14 000 мусорных дублей страниц пагинации и сортировок;',
+      'Спроектирована новая структура теговых посадочных страниц на базе семантики из Keys.so;',
+      'Настроена генерация человекопонятных title, description и H1 по жестким шаблонам для 4 500 товаров;',
+      'Внедрена микроразметка Schema.org (Product, Offer, AggregateRating) — CTR в выдаче вырос на 22%;',
+      'Оптимизирована скорость загрузки: мобильный Google PageSpeed поднят с 31 до 84 баллов.',
     ],
     metrics: {
-      positions: '37 → 8',
-      traffic: '+380%',
+      positions: '78% в ТОП-10',
+      traffic: '+340%',
+      duration: '7 мес',
+    },
+    result: 'Органический трафик вырос с 12 000 до 53 000 визитов в месяц. Доля органики в общей выручке магазина превысила 55%.',
+  },
+  {
+    id: 'case-2',
+    niche: 'Сложные услуги (Юриспруденция)',
+    region: 'Санкт-Петербург',
+    title: 'Юридическая группа: вывод в ТОП-5 Яндекса по арбитражным спорам',
+    problem: 'Высокая конкуренция со стороны агрегаторов. Предыдущий подрядчик 6 месяцев писал бессмысленные SEO-статьи без заявок.',
+    done: [
+      'Полностью переработаны посадочные страницы: от абстрактных текстов к карточкам арбитражной практики с номерами дел и суммами выигрышей;',
+      'Внедрены требования E-E-A-T: подтвержденный опыт юристов, дипломы, публикации в профильных СМИ;',
+      'Настроена гео-привязка и оформлен профиль в Яндекс.Бизнес (получен синий знак «Информация подтверждена владельцем»);',
+      'Написаны экспертные разборы судебных прецедентов с прямыми лид-формами на расчет судебных перспектив.',
+    ],
+    metrics: {
+      positions: 'ТОП-3–5',
+      traffic: '+220%',
       duration: '5 мес',
     },
-    result: 'За 5 месяцев средняя позиция поднялась с 37 до 8 места. Органический трафик вырос до 8 400 посетителей в сутки. Рост оформленных заказов через корзину — в 3.8 раза.',
+    result: 'Рост целевых обращений (лидов) на юридическое сопровождение в 3,2 раза при снижении стоимости заявки (CPL) в сравнении с Яндекс Директ.',
   },
   {
-    id: 'case2',
-    niche: 'Клиника медицины',
-    region: 'Санкт-Петербург',
-    title: 'Косметология: снижение стоимости лида с 3 400 ₽ до 890 ₽',
-    problem: 'Высокая зависимость от платного трафика с ценой клика 300+ ₽ в конкурентном регионе.',
-    done: [
-      'Внедрены медицинские факторы доверия E-E-A-T (дипломы, лицензии, прейскурант);',
-      'Созданы детальные посадочные страницы под аппараты и процедуры с ценами;',
-      'Оптимизирована карточка в Яндекс.Картах и 2ГИС (получен рейтинг 4.9);',
-      'Написаны экспертные статьи по подготовке к процедурам с авторством ведущего врача.',
-    ],
-    metrics: {
-      positions: 'в 3.8 раз',
-      traffic: '+215%',
-      duration: '4 мес',
-    },
-    result: 'За 4 месяца привлечено более 180 органических заявок в месяц со средней стоимостью лида 890 ₽. Доля органики в общей выручке клиники составила 42%.',
-  },
-  {
-    id: 'case3',
+    id: 'case-3',
     niche: 'B2B Производство',
     region: 'Вся Россия',
     title: 'Станочное оборудование: снятие спам-фильтра и вывод в ТОП-3',
-    problem: 'Резкое падение трафика на 80% после некорректной закупки спамных ссылок сторонним подрядчиком.',
+    problem: 'Резкое падение трафика на 80% после некорректной закупки спамных ссылок сторонним агентством.',
     done: [
       'Проведен полный аудит ссылочного профиля, отклонены токсичные доноры через Disavow Tool;',
       'Удалены переоптимизированные тексты начала 2010-х годов с главной и категорий;',
@@ -76,131 +77,153 @@ const detailedCases: CaseItem[] = [
   },
 ];
 
+/**
+ * Секция кейсов из практики в темной теме Dark Obsidian.
+ * Включает дисклеймеры NDA и детальные модальные окна разбора.
+ */
 export const CasesSection: React.FC = () => {
   const [activeCase, setActiveCase] = useState<CaseItem | null>(null);
 
   return (
-    <section id="cases" className="py-16 md:py-24 bg-white border-b border-dark-200">
-      <div className="container">
+    <section id="cases" className="py-16 md:py-24 bg-obsidian-950 border-b border-obsidian-850">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+        
+        {/* Заголовок */}
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
-            <div className="text-xs font-mono uppercase tracking-widest text-accent-700 font-bold mb-2">
+            <div className="text-xs font-mono uppercase tracking-widest text-growth-400 mb-2">
               Практика и результаты
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-dark-950 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
               Примеры проектов из практики
             </h2>
           </div>
-          <div className="text-xs font-mono text-dark-500 max-w-md text-left sm:text-right">
+          <div className="text-xs font-mono text-slate-400 max-w-md text-left sm:text-right">
             Данные подтверждены веб-аналитикой (Яндекс.Метрика). Названия проектов скрыты по условиям NDA.
           </div>
         </div>
 
+        {/* Сетка кейсов */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {detailedCases.map((item) => (
             <div
               key={item.id}
-              className="p-6 rounded-2xl bg-white border border-dark-200 shadow-clean-card hover:shadow-clean-hover transition-all flex flex-col justify-between"
+              className="p-6 rounded-2xl bg-obsidian-900 border border-obsidian-800 hover:border-obsidian-750 transition-colors flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between text-xs font-mono text-dark-500 mb-3">
-                  <span className="font-semibold text-dark-700">{item.niche}</span>
-                  <span className="text-accent-600 font-semibold">{item.region}</span>
+                <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
+                  <span className="font-semibold text-white">{item.niche}</span>
+                  <span className="text-growth-400 font-mono">{item.region}</span>
                 </div>
-                <h3 className="text-base font-bold font-heading text-dark-900 mb-2 leading-snug">
+                <h3 className="text-base font-bold text-white mb-2 leading-snug">
                   {item.title}
                 </h3>
-                <div className="text-xs text-dark-600 font-sans leading-relaxed mb-4 space-y-1.5">
+                <div className="text-xs text-slate-300 font-sans leading-relaxed mb-4 space-y-1.5">
                   <p>
-                    <strong className="text-dark-800">Исходная точка:</strong> {item.problem}
+                    <strong className="text-slate-400">Исходная точка:</strong> {item.problem}
                   </p>
                 </div>
 
                 {/* Метрики */}
-                <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-dark-50 font-mono text-center text-xs mb-4 border border-dark-100">
+                <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-obsidian-950 font-mono text-center text-xs mb-4 border border-obsidian-800">
                   <div>
-                    <div className="text-accent-700 font-bold text-sm">{item.metrics.positions}</div>
-                    <div className="text-[10px] text-dark-500">Ср. позиция</div>
-                  </div>
-                  <div className="border-x border-dark-200">
-                    <div className="text-dark-900 font-bold text-sm">{item.metrics.traffic}</div>
-                    <div className="text-[10px] text-dark-500">Органика</div>
+                    <div className="text-growth-400 font-bold text-sm">{item.metrics.positions}</div>
+                    <div className="text-[10px] text-slate-400">Позиции</div>
                   </div>
                   <div>
-                    <div className="text-primary-700 font-bold text-sm">{item.metrics.duration}</div>
-                    <div className="text-[10px] text-dark-500">Срок</div>
+                    <div className="text-growth-400 font-bold text-sm">{item.metrics.traffic}</div>
+                    <div className="text-[10px] text-slate-400">Трафик</div>
+                  </div>
+                  <div>
+                    <div className="text-slate-300 font-bold text-sm">{item.metrics.duration}</div>
+                    <div className="text-[10px] text-slate-400">Срок</div>
                   </div>
                 </div>
               </div>
 
               <button
+                type="button"
                 onClick={() => setActiveCase(item)}
-                className="w-full py-2.5 rounded-lg bg-dark-50 hover:bg-dark-100 border border-dark-200 text-dark-800 text-xs font-mono font-semibold transition-colors flex items-center justify-center gap-1.5 mt-2"
+                className="w-full text-xs font-mono text-growth-400 hover:text-growth-300 flex items-center justify-between pt-3 border-t border-obsidian-800 transition-colors cursor-pointer"
               >
-                <span>Разобрать кейс подробно</span>
-                <ChevronRight className="w-3.5 h-3.5 text-accent-600" />
+                <span>Подробный разбор работ</span>
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           ))}
         </div>
 
-        {/* Юридический дисклеймер к кейсам */}
-        <div className="text-[11px] font-mono text-dark-500 leading-relaxed border-t border-dark-200 pt-4 flex items-start gap-2">
-          <ShieldCheck className="w-4 h-4 text-accent-600 shrink-0 mt-0.5" />
+        {/* Юридический дисклеймер NDA по кейсам */}
+        <div className="p-4 rounded-xl bg-obsidian-900/40 border border-obsidian-800/80 text-[11px] font-mono text-slate-400 flex items-start gap-2.5">
+          <ShieldCheck className="w-4 h-4 text-growth-400 shrink-0 mt-0.5" />
           <span>
-            * Результаты индивидуальны для каждого сайта и зависят от исходного технического состояния домена, возраста, уровня конкуренции в тематике и скорости внедрения рекомендаций. Приведенные цифры не являются публичной офертой и не гарантируют аналогичных показателей в других проектах.
+            Показатели роста индивидуальны и зависят от исходного технического состояния домена, возраста сайта, структуры спроса и скорости согласования технических заданий заказчиком. Конкретные цифры зафиксированы в аналитических отчетах.
           </span>
         </div>
+
       </div>
 
-      {/* Модальное окно детального разбора кейса */}
+      {/* Модальное окно детального кейса */}
       {activeCase && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white border border-dark-200 max-w-2xl w-full rounded-2xl p-6 sm:p-8 space-y-4 max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="flex items-center justify-between border-b border-dark-100 pb-3">
-              <h3 className="font-bold font-heading text-dark-900 text-base">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in"
+          onClick={() => setActiveCase(null)}
+        >
+          <div
+            className="bg-obsidian-900 border border-obsidian-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-slate-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveCase(null)}
+              className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-obsidian-800 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div>
+              <div className="text-xs font-mono text-growth-400 uppercase tracking-widest mb-1">
+                {activeCase.niche} • {activeCase.region}
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-tight">
                 {activeCase.title}
               </h3>
-              <button
-                onClick={() => setActiveCase(null)}
-                className="text-dark-400 hover:text-dark-800 p-1"
-                aria-label="Закрыть разбор"
-              >
-                <X className="w-5 h-5" />
-              </button>
             </div>
 
-            <div className="text-xs text-dark-700 font-sans space-y-3 leading-relaxed">
-              <div className="p-3.5 rounded-xl bg-dark-50 border border-dark-200">
-                <strong className="text-dark-900 block mb-1">Исходная проблема:</strong>
-                <p>{activeCase.problem}</p>
-              </div>
-
-              <div>
-                <strong className="text-dark-900 block mb-1">Что было сделано лично мной:</strong>
-                <ul className="list-disc pl-4 space-y-1 text-dark-700">
-                  {activeCase.done.map((step, idx) => (
-                    <li key={idx}>{step}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="p-3.5 rounded-xl bg-accent-50 border border-accent-200 text-accent-900 font-mono">
-                <strong className="block mb-1">Фактический результат:</strong>
-                <p className="font-sans text-xs">{activeCase.result}</p>
-              </div>
-
-              <div className="text-[11px] text-dark-500 italic pt-1">
-                * Название проекта не раскрывается в соответствии с соглашением о неразглашении (NDA).
-              </div>
+            <div className="p-4 rounded-xl bg-obsidian-950 border border-obsidian-800 text-xs font-mono text-slate-300">
+              <span className="text-growth-400 font-bold">Исходная ситуация: </span>
+              {activeCase.problem}
             </div>
 
-            <div className="pt-3 border-t border-dark-100 flex justify-end">
+            <div>
+              <div className="text-sm font-bold text-white mb-3 font-mono">
+                Что конкретно было внедрено:
+              </div>
+              <ul className="space-y-2 text-xs font-sans text-slate-300">
+                {activeCase.done.map((step, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="text-growth-400 font-bold shrink-0 font-mono">0{idx + 1}.</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="p-4 rounded-xl bg-obsidian-950 border border-growth-500/30 text-xs font-sans text-slate-200">
+              <div className="font-bold text-growth-400 font-mono text-xs uppercase mb-1">
+                Итоговый результат:
+              </div>
+              {activeCase.result}
+            </div>
+
+            <div className="flex justify-between items-center pt-2 border-t border-obsidian-800 text-xs font-mono text-slate-400">
+              <span>Срок проекта: {activeCase.metrics.duration}</span>
               <button
+                type="button"
                 onClick={() => setActiveCase(null)}
-                className="px-4 py-2 rounded-lg bg-dark-900 hover:bg-dark-800 text-white font-mono text-xs font-semibold"
+                className="px-4 py-2 rounded-lg bg-obsidian-800 hover:bg-obsidian-750 text-white font-semibold"
               >
-                Закрыть разбор
+                Закрыть
               </button>
             </div>
           </div>

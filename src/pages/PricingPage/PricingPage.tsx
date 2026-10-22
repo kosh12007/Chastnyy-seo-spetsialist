@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { getSeoData, generateOgMeta } from '@utils/helpers';
 import { SITE_URL } from '@utils/constants';
-import { TariffsSection, BudgetCalculatorSection, ModelComparisonSection } from '@components/sections';
+import { TariffsSection, BudgetCalculatorSection, ModelComparisonSection, CTASection } from '@components/sections';
 import { AnimatedSection } from '@components/common';
 import { ShieldCheck } from 'lucide-react';
 
@@ -55,6 +55,11 @@ export const PricingPage: React.FC = () => {
         {/* Сравнение моделей взаимодействия */}
         <AnimatedSection variant="slide-up">
           <ModelComparisonSection />
+        </AnimatedSection>
+
+        {/* Форма экспресс-оценки */}
+        <AnimatedSection variant="slide-up">
+          <CTASection />
         </AnimatedSection>
       </AnimatedSection>
     </>
