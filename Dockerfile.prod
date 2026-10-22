@@ -1,0 +1,49 @@
+# Этап 1: Сборка
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Устанавливаем зависимости
+COPY package.json package-lock.json* ./
+RUN npm ci --production=false
+
+# Копируем исходники
+COPY . .
+
+# Собираем проект
+ARG VITE_APP_SITE_URL
+ARG VITE_APP_TITLE
+ARG VITE_APP_API_URL
+ARG VITE_APP_PHONE
+ARG VITE_APP_EMAIL
+ARG VITE_APP_WHATSAPP
+ARG VITE_APP_TELEGRAM
+ARG VITE_APP_ADDRESS
+ARG VITE_APP_WORKING_HOURS
+
+ENV VITE_APP_SITE_URL=${VITE_APP_SITE_URL}
+ENV VITE_APP_TITLE=${VITE_APP_TITLE}
+ENV VITE_APP_API_URL=${VITE_APP_API_URL}
+ENV VITE_APP_PHONE=${VITE_APP_PHONE}
+ENV VITE_APP_EMAIL=${VITE_APP_EMAIL}
+ENV VITE_APP_WHATSAPP=${VITE_APP_WHATSAPP}
+ENV VITE_APP_TELEGRAM=${VITE_APP_TELEGRAM}
+ENV VITE_APP_ADDRESS=${VITE_APP_ADDRESS}
+ENV VITE_APP_WORKING_HOURS=${VITE_APP_WORKING_HOURS}
+
+RUN npm run build
+
+# Этап 2: Production image (только dist)
+FROM node:20-alpine AS prod
+
+WORKDIR /app
+
+# Копируем собранные файлы
+COPY --from=builder /app/dist ./dist
+
+# Устанавливаем простой HTTP сервер для отдачи статики
+RUN npm install -g serve
+
+EXPOSE 3000
+
+CMD ["serve", "-s", "dist", "-l", "3000"]

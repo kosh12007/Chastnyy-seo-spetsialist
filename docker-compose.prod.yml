@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # React App (собранный билд)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        VITE_APP_SITE_URL: ${VITE_APP_SITE_URL}
+        VITE_APP_TITLE: ${VITE_APP_TITLE}
+        VITE_APP_API_URL: ${VITE_APP_API_URL}
+        VITE_APP_PHONE: ${VITE_APP_PHONE}
+        VITE_APP_EMAIL: ${VITE_APP_EMAIL}
+        VITE_APP_WHATSAPP: ${VITE_APP_WHATSAPP}
+        VITE_APP_TELEGRAM: ${VITE_APP_TELEGRAM}
+        VITE_APP_ADDRESS: ${VITE_APP_ADDRESS}
+        VITE_APP_WORKING_HOURS: ${VITE_APP_WORKING_HOURS}
+    container_name: seo-site-prod
+    restart: unless-stopped
+    networks:
+      - seo-network
+
+  # Nginx + SSL
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: seo-nginx-prod
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      # Prod-конфигурация с SSL (шаблон)
+      - ./docker/nginx/nginx.prod.conf.template:/etc/nginx/templates/nginx.conf.template:ro
+
+      # Статика (если нужно отдавать напрямую)
+      - ./static:/app/static:ro
+
+      # SSL-сертификаты от Let's Encrypt
+      - ./certbot/conf:/etc/letsencrypt:ro
+
+      # Директория для верификации Certbot
+      - ./certbot/www:/var/www/certbot:ro
+
+      # Лог-файлы
+      - ./logs/nginx:/var/log/nginx
+
+    environment:
+      - DOMAIN=${DOMAIN}
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
+    depends_on:
+      - app
+    restart: unless-stopped
+    networks:
+      - seo-network
+
+  # Certbot (получение и обновление SSL)
+  certbot:
+    image: certbot/certbot:latest
+    container_name: seo-certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do sleep 12h & wait $${!}; certbot renew; done;'"
+    restart: unless-stopped
+    networks:
+      - seo-network
+
+networks:
+  seo-network:
+    driver: bridge

@@ -1,0 +1,18 @@
+# Корректные MIME-типы (лечит ошибку "MIME type application/octet-stream"
+# на хостингах, где .js отдаётся как octet-stream)
+<IfModule mod_mime.c>
+  AddType text/javascript .js .mjs
+  AddType text/css .css
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType image/svg+xml .svg
+  AddType font/woff2 .woff2
+</IfModule>
+
+# SPA-фолбэк: все несуществующие пути отдаём через index.html (React Router)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . index.html [L]
+</IfModule>

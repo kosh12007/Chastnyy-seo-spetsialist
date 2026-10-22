@@ -1,0 +1,36 @@
+# Зависимости
+node_modules
+
+# Результаты сборки
+dist
+build
+
+# Git
+.git
+.gitignore
+
+# Env — секреты и dev-значения не должны попадать в прод-бандл
+.env
+.env.*
+!.env.example
+
+# Инфраструктура и вспомогательные файлы (не нужны внутри образа)
+docker
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+certbot
+logs
+static
+create_backup_serp.bat
+REstart.bat
+start.bat
+stop.bat
+
+# IDE и разное
+.vscode
+.idea
+.qwen
+*.log
+.DS_Store
+Thumbs.db

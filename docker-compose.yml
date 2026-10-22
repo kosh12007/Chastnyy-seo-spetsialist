@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # React Dev сервер
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seo-site-dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_APP_TITLE=${VITE_APP_TITLE:-SEO Специалист - Разработка}
+      - VITE_APP_PHONE=${VITE_APP_PHONE:-+79991234567}
+      - VITE_APP_EMAIL=${VITE_APP_EMAIL:-info@example.ru}
+      - VITE_APP_WHATSAPP=${VITE_APP_WHATSAPP:-79991234567}
+      - VITE_APP_TELEGRAM=${VITE_APP_TELEGRAM:-seo_specialist}
+    command: npm run dev
+    restart: unless-stopped
+
+  # Nginx (прокси для dev)
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: seo-nginx-dev
+    ports:
+      - '8085:80'
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
+    restart: unless-stopped
+
+networks:
+  default:
+    name: seo-site-dev-network

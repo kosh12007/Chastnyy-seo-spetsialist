@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /politika-konfidentsialnosti/
+Disallow: /soglasie-opd/
+
+Sitemap: https://yoursite.ru/sitemap.xml

@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+*.zip
+
+# Testing
+coverage/
+*.lcov
+
+# Production
+dist/
+build/
+
+# Misc
+.DS_Store
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Env
+.env
+.env.local
+.env.production
+
+# Docker
+certbot/
+logs/
+
+# OS
+Thumbs.db
