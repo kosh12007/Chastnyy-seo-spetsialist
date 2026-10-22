@@ -30,7 +30,7 @@
 - [x] Favicon (`favicon.svg`, `favicon.ico`)
 - [x] Docker Dev (Nginx прокси на 8085 + Vite Dev Server на 3000)
 - [x] Docker Prod (Nginx SSL Let's Encrypt + кэширование статики 365d + no-cache HTML)
-- [x] Скрипты запуска и бэкапа под Windows (`start.bat`, `stop.bat`, `REstart.bat`, `create_backup_serp.bat`)
+- [x] Скрипты запуска и бэкапа под Windows (`start.bat`, `stop.bat`, `REstart.bat`, `create_backup.bat`)
 
 ---
 

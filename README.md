@@ -45,7 +45,7 @@ site/
 │   ├── styles/                       # Глобальные стили (globals.css) и Tailwind директивы
 │   ├── types/                        # TypeScript-интерфейсы и типы сущностей
 │   └── utils/                        # Хелперы, Zod-схемы валидации, генераторы Schema.org
-├── create_backup_serp.bat            # Скрипт создания zip-бэкапа проекта с меткой времени
+├── create_backup.bat                 # Скрипт создания zip-бэкапа проекта с меткой времени
 ├── docker-compose.yml                # Локальное dev-окружение (порты 8085 Nginx, 3000 Vite)
 ├── docker-compose.prod.yml           # Продакшн-окружение со сборкой и Let's Encrypt
 ├── Dockerfile                        # Сборка контейнера для разработки
@@ -150,6 +150,213 @@ site/
 
 ---
 
+## 📝 Руководство по добавлению контента
+
+Вся контентная часть проекта спроектирована по модульному принципу: страницы формируются динамически на основе типизированных данных без необходимости вручную верстать новые JSX-страницы или менять роутинг в `App.tsx`.
+
+---
+
+### 1. Как добавить новую коммерческую страницу (Услугу)
+
+Все страницы услуг работают через динамический маршрут `/uslugi/:slug/`. Для добавления новой услуги:
+
+#### Шаг 1.1. Создайте файл услуги в `src/data/services/`
+Создайте файл `src/data/services/<slug-uslugi>.ts`, например, `src/data/services/ecommerce-seo.ts`:
+
+```typescript
+import { Service } from '@/types';
+
+export const service: Service = {
+  id: 'ecommerce-seo',
+  title: 'SEO для интернет-магазинов',
+  description: 'Комплексное продвижение каталогов товаров, оптимизация фильтров и страниц категорий для взрывного роста продаж.',
+  icon: 'ShoppingBag', // Имя иконки из библиотеки Lucide React (Search, BarChart, Layers, etc.)
+  slug: 'seo-dlya-internet-magazina', // ЧПУ адрес страницы
+  content: `
+    <div class="space-y-12">
+      <section>
+        <h2 class="text-2xl font-bold font-heading mb-6">Особенности продвижения E-commerce</h2>
+        <p class="mb-6 text-dark-800">
+          Продвижение интернет-магазина требует особого подхода: оптимизации тысяч страниц фильтров, пагинации, карточек товаров и микроразметки Product/Offer.
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-dark-50">
+            <span class="text-primary-600 font-bold">01.</span>
+            <span class="text-dark-800"><b>Оптимизация фильтрации:</b> Генерация посадочных страниц под низкочастотные запросы.</span>
+          </div>
+          <div class="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-dark-50">
+            <span class="text-primary-600 font-bold">02.</span>
+            <span class="text-dark-800"><b>Коммерческие факторы:</b> Цены, доставка, наличие, отзывы и удобство оформления заказа.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-dark-50 p-8 rounded-2xl">
+        <h2 class="text-2xl font-bold font-heading mb-6">Этапы работ для магазинов</h2>
+        <div class="space-y-6">
+          <div class="flex gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center flex-shrink-0 font-bold">1</div>
+            <div>
+              <h3 class="font-bold text-lg">Аудит структуры и индексации</h3>
+              <p class="text-dark-800 text-sm">Поиск дублей, страниц пагинации и настройка канонических адресов.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  `,
+};
+```
+
+#### Шаг 1.2. Зарегистрируйте услугу в `src/data/index.ts`
+Откройте файл [src/data/index.ts](file:///d:/Разные%20проекты/Частный%20СЕО%20специалист/site/src/data/index.ts), импортируйте новую услугу и добавьте её в массив `services`:
+
+```typescript
+import { service as ecommerceSeo } from './services/ecommerce-seo';
+
+export const services: Service[] = [
+  seoProdvizhenie,
+  seoAudit,
+  yandex,
+  google,
+  contentMarketing,
+  konsultatsiya,
+  ecommerceSeo, // <-- Добавлено
+];
+```
+
+#### Что произойдет автоматически:
+* Карточка услуги мгновенно появится в общем каталоге `/uslugi/` и на главной странице в блоке «Услуги».
+* Будет доступна отдельная детальная страница по адресу `/uslugi/seo-dlya-internet-magazina/`.
+* Для страницы автоматически сгенерируются мета-теги `title`, `description`, `canonical` и микроразметка Schema.org `Service` / `ProfessionalService`.
+
+#### Шаг 1.3. Добавьте URL в карту сайта `public/sitemap.xml`
+Внесите новый адрес в [public/sitemap.xml](file:///d:/Разные%20проекты/Частный%20СЕО%20специалист/site/public/sitemap.xml):
+
+```xml
+  <url>
+    <loc>https://yoursite.ru/uslugi/seo-dlya-internet-magazina/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+```
+
+---
+
+### 2. Как добавить новую статью в Блог
+
+Все статьи блога работают через динамический маршрут `/blog/:slug/`. Добавление новой публикации выполняется в 2 шага:
+
+#### Шаг 2.1. Создайте файл статьи в `src/data/blog/`
+Создайте файл `src/data/blog/<slug-stati>.ts`, например, `src/data/blog/optimizatsiya-kartochek-tovara.ts`:
+
+```typescript
+import { Article } from '@/types';
+
+export const article: Article = {
+  slug: 'optimizatsiya-kartochek-tovara',
+  title: 'Как оптимизировать карточки товаров для интернет-магазина в 2026 году',
+  date: '2026-04-15', // Формат ГГГГ-ММ-ДД (статьи автоматически сортируются от свежих к старым)
+  readTime: '7 мин',
+  excerpt: 'Пошаговое руководство по внутренней оптимизации товарных карточек: шаблоны тегов Title и H1, микроразметка Schema.org Product, отзывы и блоки перелинковки.',
+  content: `
+    <p>
+      Карточки товаров часто приносят интернет-магазинам до 60% всего органического трафика по «горячим» транзакционным запросам. Разберем ключевые элементы их правильной SEO-оптимизации.
+    </p>
+
+    <h2>1. Формирование мета-тегов по шаблону</h2>
+    <p>
+      Для тысяч товаров невозможно прописать теги вручную. Настройте автогенерацию:
+    </p>
+    <ul>
+      <li><b>Title:</b> [Название товара] [Артикул] — купить в Москве по цене [Цена] руб.</li>
+      <li><b>Description:</b> Закажите [Название товара] в интернет-магазине с быстрой доставкой по РФ. В наличии, гарантия качества, отзывы покупателей.</li>
+      <li><b>H1:</b> [Название товара] [Бренд / Модель].</li>
+    </ul>
+
+    <h2>2. Микроразметка Schema.org Product и Offer</h2>
+    <p>
+      Разметка структурированных данных позволяет поисковикам выводить цену, статус наличия и рейтинг со звездочками прямо в поисковой выдаче.
+    </p>
+
+    <h2>Заключение</h2>
+    <p>
+      Внедрение этих рекомендаций повышает CTR в поиске Яндекса и Google на 25-40%.
+    </p>
+  `,
+};
+```
+
+#### Шаг 2.2. Зарегистрируйте статью в `src/data/blog.ts`
+Откройте файл [src/data/blog.ts](file:///d:/Разные%20проекты/Частный%20СЕО%20специалист/site/src/data/blog.ts) и подключите новую статью:
+
+```typescript
+import { Article } from '@/types';
+import { article as kakVybratSeo } from './blog/kak-vybrat-seo';
+import { article as seoVsContext } from './blog/seo-vs-context';
+import { article as stoimostSeo2026 } from './blog/stoimost-seo-2026';
+import { article as optimizatsiyaKartochek } from './blog/optimizatsiya-kartochek-tovara'; // <-- Импорт
+
+export const blogArticles: Article[] = [
+  kakVybratSeo,
+  seoVsContext,
+  stoimostSeo2026,
+  optimizatsiyaKartochek, // <-- Добавлено в список
+].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+```
+
+#### Что произойдет автоматически:
+* Массив `blogArticles` отсортирует статьи по дате `date` (самая свежая публикация встанет первой).
+* Статья сразу отобразится в каталоге `/blog/`.
+* Будет доступна отдельная страница `/blog/optimizatsiya-kartochek-tovara/`.
+* Автоматически сформируется микроразметка `Article` с автором, датами публикации и логотипом.
+
+#### Шаг 2.3. Добавьте URL в `public/sitemap.xml`:
+```xml
+  <url>
+    <loc>https://yoursite.ru/blog/optimizatsiya-kartochek-tovara/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+```
+
+---
+
+### 3. Как добавить новый кейс в Портфолио
+
+Кейсы хранятся в массиве `cases` в файле [src/data/index.ts](file:///d:/Разные%20проекты/Частный%20СЕО%20специалист/site/src/data/index.ts):
+
+1. Откройте `src/data/index.ts`.
+2. Добавьте новый объект в массив `cases`:
+```typescript
+{
+  id: 'case-5',
+  title: 'SEO-продвижение сервиса доставки еды',
+  niche: 'Доставка готовой еды и рационов',
+  region: 'Москва и МО',
+  duration: '5 месяцев',
+  before: { traffic: 1200, positions: 22, conversion: 1.4 },
+  after: { traffic: 6800, positions: 4, conversion: 3.9 },
+  growth: { traffic: 466, positions: 82, conversion: 178 },
+  slug: 'dostavka-edy',
+  image: '/images/cases/food-delivery.webp',
+  tasks: [
+    'Вывести ключевые запросы по рационам в ТОП-5 Яндекса',
+    'Увеличить конверсию из поискового трафика',
+  ],
+  done: [
+    'Собрана семантика на 400+ транзакционных запросов',
+    'Проведена внутренняя перелинковка меню',
+    'Оптимизирована мобильная версия сайта',
+  ],
+}
+```
+3. Кейс появится на странице `/portfolio/` и получит индивидуальный экран `/portfolio/dostavka-edy/`.
+
+---
+
+---
+
 ## 🔍 SEO и поисковая оптимизация
 
 Проект спроектирован с учетом строгих критериев поисковой оптимизации:
@@ -184,7 +391,7 @@ site/
 
 ## 💾 Резервное копирование
 
-В проект встроен скрипт создания резервных копий [create_backup_serp.bat](file:///d:/Разные%20проекты/Частный%20СЕО%20специалист/site/create_backup_serp.bat).
+В проект встроен скрипт создания резервных копий [create_backup.bat](file:///d:/Разные%20проекты/Частный%20СЕО%20специалист/site/create_backup.bat).
 Он автоматически исключает `node_modules`, `.git`, кэши и собирает чистый ZIP-архив с датой и временем:
 ```
 seo_site_backup_YYYY-MM-DD_HH-MM-SS.zip

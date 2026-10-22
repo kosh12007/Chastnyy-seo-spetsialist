@@ -32,7 +32,7 @@
 * Формы обратной связи с клиентской валидацией через React Hook Form и Zod.
 * Маскирование и валидация международных номеров телефонов (`libphonenumber-js`).
 * Docker Dev и Prod конфигурации с автоматизацией SSL-сертификатов.
-* Батники автоматизации под Windows (`start.bat`, `stop.bat`, `REstart.bat`, `create_backup_serp.bat`).
+* Батники автоматизации под Windows (`start.bat`, `stop.bat`, `REstart.bat`, `create_backup.bat`).
 
 ### Вынесено за текущие рамки (To-Do):
 * Серверный бэкенд / webhook-обработчик заявок (отправка в Telegram Bot API или CRM).
