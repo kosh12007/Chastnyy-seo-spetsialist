@@ -1,209 +1,179 @@
 /**
  * =========================================================================
- * УПРАВЛЕНИЕ ЯНДЕКС.МЕТРИКОЙ И СОГЛАСИЕМ ПОЛЬЗОВАТЕЛЕЙ (152-ФЗ)
+ * ПОДГРУЗКА И УПРАВЛЕНИЕ ЯНДЕКС.МЕТРИКОЙ (152-ФЗ)
  * =========================================================================
  * 
- * Данный файл:
- * 1. Автоматически подгружает код счётчика из отдельного файла:
- *    - /yandex-metrika.html (если код вставлен целиком со скриптами из кабинета Метрики)
- *    - или /yandex-metrika.json (если передан номер счётчика и опции в формате JSON)
- * 2. Проверяет согласие пользователя (localStorage: 'analytics_consent')
- * 3. Предоставляет методы для баннера куки (CookieBanner):
- *    - window.disableYandexMetrika() — отключение счётчика и удаление cookies
- *    - window.enableYandexMetrika()  — включение счётчика при согласии
- * 
+ * 1. Код счётчика НЕ захардкожен здесь, а берётся напрямую из файла /yandex-metrika.html
+ * 2. Скрипт вставляет код из yandex-metrika.html в самое начало <head> страницы
+ * 3. Если пользователь нажимает «Отказаться» в куки-баннере — код Метрики полностью
+ *    вырезается со страницы (DOM), удаляются все cookies и отключается трекинг.
+ * 4. Если пользователь нажимает «Принять» — код подгружается и вставляется в страницу.
  * =========================================================================
  */
 
 (function () {
-  // Флаг инициализации счетчика
-  var isInitialized = false;
-  // Номер активного счетчика
-  var currentCounterId = null;
+  // Атрибут для идентификации всех внедрённых тегов Метрики
+  var INJECTED_ATTR = 'data-metrika-injected';
+  // Кэш текста счётчика
+  var cachedHtml = null;
 
   /**
-   * Исполнение полученного кода счетчика (HTML или JSON)
-   * @param {string} rawText Текст из файла yandex-metrika.html или yandex-metrika.json
+   * Вставка кода из HTML в самое начало страницы
    */
-  function executeSnippet(rawText) {
-    if (isInitialized) return;
+  function insertMetrikaFromHtml(html) {
+    if (!html) return;
+    cachedHtml = html;
 
-    var trimmed = (rawText || '').trim();
-    if (!trimmed) return;
+    // Если код уже вставлен — ничего повторно не добавляем
+    if (document.querySelector('[' + INJECTED_ATTR + '="true"]')) {
+      return;
+    }
 
-    // ВАРИАНТ 1: Если в файле передан JSON-конфиг
-    if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
+    // Автоматически определяем номер счётчика из кода без хардкода
+    var idMatch = html.match(/id=(\d+)/) || html.match(/ym\((\d+)/) || html.match(/watch\/(\d+)/);
+    if (idMatch && idMatch[1]) {
+      window.__activeYmCounterId = idMatch[1];
+      // Снимаем блокировку, если она была ранее
       try {
-        var config = JSON.parse(trimmed);
-        if (config.id) {
-          currentCounterId = String(config.id);
+        delete window['disableYaCounter' + idMatch[1]];
+      } catch (e) {}
+    }
 
-          // Инициализация стандартного загрузчика Метрики
-          (function (m, e, t, r, i, k, a) {
-            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
-            m[i].l = 1 * new Date();
-            for (var j = 0; j < document.scripts.length; j++) {
-              if (document.scripts[j].src === r) { return; }
-            }
-            k = e.createElement(t); a = e.getElementsByTagName(t)[0];
-            k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
-          })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=' + currentCounterId, 'ym');
+    // Парсим переданный HTML-код
+    var container = document.createElement('div');
+    container.innerHTML = html;
 
-          var defaultOptions = {
-            ssr: true,
-            webvisor: true,
-            clickmap: true,
-            referrer: document.referrer,
-            url: location.href,
-            accurateTrackBounce: true,
-            trackLinks: true
-          };
+    // 1. Вставляем все теги <script> в самое начало <head>
+    var scriptTags = container.getElementsByTagName('script');
+    var targetParent = document.head || document.documentElement;
 
-          window.ym(Number(currentCounterId), 'init', config.options || defaultOptions);
-          isInitialized = true;
-          console.log('[Яндекс.Метрика] Счётчик ' + currentCounterId + ' успешно инициализирован из JSON-файла.');
-          return;
-        }
-      } catch (jsonErr) {
-        console.warn('[Яндекс.Метрика] Ошибка разбора JSON, выполняем как HTML-код:', jsonErr);
+    for (var i = 0; i < scriptTags.length; i++) {
+      var orig = scriptTags[i];
+      var script = document.createElement('script');
+      script.setAttribute(INJECTED_ATTR, 'true');
+      if (orig.type) script.type = orig.type;
+
+      if (orig.src) {
+        script.src = orig.src;
+        script.async = true;
+      } else {
+        script.text = orig.innerHTML;
+      }
+
+      // Вставляем в самое начало дерева head
+      if (targetParent.firstChild) {
+        targetParent.insertBefore(script, targetParent.firstChild);
+      } else {
+        targetParent.appendChild(script);
       }
     }
 
-    // ВАРИАНТ 2: Если в файле передан HTML-код из личного кабинета Метрики
-    // (содержит теги <!-- -->, <script> и <noscript>)
-    try {
-      // Извлекаем номер счётчика для корректного отключения при отказе
-      var idMatch = trimmed.match(/tag\.js\?id=(\d+)/) || trimmed.match(/ym\((\d+)/) || trimmed.match(/watch\/(\d+)/);
-      if (idMatch && idMatch[1]) {
-        currentCounterId = idMatch[1];
-      }
+    // 2. Вставляем теги <noscript> в body (если имеются)
+    var noscriptTags = container.getElementsByTagName('noscript');
+    for (var j = 0; j < noscriptTags.length; j++) {
+      var ns = document.createElement('noscript');
+      ns.setAttribute(INJECTED_ATTR, 'true');
+      ns.innerHTML = noscriptTags[j].innerHTML;
 
-      var container = document.createElement('div');
-      container.innerHTML = trimmed;
-
-      // Извлекаем и запускаем скрипты
-      var scriptElements = container.getElementsByTagName('script');
-      for (var i = 0; i < scriptElements.length; i++) {
-        var oldScript = scriptElements[i];
-        var newScript = document.createElement('script');
-        newScript.type = oldScript.type || 'text/javascript';
-
-        if (oldScript.src) {
-          newScript.src = oldScript.src;
+      if (document.body) {
+        if (document.body.firstChild) {
+          document.body.insertBefore(ns, document.body.firstChild);
         } else {
-          newScript.text = oldScript.innerHTML;
-        }
-
-        document.head.appendChild(newScript);
-      }
-
-      // Добавляем noscript блоки, если они есть
-      var noscriptElements = container.getElementsByTagName('noscript');
-      for (var n = 0; n < noscriptElements.length; n++) {
-        var ns = document.createElement('noscript');
-        ns.innerHTML = noscriptElements[n].innerHTML;
-        if (document.body) {
           document.body.appendChild(ns);
-        } else {
-          document.addEventListener('DOMContentLoaded', function () {
-            document.body.appendChild(ns);
-          });
         }
       }
-
-      isInitialized = true;
-      console.log('[Яндекс.Метрика] Код счётчика успешно подгружен и запущен' + (currentCounterId ? ' (ID: ' + currentCounterId + ')' : '') + '.');
-    } catch (htmlErr) {
-      console.error('[Яндекс.Метрика] Ошибка при вставке кода счётчика:', htmlErr);
     }
+
+    console.log('[Яндекс.Метрика] Код из yandex-metrika.html успешно вставлен в начало страницы.');
   }
 
   /**
-   * Загрузка файла со счётчиком (сначала проверяем .html, затем .json)
+   * Подгрузка файла /yandex-metrika.html и запуск
    */
-  function loadMetrikaCode() {
-    // Проверяем согласие: если пользователь нажал «Отказаться», прерываем загрузку
+  function loadAndInsertMetrika() {
+    // Проверка согласия: если пользователь ранее отказался — не загружаем
     try {
-      var consent = localStorage.getItem('analytics_consent');
-      if (consent === 'declined') {
-        console.log('[Яндекс.Метрика] Загрузка счётчика отменена: пользователь выбрал «Отказаться».');
+      if (localStorage.getItem('analytics_consent') === 'declined') {
+        console.log('[Яндекс.Метрика] Пользователь ранее выбрал «Отказаться» — код не вставляется.');
         return;
       }
     } catch (e) {}
 
-    // 1. Пробуем загрузить yandex-metrika.html
+    if (cachedHtml) {
+      insertMetrikaFromHtml(cachedHtml);
+      return;
+    }
+
     fetch('/yandex-metrika.html')
       .then(function (response) {
-        if (response.ok) {
-          return response.text();
+        if (!response.ok) {
+          throw new Error('Файл /yandex-metrika.html не найден (HTTP ' + response.status + ')');
         }
-        // 2. Если html нет, пробуем yandex-metrika.json
-        return fetch('/yandex-metrika.json').then(function (jsonResponse) {
-          if (jsonResponse.ok) {
-            return jsonResponse.text();
-          }
-          throw new Error('Файлы yandex-metrika.html и yandex-metrika.json не найдены');
-        });
+        return response.text();
       })
-      .then(function (codeText) {
-        executeSnippet(codeText);
+      .then(function (htmlCode) {
+        insertMetrikaFromHtml(htmlCode);
       })
       .catch(function (error) {
-        console.warn('[Яндекс.Метрика] Информация:', error.message);
+        console.warn('[Яндекс.Метрика] Ошибка загрузки /yandex-metrika.html:', error);
       });
   }
 
   /**
-   * Отключение счётчика и удаление аналитических cookies (при клике «Отказаться»)
+   * Полное вырезание кода счётчика со страницы при клике «Отказаться»
    */
-  function disableYandexMetrika() {
+  function removeMetrika() {
     try {
-      if (currentCounterId) {
-        window['disableYaCounter' + currentCounterId] = true;
+      // 1. Вырезаем из DOM все добавленные теги (script и noscript)
+      var injectedElements = document.querySelectorAll('[' + INJECTED_ATTR + '="true"]');
+      for (var i = 0; i < injectedElements.length; i++) {
+        var el = injectedElements[i];
+        if (el.parentNode) {
+          el.parentNode.removeChild(el);
+        }
       }
 
-      // Список cookies, используемых Яндекс.Метрикой
-      var ymCookies = ['_ym_uid', '_ym_d', '_ym_isad', '_ym_visorc', 'yabs-sid', '_ym_hostIndex', '_ym_user_am'];
-      var domain = window.location.hostname;
-
-      for (var i = 0; i < ymCookies.length; i++) {
-        var name = ymCookies[i];
-        document.cookie = name + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        document.cookie = name + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + ';';
-        document.cookie = name + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + domain + ';';
+      // 2. Дополнительно удаляем любые скрипты, загруженные с mc.yandex.ru
+      var allScripts = document.getElementsByTagName('script');
+      for (var k = allScripts.length - 1; k >= 0; k--) {
+        if (allScripts[k].src && allScripts[k].src.indexOf('mc.yandex.ru') !== -1) {
+          if (allScripts[k].parentNode) {
+            allScripts[k].parentNode.removeChild(allScripts[k]);
+          }
+        }
       }
 
-      // Заглушка функции ym для предотвращения дальнейшей отправки хитов
+      // 3. Отключаем счетчик через глобальный флаг Метрики
+      if (window.__activeYmCounterId) {
+        window['disableYaCounter' + window.__activeYmCounterId] = true;
+      }
+
+      // 4. Глушим вызовы ym(...)
       if (window.ym) {
         window.ym = function () {};
       }
 
-      isInitialized = false;
-      console.log('[Яндекс.Метрика] Сбор аналитики отключен пользователем, cookies удалены.');
-    } catch (error) {
-      console.warn('[Яндекс.Метрика] Ошибка при отключении:', error);
+      // 5. Очищаем все cookies Яндекс.Метрики
+      var ymCookies = ['_ym_uid', '_ym_d', '_ym_isad', '_ym_visorc', 'yabs-sid', '_ym_hostIndex', '_ym_user_am'];
+      var domain = window.location.hostname;
+
+      for (var c = 0; c < ymCookies.length; c++) {
+        var cookieName = ymCookies[c];
+        document.cookie = cookieName + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = cookieName + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + ';';
+        document.cookie = cookieName + '=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.' + domain + ';';
+      }
+
+      console.log('[Яндекс.Метрика] Код счётчика полностью вырезан из страницы, cookies удалены.');
+    } catch (err) {
+      console.warn('[Яндекс.Метрика] Ошибка при вырезании счётчика:', err);
     }
   }
 
-  /**
-   * Включение счётчика (при клике «Принять» в баннере согласия)
-   */
-  function enableYandexMetrika() {
-    if (currentCounterId) {
-      try {
-        delete window['disableYaCounter' + currentCounterId];
-      } catch (e) {}
-    }
+  // Экспорт глобальных функций для CookieBanner
+  window.enableYandexMetrika = loadAndInsertMetrika;
+  window.disableYandexMetrika = removeMetrika;
 
-    if (!isInitialized) {
-      loadMetrikaCode();
-    }
-  }
-
-  // Экспорт функций для управления из CookieBanner
-  window.disableYandexMetrika = disableYandexMetrika;
-  window.enableYandexMetrika = enableYandexMetrika;
-
-  // Запуск подгрузки счетчика
-  loadMetrikaCode();
+  // Автоматический запуск подгрузки в начало страницы
+  loadAndInsertMetrika();
 })();
