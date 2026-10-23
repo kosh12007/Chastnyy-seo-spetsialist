@@ -4,4 +4,4 @@ Allow: /
 Disallow: /politika-konfidentsialnosti/
 Disallow: /soglasie-opd/
 
-Sitemap: https://yoursite.ru/sitemap.xml
+Sitemap: http://localhost:8085/sitemap.xml

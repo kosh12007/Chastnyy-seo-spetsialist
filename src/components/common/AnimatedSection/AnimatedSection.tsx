@@ -48,15 +48,8 @@ const variantsMap: Record<AnimationVariant, Variants> = {
 
 /**
  * Компонент для плавной анимации элементов при скролле.
- * Использует framer-motion и Intersection Observer (useInView).
- * 
- * @param children - дочерние элементы
- * @param variant - тип анимации ('fade', 'slide-up', и т.д.)
- * @param duration - длительность в секундах
- * @param delay - задержка в секундах
- * @param threshold - на сколько должен появиться элемент (0-1) для старта
- * @param className - дополнительные CSS классы
- * @param once - запускать анимацию только один раз при скролле
+ * Использует initial={false} для полной видимости контента при SSR/SSG пререндеринге
+ * (чтобы поисковые роботы и пользователи без JS сразу видели блоки без opacity: 0).
  */
 const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   children,
@@ -79,7 +72,7 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
       transition={{
         duration,
         delay,
-        ease: [0.25, 0.1, 0.25, 1], // Плавный переход
+        ease: [0.25, 0.1, 0.25, 1],
       }}
       className={className}
     >

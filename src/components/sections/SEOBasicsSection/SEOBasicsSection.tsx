@@ -16,10 +16,10 @@ export const SEOBasicsSection: React.FC = () => {
             Специализация и фокус
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
-            С кем я работаю наиболее эффективно
+            С какими сайтами я работаю наиболее эффективно
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed font-sans">
-            Я не беру в работу всё подряд. SEO работает только там, где есть реальный поисковый спрос и готовность развивать сайт.
+            Я не беру в работу все сайты. SEO работает только там, где есть реальный поисковый спрос и готовность развивать сайт.
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export const SEOBasicsSection: React.FC = () => {
         <div className="p-4 rounded-xl bg-emerald-50/80 dark:bg-obsidian-900 border border-emerald-300 dark:border-growth-500/30 flex items-center gap-3 text-xs font-mono text-emerald-950 dark:text-slate-300 shadow-sm transition-colors">
           <AlertCircle className="w-4 h-4 text-growth-600 dark:text-growth-400 shrink-0" />
           <span>
-            <strong className="text-emerald-950 dark:text-white">Принцип честности:</strong> я прямо откажусь от сотрудничества, если увижу, что в вашей нише SEO не окупится или бюджет целесообразнее направить в контекстную рекламу.
+            Я прямо откажусь от сотрудничества, если увижу, что в вашей нише SEO не окупится или бюджет целесообразнее направить в контекстную рекламу.
           </span>
         </div>
 

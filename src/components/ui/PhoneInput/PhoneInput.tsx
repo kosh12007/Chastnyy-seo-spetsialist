@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactPhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+
+// Совместимость CJS и ESM при серверном рендеринге (SSR/SSG)
+const PhoneInputComponent =
+  (ReactPhoneInput as unknown as { default?: typeof ReactPhoneInput }).default || ReactPhoneInput;
 
 interface PhoneInputProps {
   label?: string;
@@ -35,7 +38,7 @@ export const PhoneInputField: React.FC<PhoneInputProps> = ({
           {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
       )}
-      <ReactPhoneInput
+      <PhoneInputComponent
         country={defaultCountry}
         value={value}
         onChange={(phone) => onChange(`+${phone}`)}

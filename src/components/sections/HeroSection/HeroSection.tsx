@@ -53,7 +53,7 @@ export const HeroSection: React.FC = () => {
                 <div className="text-slate-500 dark:text-slate-400">в поисковой оптимизации</div>
               </div>
               <div className="p-3.5 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 shadow-sm dark:shadow-none">
-                <div className="text-slate-900 dark:text-white font-bold text-base mb-0.5">180+ проектов</div>
+                <div className="text-slate-900 dark:text-white font-bold text-base mb-0.5">120+ проектов</div>
                 <div className="text-slate-500 dark:text-slate-400">в e-com, B2B, услугах и информационных проектах</div>
               </div>
               <div className="p-3.5 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 shadow-sm dark:shadow-none">

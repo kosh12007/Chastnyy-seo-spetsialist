@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Home } from 'lucide-react';
 import { AnimatedSection } from '@components/common';
 
@@ -10,6 +11,10 @@ import { AnimatedSection } from '@components/common';
 export const NotFoundPage: React.FC = () => {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-16 grid-bg">
+      <Helmet>
+        <title>Страница не найдена (404) — Частный SEO-специалист Михаил Павлов</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <AnimatedSection variant="scale" duration={0.8}>
         <div className="text-center max-w-md mx-auto p-8 rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 shadow-xl transition-colors">
           <div className="text-8xl font-black text-growth-600 dark:text-growth-400 font-mono mb-4">

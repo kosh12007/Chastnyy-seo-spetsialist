@@ -1,108 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yoursite.ru/</loc>
+    <loc>http://localhost:8085/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/uslugi/</loc>
+    <loc>http://localhost:8085/uslugi/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/uslugi/seo-prodvizhenie/</loc>
+    <loc>http://localhost:8085/uslugi/seo-prodvizhenie/</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/uslugi/seo-audit/</loc>
+    <loc>http://localhost:8085/uslugi/seo-audit/</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/uslugi/yandex/</loc>
+    <loc>http://localhost:8085/uslugi/yandex/</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/uslugi/google/</loc>
+    <loc>http://localhost:8085/uslugi/google/</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/uslugi/content-marketing/</loc>
+    <loc>http://localhost:8085/uslugi/content-marketing/</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/uslugi/konsultatsiya/</loc>
+    <loc>http://localhost:8085/uslugi/konsultatsiya/</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/ceny/</loc>
+    <loc>http://localhost:8085/ceny/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/portfolio/</loc>
+    <loc>http://localhost:8085/portfolio/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/portfolio/stroy-market/</loc>
+    <loc>http://localhost:8085/portfolio/stroy-market/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/portfolio/dental-clinic/</loc>
+    <loc>http://localhost:8085/portfolio/dental-clinic/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/portfolio/auto-service/</loc>
+    <loc>http://localhost:8085/portfolio/auto-service/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/portfolio/furniture-store/</loc>
+    <loc>http://localhost:8085/portfolio/furniture-store/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/otzyvy/</loc>
+    <loc>http://localhost:8085/otzyvy/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/obo-mne/</loc>
+    <loc>http://localhost:8085/obo-mne/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/kontakty/</loc>
+    <loc>http://localhost:8085/kontakty/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://yoursite.ru/blog/</loc>
-    <priority>0.7</priority>
+    <loc>http://localhost:8085/blog/</loc>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yoursite.ru/blog/kak-vybrat-seo/</loc>
-    <priority>0.6</priority>
+    <loc>http://localhost:8085/blog/kak-vybrat-seo/</loc>
+    <lastmod>2026-04-01</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://yoursite.ru/blog/seo-vs-context/</loc>
-    <priority>0.6</priority>
+    <loc>http://localhost:8085/blog/seo-vs-context/</loc>
+    <lastmod>2026-03-28</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://yoursite.ru/blog/stoimost-seo-2026/</loc>
-    <priority>0.6</priority>
+    <loc>http://localhost:8085/blog/stoimost-seo-2026/</loc>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8085/rekvizity/</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>
