@@ -15,10 +15,10 @@ export const RequisitesPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Реквизиты и условия сотрудничества для юридических лиц | Михаил Павлов</title>
+        <title>Реквизиты и условия сотрудничества для юридических лиц | Сергей Кошелев</title>
         <meta
           name="description"
-          content="Официальные реквизиты самозанятого Павлова Михаила Васильевича. Условия заключения договоров с юридическими лицами и ИП, чеки 'Мой налог', без НДФЛ и взносов."
+          content="Официальные реквизиты самозанятого Кошелева Сергея Ивановича. Условия заключения договоров с юридическими лицами и ИП, чеки 'Мой налог', без НДФЛ и взносов."
         />
         <link rel="canonical" href={`${SITE_URL}/rekvizity/`} />
       </Helmet>
@@ -111,7 +111,7 @@ export const RequisitesPage: React.FC = () => {
                     <tbody className="divide-y divide-slate-200 dark:divide-obsidian-800 text-slate-700 dark:text-slate-300">
                       <tr className="hover:bg-slate-100/70 dark:hover:bg-obsidian-900/60 transition-colors">
                         <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-slate-400 w-1/3">ФИО исполнителя:</td>
-                        <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">Павлов Михаил Васильевич</td>
+                        <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">Кошелев Сергей Иванович</td>
                       </tr>
                       <tr className="hover:bg-slate-100/70 dark:hover:bg-obsidian-900/60 transition-colors">
                         <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-slate-400">Налоговый статус:</td>

@@ -1,0 +1,139 @@
+{
+  "pillar": {
+    "title": "Комплексный SEO-аудит сайта",
+    "keyword": "seo аудит сайта",
+    "volume": 8100,
+    "template": "посадочная-страница",
+    "wordCount": 2800,
+    "url": "/uslugi/seo-audit/"
+  },
+  "clusters": [
+    {
+      "name": "Технический аудит",
+      "color": "#2563eb",
+      "posts": [
+        {
+          "title": "Технический SEO-аудит сайта",
+          "keyword": "технический seo аудит сайта",
+          "volume": 2400,
+          "template": "посадочная-страница",
+          "wordCount": 2100,
+          "url": "/uslugi/seo-audit/tehnicheskij/",
+          "status": "written"
+        },
+        {
+          "title": "Как проверить сайт на технические ошибки самостоятельно",
+          "keyword": "как проверить сайт на ошибки seo",
+          "volume": 1300,
+          "template": "пошаговое-руководство",
+          "wordCount": 1800,
+          "url": "/stati/kak-proverit-sajt-na-oshibki/",
+          "status": "planned"
+        },
+        {
+          "title": "Образец отчета технического аудита сайта",
+          "keyword": "пример отчета seo аудита",
+          "volume": 880,
+          "template": "разбор-кейса",
+          "wordCount": 1400,
+          "url": "/stati/primer-otcheta-seo-audita/",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "name": "Коммерческий аудит",
+      "color": "#16a34a",
+      "posts": [
+        {
+          "title": "Коммерческий аудит сайта и удобство заказа",
+          "keyword": "коммерческий аудит сайта",
+          "volume": 1100,
+          "template": "посадочная-страница",
+          "wordCount": 1900,
+          "url": "/uslugi/seo-audit/kommercheskij/",
+          "status": "written"
+        },
+        {
+          "title": "Факторы доверия Яндекса для интернет-магазинов",
+          "keyword": "коммерческие факторы ранжирования яндекс",
+          "volume": 1600,
+          "template": "экспертная-статья",
+          "wordCount": 1700,
+          "url": "/stati/kommercheskie-faktory-yandeks/",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "name": "Ссылочный аудит",
+      "color": "#d97706",
+      "posts": [
+        {
+          "title": "Аудит ссылочной массы и проверка доноров",
+          "keyword": "ссылочный аудит сайта",
+          "volume": 950,
+          "template": "посадочная-страница",
+          "wordCount": 1850,
+          "url": "/uslugi/seo-audit/ssylochnyj/",
+          "status": "written"
+        },
+        {
+          "title": "Как очистить ссылочный профиль от токсичных ссылок",
+          "keyword": "снятие ссылочных санкций яндекс google",
+          "volume": 720,
+          "template": "пошаговое-руководство",
+          "wordCount": 1600,
+          "url": "/stati/ochistka-ssylochnogo-profilya/",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "name": "Структура и семантика",
+      "color": "#9333ea",
+      "posts": [
+        {
+          "title": "Аудит структуры сайта и семантического ядра",
+          "keyword": "аудит структуры сайта",
+          "volume": 890,
+          "template": "посадочная-страница",
+          "wordCount": 1950,
+          "url": "/uslugi/seo-audit/struktury-i-semantiki/",
+          "status": "written"
+        },
+        {
+          "title": "Поиск упущенного спроса и устранение каннибализации страниц",
+          "keyword": "каннибализация ключевых слов seo",
+          "volume": 640,
+          "template": "экспертная-статья",
+          "wordCount": 1500,
+          "url": "/stati/kannibalizaciya-zaprosov-v-seo/",
+          "status": "planned"
+        }
+      ]
+    }
+  ],
+  "links": [
+    { "from": "pillar", "to": "cluster-0-post-0", "type": "mandatory", "anchor": "технический аудит сайта" },
+    { "from": "cluster-0-post-0", "to": "pillar", "type": "mandatory", "anchor": "комплексный SEO-аудит" },
+    { "from": "pillar", "to": "cluster-1-post-0", "type": "mandatory", "anchor": "коммерческий аудит сайта" },
+    { "from": "cluster-1-post-0", "to": "pillar", "type": "mandatory", "anchor": "комплексный SEO-аудит" },
+    { "from": "pillar", "to": "cluster-2-post-0", "type": "mandatory", "anchor": "ссылочный аудит сайта" },
+    { "from": "cluster-2-post-0", "to": "pillar", "type": "mandatory", "anchor": "комплексный SEO-аудит" },
+    { "from": "pillar", "to": "cluster-3-post-0", "type": "mandatory", "anchor": "аудит структуры и семантики" },
+    { "from": "cluster-3-post-0", "to": "pillar", "type": "mandatory", "anchor": "комплексный SEO-аудит" },
+    { "from": "cluster-0-post-0", "to": "cluster-1-post-0", "type": "recommended", "anchor": "коммерческий аудит" },
+    { "from": "cluster-1-post-0", "to": "cluster-2-post-0", "type": "recommended", "anchor": "ссылочный аудит" },
+    { "from": "cluster-2-post-0", "to": "cluster-3-post-0", "type": "recommended", "anchor": "аудит структуры и семантики" },
+    { "from": "cluster-3-post-0", "to": "cluster-0-post-0", "type": "recommended", "anchor": "технический аудит" },
+    { "from": "cluster-0-post-1", "to": "cluster-0-post-0", "type": "mandatory", "anchor": "заказать профессиональный технический аудит" },
+    { "from": "cluster-0-post-2", "to": "cluster-0-post-0", "type": "mandatory", "anchor": "заказать аудит по образцу" }
+  ],
+  "meta": {
+    "totalPosts": 9,
+    "totalClusters": 4,
+    "totalLinks": 14,
+    "estimatedWords": 16600
+  }
+}

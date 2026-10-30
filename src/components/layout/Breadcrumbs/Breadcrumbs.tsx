@@ -28,7 +28,45 @@ export const Breadcrumbs: React.FC = () => {
   // Не показываем хлебные крошки на главной странице
   if (location.pathname === '/') return null;
 
-  // Динамические страницы услуг
+  // Вложенные специализированные аудиты кластера (/uslugi/seo-audit/:subSlug/)
+  const subAuditTitles: Record<string, string> = {
+    tehnicheskij: 'Технический аудит',
+    kommercheskij: 'Коммерческий аудит',
+    ssylochnyj: 'Ссылочный аудит',
+    'struktury-i-semantiki': 'Аудит структуры и семантики',
+  };
+  const subAuditMatch = location.pathname.match(/^\/uslugi\/seo-audit\/(.+?)\/?$/);
+  if (subAuditMatch && subAuditTitles[subAuditMatch[1]]) {
+    const title = subAuditTitles[subAuditMatch[1]];
+    return (
+      <div className="border-b border-slate-200 bg-slate-100/60 dark:border-obsidian-850/60 dark:bg-obsidian-950/40 transition-colors">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-8 py-3" aria-label="Хлебные крошки">
+          <ol className="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 flex-wrap">
+            <li>
+              <Link to="/" className="flex items-center gap-1 hover:text-growth-600 dark:hover:text-growth-400 transition-colors">
+                <Home className="w-3.5 h-3.5" />
+                <span>Главная</span>
+              </Link>
+            </li>
+            <li className="flex items-center gap-2">
+              <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
+              <Link to="/uslugi/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Услуги</Link>
+            </li>
+            <li className="flex items-center gap-2">
+              <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
+              <Link to="/uslugi/seo-audit/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">SEO-аудит сайта</Link>
+            </li>
+            <li className="flex items-center gap-2">
+              <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
+              <span className="text-slate-900 dark:text-slate-200 font-medium">{title}</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    );
+  }
+
+  // Динамические страницы услуг (/uslugi/:slug/)
   const serviceMatch = location.pathname.match(/^\/uslugi\/(.+)\/$/);
   if (serviceMatch) {
     const service = services.find((s) => s.slug === serviceMatch[1]);

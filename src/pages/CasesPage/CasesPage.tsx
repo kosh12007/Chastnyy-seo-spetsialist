@@ -41,7 +41,7 @@ export const CasesPage: React.FC = () => {
 
   // 1. Детальная страница конкретного кейса (/portfolio/:slug/)
   if (currentCase) {
-    const pageTitle = `${currentCase.title} — Кейс SEO-продвижения | Михаил Павлов`;
+    const pageTitle = `${currentCase.title} — Кейс SEO-продвижения | Сергей Кошелев`;
     const pageDesc = `${currentCase.niche} (${currentCase.region}): ${currentCase.result}`;
     const canonicalUrl = `${SITE_URL}/portfolio/${currentCase.slug}/`;
     const cleanImage = currentCase.image?.trim();
@@ -377,7 +377,7 @@ export const CasesPage: React.FC = () => {
               Кейсы и реальные результаты
             </h1>
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-2xl font-sans leading-relaxed">
-              Примеры поискового продвижения в e-commerce, медицине, производственном B2B и сфере услуг с детальным разбором выполненных работ.
+              Примеры поискового продвижения интернет-магазинов, медицины, производственного B2B и сферы услуг с детальным разбором выполненных работ.
             </p>
           </div>
         </section>

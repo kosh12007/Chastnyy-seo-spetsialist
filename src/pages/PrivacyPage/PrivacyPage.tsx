@@ -26,7 +26,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ type = 'privacy' }) =>
   return (
     <>
       <Helmet>
-        <title>{pageTitle} | Михаил Павлов</title>
+        <title>{pageTitle} | Сергей Кошелев</title>
         <meta
           name="description"
           content={

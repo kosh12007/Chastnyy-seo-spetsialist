@@ -68,7 +68,7 @@ export function generateOgMeta(
   image?: string,
 ): Record<string, string> {
   const SITE_URL = (import.meta.env.VITE_APP_SITE_URL || 'http://localhost:8085').replace(/\/+$/, '');
-  const SITE_NAME = import.meta.env.VITE_APP_TITLE || 'Михаил Павлов — Частный SEO-специалист';
+  const SITE_NAME = import.meta.env.VITE_APP_TITLE || 'Сергей Кошелев — Частный SEO-специалист';
   const cleanImage = image?.trim();
   const fullImageUrl = cleanImage
     ? cleanImage.startsWith('http')

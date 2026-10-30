@@ -18,7 +18,7 @@ import {
 } from '@components/sections';
 
 // Метаданные главной страницы, согласованные с требованиями ФЗ № 38-ФЗ (без ложных 100% гарантий)
-const HOME_TITLE = 'Частный SEO-специалист Михаил Павлов — Системное SEO в Яндекс и Google | От 35 000 ₽/мес';
+const HOME_TITLE = 'Частный SEO-специалист Сергей Кошелев — Системное SEO в Яндекс и Google | От 35 000 ₽/мес';
 const HOME_DESC = 'Системная поисковая оптимизация сайтов от частного эксперта (самозанятый). Прозрачные KPI, белые методы, официальный договор и чеки. Предварительная экспресс-оценка проекта.';
 const ogMeta = generateOgMeta('/', HOME_TITLE, HOME_DESC);
 const localBusinessSchema = generateLocalBusinessSchema();

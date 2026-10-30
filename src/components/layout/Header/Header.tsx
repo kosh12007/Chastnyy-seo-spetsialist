@@ -79,7 +79,7 @@ export const Header: React.FC = () => {
             </div>
             <div>
               <span className="font-bold text-slate-900 dark:text-white tracking-tight text-sm flex items-center gap-1.5">
-                Михаил Павлов
+                Сергей Кошелев
               </span>
               <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono block">
                 Поисковая оптимизация сайтов

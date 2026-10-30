@@ -26,12 +26,12 @@ export const SEOBasicsSection: React.FC = () => {
         {/* Сетка аудиторий */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           
-          {/* Сегмент 1: E-commerce */}
+          {/* Сегмент 1: Интернет-магазины */}
           <div className="p-6 rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 space-y-3 hover:border-slate-300 dark:hover:border-obsidian-750 shadow-sm transition-all">
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-obsidian-850 border border-slate-300 dark:border-obsidian-750 flex items-center justify-center text-growth-600 dark:text-growth-400">
               <ShoppingCart className="w-5 h-5" />
             </div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">Интернет-магазины (E-commerce)</h3>
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Интернет-магазины и каталоги товаров</h3>
             <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
               Каталоги от 500 товаров. Оптимизация структуры, теговые страницы, фильтры, коммерческие сниппеты с ценами и разметка Schema.org.
             </p>

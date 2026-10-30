@@ -10,11 +10,11 @@ import { CTASection, TariffsSection } from '@components/sections';
 import { NotFoundPage } from '@/pages/NotFoundPage/NotFoundPage';
 
 /**
- * Страница услуг SEO-продвижения и детального просмотра конкретной услуги.
- * Поддерживает адаптивную светлую тему и ночную Dark Obsidian & Emerald Growth.
+ * Страница каталога услуг SEO-продвижения и детального просмотра обычной услуги.
+ * Специализированные кластеры (например, /uslugi/seo-audit/) вынесены в отдельные страницы в src/pages/services/.
  */
 export const ServicesPage: React.FC = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug } = useParams<{ slug?: string }>();
   const currentService = services.find((s) => s.slug === slug);
 
   // Если запрошен несуществующий slug услуги — отдаём страницу 404
@@ -22,13 +22,13 @@ export const ServicesPage: React.FC = () => {
     return <NotFoundPage />;
   }
 
-  // 1. Детальная страница услуги
+  // 1. Детальная страница обычной услуги (продвижение, консультация и т.д.)
   if (currentService) {
     const ogMeta = generateOgMeta(`/uslugi/${currentService.slug}/`, currentService.title, currentService.description);
     return (
       <>
         <Helmet>
-          <title>{currentService.title} — Михаил Павлов | Частный SEO-специалист</title>
+          <title>{currentService.title} — Сергей Кошелев | Частный SEO-специалист</title>
           <meta name="description" content={currentService.description} />
           <link rel="canonical" href={`${SITE_URL}/uslugi/${currentService.slug}/`} />
           {Object.entries(ogMeta).map(([key, value]) => (

@@ -17,10 +17,10 @@ export const Footer: React.FC = () => {
           {/* Колонка 1: Эксперт и статус */}
           <div className="space-y-4">
             <Link to="/" className="text-xl font-bold font-heading text-slate-900 dark:text-white block">
-              Михаил Павлов
+              Сергей Кошелев
             </Link>
             <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed font-sans">
-              Частное поисковое продвижение коммерческих сайтов и e-commerce в Яндекс и Google. Персональное ведение проектов без конвейера.
+              Частное поисковое продвижение коммерческих сайтов и интернет-магазинов в Яндекс и Google. Персональное ведение проектов без конвейера.
             </p>
             <div className="p-3.5 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 text-[11px] font-mono text-slate-600 dark:text-slate-300 space-y-1 shadow-sm">
               <div className="text-slate-900 dark:text-white font-medium flex items-center gap-1.5">
@@ -106,7 +106,7 @@ export const Footer: React.FC = () => {
 
         {/* Нижняя полоса с 152-ФЗ и реквизитами */}
         <div className="mt-12 pt-8 border-t border-slate-200 dark:border-obsidian-850 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
-          <p>© {new Date().getFullYear()} Михаил Павлов. Частное продвижение сайтов.</p>
+          <p>© {new Date().getFullYear()} Сергей Кошелев. Частное продвижение сайтов.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center">
             <Link to="/rekvizity/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               Реквизиты и условия для юрлиц

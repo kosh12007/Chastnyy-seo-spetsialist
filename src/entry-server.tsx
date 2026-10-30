@@ -52,6 +52,35 @@ export function getSiteRoutes(customStaticPaths?: string[]): SitemapEntry[] {
       indexable: true,
       sourceFile: `src/data/services/${s.slug}.ts`,
     })),
+    // Кластер услуг: SEO-аудит (дочерние специализированные страницы)
+    {
+      path: '/uslugi/seo-audit/tehnicheskij/',
+      changefreq: 'monthly',
+      priority: '0.8',
+      indexable: true,
+      sourceFile: 'src/pages/services/seo-audit/tehnicheskij/index.tsx',
+    },
+    {
+      path: '/uslugi/seo-audit/kommercheskij/',
+      changefreq: 'monthly',
+      priority: '0.8',
+      indexable: true,
+      sourceFile: 'src/pages/services/seo-audit/kommercheskij/index.tsx',
+    },
+    {
+      path: '/uslugi/seo-audit/ssylochnyj/',
+      changefreq: 'monthly',
+      priority: '0.8',
+      indexable: true,
+      sourceFile: 'src/pages/services/seo-audit/ssylochnyj/index.tsx',
+    },
+    {
+      path: '/uslugi/seo-audit/struktury-i-semantiki/',
+      changefreq: 'monthly',
+      priority: '0.8',
+      indexable: true,
+      sourceFile: 'src/pages/services/seo-audit/struktury-i-semantiki/index.tsx',
+    },
     {
       path: '/ceny/',
       changefreq: 'monthly',

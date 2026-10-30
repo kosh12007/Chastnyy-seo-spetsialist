@@ -5,6 +5,11 @@ import { ThemeProvider } from '@/context/ThemeContext';
 import { MainLayout } from '@/components/layout/MainLayout';
 import { HomePage } from '@/pages/HomePage/HomePage';
 import { ServicesPage } from '@/pages/ServicesPage/ServicesPage';
+import { SeoAuditPage } from '@/pages/services/seo-audit';
+import { TechnicalAuditPage } from '@/pages/services/seo-audit/tehnicheskij';
+import { CommercialAuditPage } from '@/pages/services/seo-audit/kommercheskij';
+import { LinksAuditPage } from '@/pages/services/seo-audit/ssylochnyj';
+import { StructureAuditPage } from '@/pages/services/seo-audit/struktury-i-semantiki';
 import { PricingPage } from '@/pages/PricingPage/PricingPage';
 import { CasesPage } from '@/pages/CasesPage/CasesPage';
 import { ReviewsPage } from '@/pages/ReviewsPage/ReviewsPage';
@@ -26,6 +31,15 @@ export const AppRoutes: React.FC = () => {
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/uslugi/" element={<ServicesPage />} />
+
+        {/* Кластер услуг: Комплексный SEO-аудит (Основной раздел и специализированные аудиты) */}
+        <Route path="/uslugi/seo-audit/" element={<SeoAuditPage />} />
+        <Route path="/uslugi/seo-audit/tehnicheskij/" element={<TechnicalAuditPage />} />
+        <Route path="/uslugi/seo-audit/kommercheskij/" element={<CommercialAuditPage />} />
+        <Route path="/uslugi/seo-audit/ssylochnyj/" element={<LinksAuditPage />} />
+        <Route path="/uslugi/seo-audit/struktury-i-semantiki/" element={<StructureAuditPage />} />
+
+        {/* Детальные страницы стандартных услуг */}
         <Route path="/uslugi/:slug/" element={<ServicesPage />} />
         <Route path="/ceny/" element={<PricingPage />} />
         <Route path="/portfolio/" element={<CasesPage />} />

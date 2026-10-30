@@ -77,3 +77,65 @@ export function generateWebPageSchema(title: string, description: string, url: s
     },
   };
 }
+
+/**
+ * Генерация микроразметки конкретной коммерческой услуги (Service / ProfessionalService)
+ * для формирования расширенных сниппетов в Яндексе и Google.
+ */
+export function generateServiceSchema(options: {
+  name: string;
+  description: string;
+  url: string;
+  price?: string | number;
+  priceCurrency?: string;
+  serviceType?: string;
+}) {
+  const schema: Record<string, any> = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: options.name,
+    description: options.description,
+    url: `${SITE_URL}${options.url}`,
+    serviceType: options.serviceType || 'SEO-оптимизация и аудит сайта',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+      telephone: PHONE,
+      email: EMAIL,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Москва',
+        addressCountry: 'RU',
+      },
+    },
+  };
+
+  if (options.price) {
+    schema.offers = {
+      '@type': 'Offer',
+      price: String(options.price).replace(/[^0-9]/g, ''),
+      priceCurrency: options.priceCurrency || 'RUB',
+      availability: 'https://schema.org/InStock',
+    };
+  }
+
+  return schema;
+}
+
+/**
+ * Генерация микроразметки навигационной цепочки (BreadcrumbList)
+ * для отображения кликабельных хлебных крошек в результатах поиска.
+ */
+export function generateBreadcrumbSchema(items: { name: string; url: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url.startsWith('http') ? item.url : `${SITE_URL}${item.url}`,
+    })),
+  };
+}

@@ -12,7 +12,7 @@ export const NotFoundPage: React.FC = () => {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-16 grid-bg">
       <Helmet>
-        <title>Страница не найдена (404) — Частный SEO-специалист Михаил Павлов</title>
+        <title>Страница не найдена (404) — Частный SEO-специалист Сергей Кошелев</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <AnimatedSection variant="scale" duration={0.8}>

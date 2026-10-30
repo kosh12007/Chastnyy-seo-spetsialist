@@ -41,7 +41,7 @@ export const AboutPage: React.FC = () => {
               <span>Частная практика с 2012 года</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
-              Обо мне — Михаил Павлов
+              Обо мне — Сергей Кошелев
             </h1>
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-2xl font-sans leading-relaxed">
               Частный SEO-специалист, инженер поисковой оптимизации. Лично веду проекты от технического аудита до вывода страниц в ТОП-10 Яндекс и Google.

@@ -101,7 +101,7 @@ export const TariffsSection: React.FC = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-growth-600 dark:text-growth-400 shrink-0 mt-0.5" />
-                  <span>Анализ конверсии страниц (CRO) и кликабельности сниппетов</span>
+                  <span>Анализ конверсии страниц и привлекательности сниппетов</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-4 h-4 text-growth-600 dark:text-growth-400 shrink-0 mt-0.5" />
