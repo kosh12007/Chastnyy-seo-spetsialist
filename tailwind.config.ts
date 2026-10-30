@@ -25,6 +25,10 @@ export default {
       },
     },
     extend: {
+      screens: {
+        // Дополнительная точка останова для мобильных устройств (перенос шапки в 2 строки при < 468px)
+        xs: '468px',
+      },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],

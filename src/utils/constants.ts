@@ -1,4 +1,5 @@
-export const SITE_URL = import.meta.env.VITE_APP_SITE_URL || 'http://localhost:3000';
+// Удаляем завершающий слэш из базового URL, чтобы все пути вида `${SITE_URL}/...` формировались единообразно без двойных слэшей
+export const SITE_URL = (import.meta.env.VITE_APP_SITE_URL || 'http://localhost:8085').replace(/\/+$/, '');
 export const PHONE = import.meta.env.VITE_APP_PHONE || '+79991234567';
 export const EMAIL = import.meta.env.VITE_APP_EMAIL || 'info@example.ru';
 export const WHATSAPP = import.meta.env.VITE_APP_WHATSAPP || '79991234567';

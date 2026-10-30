@@ -1,3 +1,4 @@
+
 # Этап 1: Сборка
 FROM node:20-alpine AS builder
 
@@ -46,4 +47,5 @@ RUN npm install -g serve
 
 EXPOSE 3000
 
-CMD ["serve", "-s", "dist", "-l", "3000"]
+# Запускаем без флага -s (--single), чтобы несуществующие URL и файлы возвращали 404 Not Found (dist/404.html), а не 200 OK
+CMD ["serve", "dist", "-l", "3000"]

@@ -131,16 +131,43 @@ function viteDevSSRPlugin(): Plugin {
             return res.end(xml);
           }
 
-          // Пропускаем не-GET запросы, внутренние модули Vite и статические файлы с расширениями
+          // Пропускаем не-GET/HEAD запросы и внутренние служебные модули Vite
           if (
-            req.method !== 'GET' ||
+            (req.method !== 'GET' && req.method !== 'HEAD') ||
             cleanPath.startsWith('/@') ||
             cleanPath.startsWith('/__') ||
             cleanPath.startsWith('/src/') ||
-            cleanPath.startsWith('/node_modules/') ||
-            (path.extname(cleanPath) !== '' && cleanPath !== '/index.html')
+            cleanPath.startsWith('/node_modules/')
           ) {
             return next();
+          }
+
+          // Обработка запросов к файлам с расширением (например, /llms.txt, /og-image.jpg, /favicon.svg)
+          const ext = path.extname(cleanPath);
+          if (ext !== '' && cleanPath !== '/index.html' && cleanPath !== '/404.html') {
+            const publicDir = path.resolve(__dirname, 'public');
+            let decodedPath = cleanPath;
+            try {
+              decodedPath = decodeURIComponent(cleanPath);
+            } catch {
+              // Оставляем исходный путь при некорректной последовательности %
+            }
+
+            const publicFilePath = path.resolve(publicDir, decodedPath.replace(/^\/+/, ''));
+            const isSafePublicFile =
+              publicFilePath.startsWith(publicDir) &&
+              fs.existsSync(publicFilePath) &&
+              fs.statSync(publicFilePath).isFile();
+
+            // Если файл реально существует в public/ — передаем управление статическому серверу Vite
+            if (isSafePublicFile) {
+              return next();
+            }
+
+            // Для любых несуществующих статических файлов возвращаем честный 404 Not Found (без HTML-фолбэка)
+            res.statusCode = 404;
+            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+            return res.end('404 Not Found');
           }
 
           // Читаем исходный шаблон index.html и прогоняем через трансформер Vite (HMR-клиент)
@@ -150,10 +177,12 @@ function viteDevSSRPlugin(): Plugin {
 
           // Загружаем серверный модуль рендеринга через Vite SSR
           const { render, injectSSRHtml } = await server.ssrLoadModule('/src/entry-server.tsx');
-          const { appHtml, headTags } = render(cleanPath);
+          const staticPathsFromApp = extractStaticPathsFromApp();
+          const renderTarget = cleanPath === '/404.html' ? '/404-page-not-found/' : cleanPath;
+          const { appHtml, headTags, statusCode } = render(renderTarget, staticPathsFromApp);
           const finalHtml = injectSSRHtml(template, appHtml, headTags);
 
-          res.statusCode = 200;
+          res.statusCode = statusCode;
           res.setHeader('Content-Type', 'text/html; charset=utf-8');
           res.end(finalHtml);
         } catch (err) {
@@ -166,6 +195,8 @@ function viteDevSSRPlugin(): Plugin {
 }
 
 export default defineConfig(({ isSsrBuild }) => ({
+  // Отключаем встроенный SPA-фолбэк Vite (который отдаёт 200 OK на несуществующие URL и файлы)
+  appType: 'custom',
   plugins: [react(), viteDevSSRPlugin()],
   resolve: {
     alias: {

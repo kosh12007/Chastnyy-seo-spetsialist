@@ -31,17 +31,17 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 transition-all duration-300">
-      {/* 1. Верхняя служебная полоса: Юридический статус плательщика НПД */}
+      {/* 1. Верхняя служебная полоса: Условия для бизнеса и прозрачность */}
       <div className="bg-slate-100 border-b border-slate-200 text-xs font-mono text-slate-600 dark:bg-obsidian-950 dark:border-obsidian-850 dark:text-slate-400 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-2 flex items-center justify-between">
           <div className="flex items-center space-x-3 text-[11px] sm:text-xs">
             <span className="inline-flex items-center text-growth-600 dark:text-growth-400 font-semibold">
               <span className="w-2 h-2 rounded-full bg-growth-500 mr-2 animate-pulse" />
-              Частная практика
+              Прямой формат сотрудничества
             </span>
             <span className="text-slate-300 dark:text-obsidian-700">|</span>
             <span className="text-slate-700 dark:text-slate-300 hidden sm:inline">
-              Павлов М.В. • Самозанятый (НПД) • Договор и чеки «Мой налог»
+              Официальный договор с юрлицами и ИП • ЭДО и закрывающие документы • Без комиссии агентств
             </span>
           </div>
 
@@ -69,9 +69,10 @@ export const Header: React.FC = () => {
           isScrolled ? 'py-2.5 shadow-lg shadow-slate-200/50 dark:shadow-2xl dark:shadow-black/50' : 'py-3.5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
+        {/* Контейнер навигации: при ширине экрана < 468px перестраивается в 2 строки */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col xs:flex-row items-stretch xs:items-center justify-between gap-y-2.5 xs:gap-y-0">
           
-          {/* Логотип */}
+          {/* Логотип и имя специалиста */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-300 dark:bg-obsidian-850 dark:border-obsidian-700 flex items-center justify-center group-hover:border-growth-500/50 transition-colors">
               <span className="font-mono font-bold text-growth-600 dark:text-growth-400 text-base">МП</span>
@@ -81,7 +82,7 @@ export const Header: React.FC = () => {
                 Михаил Павлов
               </span>
               <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono block">
-                Частный SEO-специалист
+                Поисковая оптимизация сайтов
               </span>
             </div>
           </Link>
@@ -106,8 +107,8 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* CTA кнопки, переключатель темы и контакты */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
+          {/* Панель действий: переключатель темы, контакты, CTA-кнопка и гамбургер */}
+          <div className="flex items-center justify-between xs:justify-end space-x-2 sm:space-x-3 w-full xs:w-auto">
             {/* Переключатель светлой / тёмной темы */}
             <ThemeToggle />
 
@@ -123,14 +124,14 @@ export const Header: React.FC = () => {
 
             <a
               href="#audit-form"
-              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-lg bg-growth-600 hover:bg-growth-500 text-obsidian-950 font-bold text-xs font-mono uppercase tracking-wider transition-all shadow-md shadow-growth-950/20 dark:shadow-growth-950/40"
+              className="inline-flex items-center justify-center flex-1 xs:flex-initial gap-2 px-3.5 sm:px-4 py-2 rounded-lg bg-growth-600 hover:bg-growth-500 text-obsidian-950 font-bold text-xs font-mono uppercase tracking-wider transition-all shadow-md shadow-growth-950/20 dark:shadow-growth-950/40 text-center"
             >
               <span>Оценка проекта</span>
             </a>
 
             <button
               type="button"
-              className="lg:hidden p-2 rounded-lg bg-slate-100 border border-slate-300 text-slate-700 hover:text-slate-900 dark:bg-obsidian-850 dark:border-obsidian-750 dark:text-slate-300 dark:hover:text-white transition-colors"
+              className="lg:hidden p-2 rounded-lg bg-slate-100 border border-slate-300 text-slate-700 hover:text-slate-900 dark:bg-obsidian-850 dark:border-obsidian-750 dark:text-slate-300 dark:hover:text-white transition-colors flex-shrink-0"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
             >

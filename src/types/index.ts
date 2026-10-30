@@ -22,13 +22,35 @@ export interface Case {
   niche: string;
   region: string;
   duration: string;
+  problem: string;
+  result: string;
+  metrics: {
+    positions: string;
+    traffic: string;
+    duration: string;
+  };
   before: { traffic: number; positions: number; conversion: number };
   after: { traffic: number; positions: number; conversion: number };
   growth: { traffic: number; positions: number; conversion: number };
   slug: string;
-  image: string;
-  tasks?: string[];
-  done?: string[];
+  /** Путь к изображению/скриншоту кейса в папке public/images/cases/ (необязательное поле) */
+  image?: string;
+  tasks: string[];
+  done: string[];
+  /** Кастомные подписи метрик под специфику ниши (E-com, Услуги, Медиа) */
+  metricLabels?: {
+    trafficTitle?: string;
+    growthTrafficText?: string;
+    positionsTitle?: string;
+    positionsBadgeLabel?: string;
+    conversionTitle?: string;
+    beforePositionsText?: string;
+    afterPositionsText?: string;
+    growthPositionsText?: string;
+    beforeConversionText?: string;
+    afterConversionText?: string;
+    growthConversionText?: string;
+  };
 }
 
 export interface Review {

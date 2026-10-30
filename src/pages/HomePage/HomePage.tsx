@@ -43,7 +43,7 @@ export const HomePage: React.FC = () => {
       <Helmet>
         <title>{HOME_TITLE}</title>
         <meta name="description" content={HOME_DESC} />
-        <link rel="canonical" href={SITE_URL} />
+        <link rel="canonical" href={`${SITE_URL}/`} />
         {Object.entries(ogMeta).map(([key, value]) => (
           <meta key={key} property={key} content={value} />
         ))}

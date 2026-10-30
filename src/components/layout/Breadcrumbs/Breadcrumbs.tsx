@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
-import { services } from '@data/index';
+import { services, cases } from '@data/index';
+import { blogArticles } from '@data/blog';
 
 interface BreadcrumbItem {
   label: string;
@@ -49,6 +50,66 @@ export const Breadcrumbs: React.FC = () => {
               <li className="flex items-center gap-2">
                 <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
                 <span className="text-slate-900 dark:text-slate-200 font-medium">{service.title}</span>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      );
+    }
+  }
+
+  // Динамические страницы кейсов (/portfolio/:slug/)
+  const caseMatch = location.pathname.match(/^\/portfolio\/(.+?)\/?$/);
+  if (caseMatch) {
+    const currentCase = cases.find((c) => c.slug === caseMatch[1]);
+    if (currentCase) {
+      return (
+        <div className="border-b border-slate-200 bg-slate-100/60 dark:border-obsidian-850/60 dark:bg-obsidian-950/40 transition-colors">
+          <nav className="max-w-7xl mx-auto px-4 sm:px-8 py-3" aria-label="Хлебные крошки">
+            <ol className="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 flex-wrap">
+              <li>
+                <Link to="/" className="flex items-center gap-1 hover:text-growth-600 dark:hover:text-growth-400 transition-colors">
+                  <Home className="w-3.5 h-3.5" />
+                  <span>Главная</span>
+                </Link>
+              </li>
+              <li className="flex items-center gap-2">
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
+                <Link to="/portfolio/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Кейсы</Link>
+              </li>
+              <li className="flex items-center gap-2">
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
+                <span className="text-slate-900 dark:text-slate-200 font-medium">{currentCase.title}</span>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      );
+    }
+  }
+
+  // Динамические страницы статей блога (/blog/:slug/)
+  const blogMatch = location.pathname.match(/^\/blog\/(.+?)\/?$/);
+  if (blogMatch) {
+    const currentArticle = blogArticles.find((a) => a.slug === blogMatch[1]);
+    if (currentArticle) {
+      return (
+        <div className="border-b border-slate-200 bg-slate-100/60 dark:border-obsidian-850/60 dark:bg-obsidian-950/40 transition-colors">
+          <nav className="max-w-7xl mx-auto px-4 sm:px-8 py-3" aria-label="Хлебные крошки">
+            <ol className="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 flex-wrap">
+              <li>
+                <Link to="/" className="flex items-center gap-1 hover:text-growth-600 dark:hover:text-growth-400 transition-colors">
+                  <Home className="w-3.5 h-3.5" />
+                  <span>Главная</span>
+                </Link>
+              </li>
+              <li className="flex items-center gap-2">
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
+                <Link to="/blog/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Блог</Link>
+              </li>
+              <li className="flex items-center gap-2">
+                <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-obsidian-700" />
+                <span className="text-slate-900 dark:text-slate-200 font-medium">{currentArticle.title}</span>
               </li>
             </ol>
           </nav>

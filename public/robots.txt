@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
 
-Disallow: /politika-konfidentsialnosti/
-Disallow: /soglasie-opd/
-
 Sitemap: http://localhost:8085/sitemap.xml

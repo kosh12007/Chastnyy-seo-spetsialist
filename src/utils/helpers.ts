@@ -61,26 +61,42 @@ export function getSeoData(page: string) {
   return seoMap[page] || seoMap.home;
 }
 
-export function generateOgMeta(url: string, title: string, description: string) {
-  const SITE_URL = import.meta.env.VITE_APP_SITE_URL || 'http://localhost:3000';
-  const SITE_NAME = 'SEO Специалист';
-  const defaultOgImage = `${SITE_URL}/og-image.jpg`;
+export function generateOgMeta(
+  url: string,
+  title: string,
+  description: string,
+  image?: string,
+): Record<string, string> {
+  const SITE_URL = (import.meta.env.VITE_APP_SITE_URL || 'http://localhost:8085').replace(/\/+$/, '');
+  const SITE_NAME = import.meta.env.VITE_APP_TITLE || 'Михаил Павлов — Частный SEO-специалист';
+  const cleanImage = image?.trim();
+  const fullImageUrl = cleanImage
+    ? cleanImage.startsWith('http')
+      ? cleanImage
+      : `${SITE_URL}${cleanImage.startsWith('/') ? cleanImage : `/${cleanImage}`}`
+    : undefined;
 
-  return {
+  const meta: Record<string, string> = {
     'og:type': 'website',
     'og:title': title,
     'og:description': description,
     'og:url': `${SITE_URL}${url}`,
     'og:site_name': SITE_NAME,
-    'og:image': defaultOgImage,
-    'og:image:width': '1200',
-    'og:image:height': '630',
-    'og:image:alt': title,
-    'twitter:card': 'summary_large_image',
+    'twitter:card': fullImageUrl ? 'summary_large_image' : 'summary',
     'twitter:title': title,
     'twitter:description': description,
-    'twitter:image': defaultOgImage,
   };
+
+  // Выводим теги изображения в разметку только если картинка действительно задана
+  if (fullImageUrl) {
+    meta['og:image'] = fullImageUrl;
+    meta['og:image:width'] = '1200';
+    meta['og:image:height'] = '630';
+    meta['og:image:alt'] = title;
+    meta['twitter:image'] = fullImageUrl;
+  }
+
+  return meta;
 }
 
 export function generateBreadcrumbSchema(items: { name: string; url?: string }[]) {

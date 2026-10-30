@@ -7,6 +7,7 @@ import { getSeoData, generateOgMeta } from '@utils/helpers';
 import { SITE_URL } from '@utils/constants';
 import { AnimatedSection } from '@components/common';
 import { CTASection, TariffsSection } from '@components/sections';
+import { NotFoundPage } from '@/pages/NotFoundPage/NotFoundPage';
 
 /**
  * Страница услуг SEO-продвижения и детального просмотра конкретной услуги.
@@ -15,6 +16,11 @@ import { CTASection, TariffsSection } from '@components/sections';
 export const ServicesPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const currentService = services.find((s) => s.slug === slug);
+
+  // Если запрошен несуществующий slug услуги — отдаём страницу 404
+  if (slug && !currentService) {
+    return <NotFoundPage />;
+  }
 
   // 1. Детальная страница услуги
   if (currentService) {

@@ -6,7 +6,7 @@ export function generateLocalBusinessSchema() {
     '@type': 'ProfessionalService',
     name: SITE_NAME,
     description: 'Частный SEO-специалист. Продвижение сайтов в ТОП Яндекс и Google.',
-    url: SITE_URL,
+    url: `${SITE_URL}/`,
     telephone: PHONE,
     email: EMAIL,
     priceRange: 'от 35 000 ₽/мес',
@@ -38,7 +38,7 @@ export function generateArticleSchema(title: string, description: string, datePu
       name: SITE_NAME,
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/logo.png`,
+        url: `${SITE_URL}/favicon.svg`,
       },
     },
     mainEntityOfPage: {

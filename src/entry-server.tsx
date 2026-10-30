@@ -222,14 +222,41 @@ export function generateSitemapXml(
 export interface SSRRenderResult {
   appHtml: string;
   headTags: string;
+  statusCode: number;
+}
+
+/**
+ * Нормализует URL-путь к единому формату со слешем на конце (например, '/uslugi/').
+ */
+export function normalizeRoutePath(rawUrl: string): string {
+  const clean = rawUrl.split('?')[0].split('#')[0].trim();
+  if (!clean || clean === '/' || clean === '/index.html') {
+    return '/';
+  }
+  return `/${clean.replace(/^\/+|\/+$/g, '')}/`;
+}
+
+/**
+ * Проверяет, существует ли маршрут в реестре страниц сайта или среди технических редиректов.
+ */
+export function isKnownSiteRoute(url: string, customStaticPaths?: string[]): boolean {
+  const normalized = normalizeRoutePath(url);
+  const validRoutes = new Set<string>([
+    ...getSiteRoutes(customStaticPaths).map((r) => normalizeRoutePath(r.path)),
+    '/privacy/',
+    '/consent/',
+    '/requisites/',
+  ]);
+  return validRoutes.has(normalized);
 }
 
 /**
  * Серверный рендеринг (SSR / SSG) приложения для указанного URL-адреса.
- * Возвращает сгенерированный HTML-код внутри #root и мета-теги для <head>.
+ * Возвращает сгенерированный HTML-код внутри #root, мета-теги для <head> и точный HTTP statusCode (200 или 404).
  */
-export function render(url: string): SSRRenderResult {
+export function render(url: string, customStaticPaths?: string[]): SSRRenderResult {
   const helmetContext: { helmet?: HelmetServerState } = {};
+  const isKnown = isKnownSiteRoute(url, customStaticPaths);
 
   const appHtml = ReactDOMServer.renderToString(
     <React.StrictMode>
@@ -256,7 +283,9 @@ export function render(url: string): SSRRenderResult {
         .join('\n    ')
     : '';
 
-  return { appHtml, headTags };
+  const statusCode = isKnown ? 200 : 404;
+
+  return { appHtml, headTags, statusCode };
 }
 
 /**

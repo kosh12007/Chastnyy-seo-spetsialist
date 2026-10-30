@@ -17,6 +17,8 @@ build/
 *.log
 npm-debug.log*
 pnpm-debug.log*
+*.docx
+Test site/
 
 # IDE
 .vscode/*

@@ -9,10 +9,5 @@
   AddType font/woff2 .woff2
 </IfModule>
 
-# SPA-фолбэк: все несуществующие пути отдаём через index.html (React Router)
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . index.html [L]
-</IfModule>
+# Страница ошибки 404: возвращаем честный HTTP-код 404 Not Found вместо Soft 404 (200 OK)
+ErrorDocument 404 /404.html

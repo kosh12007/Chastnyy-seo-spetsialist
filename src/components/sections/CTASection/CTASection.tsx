@@ -241,7 +241,7 @@ export const CTASection: React.FC = () => {
             <div className="text-slate-600 dark:text-slate-400 font-sans">
               Предпочитаете написать напрямую без заполнения формы?
             </div>
-            <div className="flex items-center gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <a
                 href={`https://t.me/${contactInfo.telegram}`}
                 target="_blank"
