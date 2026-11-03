@@ -74,7 +74,7 @@ export const BlogPage: React.FC = () => {
                         </span>
                         <span className="flex items-center gap-1.5">
                           <Clock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
-                          <span>{article.readTime} мин</span>
+                          <span>{String(article.readTime).replace(/\s*мин\.?$/i, '')} мин</span>
                         </span>
                       </div>
 

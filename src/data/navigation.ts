@@ -1,4 +1,5 @@
 import type { NavItem, SocialLink } from '@/types';
+import { contactInfo } from '@data/contactInfo';
 
 export const navigationLinks: NavItem[] = [
   { label: 'Главная', href: '/' },
@@ -12,7 +13,6 @@ export const navigationLinks: NavItem[] = [
 ];
 
 export const socialLinks: SocialLink[] = [
-  { name: 'WhatsApp', url: `https://wa.me/${import.meta.env.VITE_APP_WHATSAPP}`, icon: 'MessageCircle' },
-  { name: 'Telegram', url: `https://t.me/${import.meta.env.VITE_APP_TELEGRAM}`, icon: 'Send' },
-  { name: 'VK', url: 'https://vk.com/', icon: 'Users' },
+  { name: 'WhatsApp', url: `https://wa.me/${contactInfo.whatsapp}`, icon: 'MessageCircle' },
+  { name: 'Telegram', url: `https://t.me/${contactInfo.telegram}`, icon: 'Send' },
 ];

@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import {
-  CheckCircle2,
-  ArrowRight,
-  ArrowLeft,
   Network,
-  ChevronDown,
   FileCode2,
   ShoppingCart,
   Link2,
-  BadgePercent,
+  FileSpreadsheet,
+  FileText,
 } from 'lucide-react';
 import { SITE_URL } from '@/utils/constants';
 import { generateOgMeta } from '@/utils/helpers';
@@ -19,96 +16,359 @@ import {
   generateBreadcrumbSchema,
   generateFAQPageSchema,
 } from '@/utils/schemaGenerators';
-import { CTASection } from '@/components/sections';
+import {
+  CTASection,
+  TariffsSection,
+  FAQSection,
+  SpecialOfferBanner,
+  DeliverablesSection,
+  RelatedServicesSection,
+  SubServiceHero,
+  DiagnosticScenariosSection,
+  ChecklistGroupsSection,
+  AuditTrustAndRulesSection,
+  TariffComparisonTable,
+  type TariffItem,
+  type DeliverableItem,
+  type FAQItem,
+  type HubCtaBanner,
+} from '@/components/sections';
+import { AnimatedSection } from '@/components/common';
 
 /**
  * Страница «Аудит структуры сайта и семантического ядра»
  * Физический путь: src/pages/services/seo-audit/struktury-i-semantiki/index.tsx
+ * Целевые запросы кластера: «аудит структуры сайта», «аудит семантического ядра»,
+ * «анализ архитектуры каталога сайта», «поиск упущенного спроса seo»,
+ * «проверка каннибализации поисковых запросов», «анализ внутренней перелинковки сайта».
  */
 export const StructureAuditPage: React.FC = () => {
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-
-  const pageTitle = 'Аудит структуры сайта и семантического ядра — поиск упущенного спроса | Сергей Кошелев';
+  const pageTitle = 'Аудит структуры сайта и семантического ядра — поиск упущенного спроса';
   const pageDescription =
-    'Анализ структуры сайта и семантики: аудит каталога, поиск упущенных кластеров запросов, устранение каннибализации и SILO-перелинковка для кратного роста охвата.';
+    'Заказать аудит структуры сайта и семантического ядра: анализ архитектуры каталога, поиск упущенного спроса SEO, проверка каннибализации и перелинковки. От 30 000 ₽.';
   const pageUrl = '/uslugi/seo-audit/struktury-i-semantiki/';
 
   const ogMeta = generateOgMeta(pageUrl, pageTitle, pageDescription);
 
   const whoNeeds = [
     {
-      title: 'Интернет-магазинам с широким ассортиментом',
-      desc: 'Проектирование теговых страниц, посадочных страниц под комбинации параметров фильтра и оптимизация категорий.',
+      title: 'Интернет-магазинам и многостраничным каталогам',
+      desc: 'Проводим анализ архитектуры каталога сайта, проектируем посадочные страницы под популярные комбинации характеристик и оптимизируем рубрикатор.',
     },
     {
-      title: 'Сайтам услуг, упершимся в «стеклянный потолок» трафика',
-      desc: 'Сегментация общих услуг на узкие подуслуги по геолокации, объектам применения или видам работ.',
+      title: 'Компаниям в сфере услуг для расширения охвата',
+      desc: 'Выполняем поиск упущенного спроса SEO: разделяем общие услуги на узкие посадочные страницы по направлениям, отраслям клиентов и видам задач.',
     },
     {
-      title: 'Сайтам, где несколько страниц конкурируют друг с другом',
-      desc: 'Устранение каннибализации, когда поиск мечется между блогом, категорией и главной страницей.',
+      title: 'Проектам с внутренней конкуренцией страниц в выдаче',
+      desc: 'Проводим проверку каннибализации поисковых запросов, когда за одну фразу конкурируют статья, категория и главная страница, мешая друг другу расти.',
+    },
+  ];
+
+  // 4 диагностических симптома, когда аудит структуры и семантики нужен в первую очередь
+  const diagnosticScenarios = [
+    {
+      title: 'Сайт уперся в потолок поискового трафика',
+      desc: 'Основные общие разделы уже находятся на первой странице, но приток заявок не растет из-за отсутствия посадочных страниц под узкие средне- и низкочастотные запросы.',
+      result: 'Находим все неохваченные кластеры спроса конкурентов и проектируем новые посадочные страницы с высоким потенциалом конверсии.',
+    },
+    {
+      title: 'Внутренняя конкуренция страниц (каннибализация)',
+      desc: 'По одному и тому же запросу Яндекс или Google попеременно меняет в выдаче главную страницу, категорию и статью блога, не пуская ни одну из них в ТОП-3.',
+      result: 'Четко разводим поисковые намерения разделов, корректируем заголовки H1/Title и объединяем дублирующиеся страницы.',
+    },
+    {
+      title: 'Попытка продвинуть все услуги на одной странице',
+      desc: 'На сайте создан единственный общий раздел «Услуги» или «Каталог», который уступает узкоспециализированным страницам лидеров поисковой выдачи.',
+      result: 'Строим древовидную схему специализированных подуслуг по видам работ, типам объектов и отраслям заказчиков.',
+    },
+    {
+      title: 'Глубокая вложенность и слабая перелинковка разделов',
+      desc: 'Приоритетные коммерческие страницы спрятаны в 4–5 переходах от главной и не получают достаточного внутреннего веса от меню и смежных разделов.',
+      result: 'Перестраиваем навигацию и внедряем схему перелинковки, сокращающую путь до целевых разделов до 2–3 переходов.',
     },
   ];
 
   const checklistGroups = [
     {
-      groupName: 'Полнота семантического покрытия',
+      groupName: '1. Аудит семантического ядра и поиск упущенного спроса SEO',
       items: [
-        { name: 'Сравнение видимости с топ-конкурентами', desc: 'Выявление сотен и тысяч ключевых фраз, по которым ранжируются лидеры, но отсутствует ваш сайт' },
-        { name: 'Анализ цели поискового запроса', desc: 'Проверка соответствия страниц типу запроса (информационный против коммерческого)' },
-        { name: 'Оценка частотности и сезонности', desc: 'Распределение запросов по кластерам спроса с учетом сезонных пиков' },
+        {
+          name: 'Сравнение видимости с 3–5 лидерами выдачи',
+          desc: 'Выгрузка и сопоставление поисковых фраз, по которым получают переходы конкуренты, но у вашего сайта еще нет отдельных посадочных страниц',
+        },
+        {
+          name: 'Разграничение поискового намерения (коммерция / информация)',
+          desc: 'Проверка соответствия типа страницы запросам пользователей: чтобы коммерческие ключи вели на услуги и категории, а информационные — в статьи блога',
+        },
+        {
+          name: 'Проверка каннибализации поисковых запросов',
+          desc: 'Поиск дублирующихся по смыслу разделов, карточек и статей, которые делят один и тот же кластер запросов и теряют позиции в Яндексе и Google',
+        },
+        {
+          name: 'Группировка запросов по пересечению выдачи',
+          desc: 'Формирование чистых семантических кластеров без смешивания несовместимых запросов на одной странице',
+        },
       ],
     },
     {
-      groupName: 'Архитектура каталога и глубина URL',
+      groupName: '2. Анализ архитектуры каталога сайта и навигации',
       items: [
-        { name: 'Иерархия рубрикатора', desc: 'Логика разделения категорий, подкатегорий и брендовых листингов' },
-        { name: 'Глубина клика (Click Depth)', desc: 'Доступность приоритетных товаров и услуг не глубже 3 кликов от главной' },
-        { name: 'Тегирование и смарт-фильтры', desc: 'Возможность генерации статических оптимизированных страниц для популярных фильтров' },
+        {
+          name: 'Логика рубрикатора и вложенности разделов',
+          desc: 'Ревизия дерева категорий, подкатегорий, брендовых подборок и страниц по назначению или характеристикам товара/услуги',
+        },
+        {
+          name: 'Контроль глубины клика от главной страницы',
+          desc: 'Проверка доступности всех приоритетных коммерческих разделов не далее чем в 2–3 перехода от главной страницы сайта',
+        },
+        {
+          name: 'Посадочные страницы фильтров и теговых подборок',
+          desc: 'Оценка потенциала создания индексируемых страниц под средне- и низкочастотный спрос с уникальными заголовками H1 и Title',
+        },
+        {
+          name: 'Человекопонятные адреса (ЧПУ) и иерархия URL',
+          desc: 'Проверка единообразия структуры URL-адресов и отсутствия дублирования одних и тех же товаров по разным путям каталога',
+        },
       ],
     },
     {
-      groupName: 'Внутренняя перелинковка и передача веса',
+      groupName: '3. Анализ внутренней перелинковки сайта и распределения веса',
       items: [
-        { name: 'Модель распределения ссылочного веса', desc: 'Анализ передачи веса внутри сайта, направление на маржинальные разделы' },
-        { name: 'Хлебные крошки и меню', desc: 'Корректность навигационной цепочки и сквозных ссылок' },
-        { name: 'Блоки перелинковки', desc: 'Наличие блоков «С этим товаром покупают», «Популярные категории», «Смежные услуги»' },
+        {
+          name: 'Распределение статического веса внутри сайта',
+          desc: 'Расчет входящих и исходящих внутренних ссылок: выявление страниц-сирот и разделов, недополучающих внутренний вес',
+        },
+        {
+          name: 'Навигационные цепочки (хлебные крошки) и меню',
+          desc: 'Проверка сквозной навигации, подвала и хлебных крошек на корректность анкоров и отсутствие циклических ссылок',
+        },
+        {
+          name: 'Связка «Центр и лучевые направления» в услугах и блоге',
+          desc: 'Проектирование перелинковки между обзорными разделами, узкими подуслугами и информационными статьями блога с передачей веса на конверсионные страницы',
+        },
       ],
     },
   ];
 
-  const deliverables = [
-    { title: 'Наглядная схема структуры каталога', desc: 'Понятная схема рекомендуемой архитектуры каталога и посадочных страниц.' },
-    { title: 'Матрица упущенных кластеров спроса', desc: 'Список конкретных страниц с потенциальным трафиком, которые нужно создать на сайте.' },
-    { title: 'Схема внутренней перелинковки страниц', desc: 'Правила внутренней линковки страниц между разделами для максимальной передачи статического веса.' },
+  // Тарифная сетка аудита структуры и семантики
+  const structureTariffItems: TariffItem[] = [
+    {
+      id: 'services',
+      name: 'Сайт услуг / B2B',
+      badge: 'Сайты услуг и B2B',
+      price: '30 000 ₽',
+      duration: 'разово',
+      description: 'Срок проведения: 4–5 рабочих дней. Для сервисных и B2B-компаний (до 50 посадочных страниц).',
+      features: [
+        'Аудит текущего семантического ядра и сбор упущенных групп спроса',
+        'Проверка каннибализации поисковых запросов между разделами и блогом',
+        'Проектирование структуры новых посадочных страниц услуг',
+        'Ревизия меню, навигационных цепочек и глубины клика (до 3 переходов)',
+        'Схема перелинковки с передачей веса на ключевые страницы услуг',
+        'Сводная таблица семантики в Excel и пошаговое ТЗ в Word',
+      ],
+      link: '#order-form',
+      linkText: 'Заказать аудит структуры',
+      isInternalRoute: false,
+    },
+    {
+      id: 'ecommerce',
+      name: 'Интернет-магазин / Каталог',
+      badge: 'Хит • Для торговли и каталогов',
+      popular: true,
+      price: '45 000 ₽',
+      duration: 'разово',
+      description: 'Срок проведения: 5–7 рабочих дней. Для интернет-магазинов, каталогов и порталов от 100 категорий.',
+      features: [
+        'Все работы базового пакета с углубленной аналитикой каталога',
+        'Сравнительный анализ товарной матрицы с 3–5 лидерами ниши',
+        'Проектирование посадочных страниц фильтрации и теговых подборок',
+        'Устранение дублирования страниц товаров по разным путям рубрикатора',
+        'Расчет распределения внутреннего веса и схема товарной перелинковки',
+        'Полная матрица структуры в Excel и развернутое ТЗ для разработчиков',
+      ],
+      link: '#order-form',
+      linkText: 'Заказать аудит структуры',
+      isInternalRoute: false,
+    },
   ];
 
-  const faqList = [
+  // Сравнительная матрица тарифов
+  const comparisonMatrixRows = [
     {
-      question: 'Засчитывается ли стоимость аудита структуры в дальнейшее продвижение?',
-      answer: 'Да! Если в течение 30 дней после получения результатов аудита вы заключаете договор на постоянное ежемесячное SEO-продвижение, 100% стоимости проведенного аудита засчитывается в оплату первого месяца ведения проекта.',
+      param: 'Для каких сайтов подходит тариф',
+      services: 'Сайты услуг, B2B-компании, клиники, юристы',
+      ecommerce: 'Интернет-магазины, оптовые каталоги, маркетплейсы',
+      complex: 'Любые проекты, которым нужна сквозная диагностика',
     },
     {
-      question: 'Что такое каннибализация ключевых слов?',
-      answer: 'Это ситуация, когда за один и тот же запрос конкурируют две разные страницы вашего сайта (например, статья в блоге и страница услуги). В результате поисковик занижает позиции обеих. Аудит помогает разграничить типы запросов или склеить страницы.',
+      param: 'Срок проведения и подготовки документов',
+      services: '4–5 рабочих дней',
+      ecommerce: '5–7 рабочих дней',
+      complex: '5–7 рабочих дней',
     },
     {
-      question: 'Подойдет ли этот аудит для каталога без цен?',
-      answer: 'Да. Структура и семантика одинаково критичны как для розничных интернет-магазинов, так и для оптовых компаний и сложных производственных предприятий.',
+      param: 'Сбор упущенного спроса по лидерам ТОП-10',
+      services: 'До 50 посадочных страниц',
+      ecommerce: 'От 100 категорий и страниц фильтров',
+      complex: 'Включено полностью (все направления)',
     },
     {
-      question: 'Сколько времени занимает аудит структуры и семантики?',
-      answer: 'Стандартный срок проведения анализа структуры — 4–6 рабочих дней.',
+      param: 'Проверка каннибализации запросов между разделами',
+      services: 'Включено полностью',
+      ecommerce: 'Включено полностью (каталог + карточки + теги)',
+      complex: 'Включено полностью',
+    },
+    {
+      param: 'Проектирование посадочных страниц фильтрации',
+      services: 'По типам услуг и отраслям клиентов',
+      ecommerce: 'По фасетным фильтрам, брендам и характеристикам',
+      complex: 'Полное проектирование структуры каталога',
+    },
+    {
+      param: 'Схема внутренней перелинковки и расчет веса',
+      services: 'Связка услуг с блогом и главными страницами',
+      ecommerce: 'Связка категорий, подборок и сопутствующих товаров',
+      complex: 'Единая схема распределения внутреннего веса',
+    },
+    {
+      param: 'Технический, коммерческий и ссылочный аудит',
+      services: 'Не входит (заказывается отдельно)',
+      ecommerce: 'Не входит (заказывается отдельно)',
+      complex: 'Включены все 4 направления аудита',
+    },
+    {
+      param: 'Онлайн-встреча для защиты отчета',
+      services: 'Таблицы Excel + дерево структуры + отчет в Word',
+      ecommerce: 'Таблицы Excel + дерево структуры + отчет в Word',
+      complex: 'Включена дистанционная встреча',
+    },
+    {
+      param: 'Стоимость услуги',
+      services: '30 000 ₽',
+      ecommerce: '45 000 ₽',
+      complex: 'от 35 000 ₽',
+    },
+  ];
+
+  // Итоговые документы
+  const deliverablesList: DeliverableItem[] = [
+    {
+      icon: FileSpreadsheet,
+      badge: 'Таблица Excel',
+      title: 'Сводный реестр семантики и посадочных страниц',
+      description:
+        'Полная таблица кластеров запросов с распределением по целевым URL, приоритетами частотности и сопоставлением с конкурентами.',
+    },
+    {
+      icon: Network,
+      badge: 'Архитектура сайта',
+      title: 'Древовидная схема новой структуры каталога',
+      description:
+        'Наглядная архитектура разделов, подразделов, тегов и страниц фильтрации с глубиной вложенности не более 2–3 кликов.',
+    },
+    {
+      icon: FileText,
+      badge: 'Документ Word',
+      badgeType: 'accent',
+      title: 'Пошаговое ТЗ в Word с правилами перелинковки',
+      description:
+        'Техническое задание для разработчиков и контент-команды: устранение каннибализации, генерация ЧПУ-фильтров и схема связки страниц.',
+    },
+  ];
+
+  // Дисклеймер с детальным сопоставлением тарифов
+  const comparisonDisclaimer = (
+    <TariffComparisonTable
+      eyebrow="Детальное сопоставление форматов"
+      title="Сравнение тарифов аудита структуры и комплексного SEO-аудита"
+      subtitle={
+        <>
+          Таблица помогает выбрать подходящий тариф проектирования структуры или заказать все четыре направления в рамках{' '}
+          <Link
+            to="/uslugi/seo-audit/"
+            className="text-growth-700 dark:text-growth-400 underline hover:no-underline font-medium"
+          >
+            комплексного SEO-аудита сайта
+          </Link>
+          .
+        </>
+      }
+      columns={[
+        { key: 'services', label: 'Сайт услуг / B2B' },
+        { key: 'ecommerce', label: 'Интернет-магазин / Каталог', isHighlighted: true },
+        { key: 'complex', label: 'Комплексный аудит (4 оси)' },
+      ]}
+      rows={comparisonMatrixRows}
+    />
+  );
+
+  const faqList: FAQItem[] = [
+    {
+      question: 'Когда сайту необходим аудит структуры и семантического ядра?',
+      answer:
+        'Проверка требуется в трех главных ситуациях: 1) Рост трафика остановился, и текущие разделы не могут охватить весь поисковый спрос ниши; 2) Появились признаки внутренней конкуренции (каннибализации), когда разные страницы конкурируют за одинаковые фразы; 3) Планируется масштабный редизайн, расширение каталога или вывод на рынок новых товарных групп и направлений услуг.',
+    },
+    {
+      question: 'Что такое каннибализация поисковых запросов и чем она опасна?',
+      answer:
+        'Каннибализация возникает, когда на сайте создано несколько страниц под близкие запросы (например, статья в блоге, карточка товара и категория). Поисковая система не может определить единственную релевантную посадочную страницу, постоянно меняет URL в выдаче, и ни одна из них не поднимается в ТОП-3. Аудит находит такие пересечения и дает ТЗ на разделение интентов или склейку страниц.',
+    },
+    {
+      question: 'Как правильная перелинковка влияет на ранжирование страниц?',
+      answer:
+        'Внутренняя перелинковка решает две задачи: передает статический ссылочный вес важным коммерческим страницам и помогает роботам быстрее индексировать новые подразделы. Грамотно выстроенная схема снижает уровень вложенности ключевых страниц до 2–3 кликов от главной и увеличивает видимость низкочастотных запросов.',
+    },
+    {
+      question: 'Как работает зачет стоимости аудита структуры в тариф продвижения?',
+      answer:
+        'При заключении договора на регулярное ежемесячное SEO-продвижение сайта в течение 30 календарных дней после сдачи отчета — 100% стоимости аудита структуры и семантики засчитывается в оплату первого месяца продвижения. Сбор ядра и проектирование архитектуры уже выполнены, повторно оплачивать эти работы не требуется.',
+    },
+    {
+      question: 'В каком виде программисты получают задание на внедрение новой структуры?',
+      answer:
+        'Разработчики получают понятную древовидную схему URL-адресов в Excel с указанием уровней вложенности, шаблонов посадочных страниц и правил генерации тегов H1/Title, а также подробное ТЗ в Word с техническими требованиями к ЧПУ, хлебным крошкам и сквозным блокам перелинковки.',
     },
   ];
 
   const relatedAudits = [
-    { slug: 'tehnicheskij', title: 'Технический аудит', price: 'от 10 000 ₽', icon: FileCode2, desc: 'Диагностика по ключевым техническим направлениям, отчет в Excel и Word с ТЗ для разработчиков за 24 часа.' },
-    { slug: 'kommercheskij', title: 'Коммерческий аудит', price: 'от 25 000 ₽', icon: ShoppingCart, desc: 'Анализ факторов доверия Яндекса, удобства корзины, форм и 152-ФЗ.' },
-    { slug: 'ssylochnyj', title: 'Ссылочный аудит', price: 'от 20 000 ₽', icon: Link2, desc: 'Проверка профиля входящих ссылок, анкор-листа, токсичных доноров и конкурентов.' },
+    {
+      slug: 'tehnicheskij',
+      title: 'Технический SEO-аудит',
+      price: 'от 10 000 ₽',
+      icon: FileCode2,
+      desc: 'Диагностика по 8 техническим направлениям, выгрузка ошибок в Excel и ТЗ в Word за 24 часа. 100% зачет в тариф продвижения.',
+      anchor: 'Перейти к техническому аудиту',
+    },
+    {
+      slug: 'kommercheskij',
+      title: 'Коммерческий аудит сайта',
+      price: 'от 25 000 ₽',
+      icon: ShoppingCart,
+      desc: 'Проверка коммерческих факторов доверия Яндекса, удобства корзины, форм заявки, реквизитов и соблюдения 152-ФЗ.',
+      anchor: 'Перейти к коммерческому аудиту',
+    },
+    {
+      slug: 'ssylochnyj',
+      title: 'Аудит ссылочной массы',
+      price: 'от 20 000 ₽',
+      icon: Link2,
+      desc: 'Проверка профиля обратных ссылок, анкор-листа, фильтрация спамных доноров и анализ ссылочной стратегии конкурентов.',
+      anchor: 'Перейти к ссылочному аудиту',
+    },
   ];
 
-  const serviceSchema = generateServiceSchema({
+  const hubCtaBanner: HubCtaBanner = {
+    badge: 'Комплексный подход',
+    title: 'Нужна не только новая структура, но и техническая проверка и коммерция?',
+    description:
+      'Закажите комплексный SEO-аудит сайта в основном разделе (от 35 000 ₽). Он объединяет все ключевые направления диагностики: техническую базу, коммерческие факторы, семантику и ссылки.',
+    buttonText: 'Комплексный SEO-аудит сайта',
+    buttonLink: '/uslugi/seo-audit/',
+  };
+
+  const baseServiceSchema = generateServiceSchema({
     name: 'Аудит структуры сайта и семантического ядра',
     description: pageDescription,
     url: pageUrl,
@@ -116,11 +376,37 @@ export const StructureAuditPage: React.FC = () => {
     serviceType: 'Аудит структуры и семантики сайта',
   });
 
+  const serviceSchema = {
+    ...baseServiceSchema,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Тарифы на аудит структуры и семантики сайта',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          name: 'Аудит структуры: Сайт услуг / B2B',
+          price: '30000',
+          priceCurrency: 'RUB',
+          availability: 'https://schema.org/InStock',
+          url: `${SITE_URL}${pageUrl}#pricing`,
+        },
+        {
+          '@type': 'Offer',
+          name: 'Аудит структуры: Интернет-магазин / Каталог',
+          price: '45000',
+          priceCurrency: 'RUB',
+          availability: 'https://schema.org/InStock',
+          url: `${SITE_URL}${pageUrl}#pricing`,
+        },
+      ],
+    },
+  };
+
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Главная', url: '/' },
     { name: 'Услуги', url: '/uslugi/' },
     { name: 'SEO-аудит сайта', url: '/uslugi/seo-audit/' },
-    { name: 'Аудит структуры и семантики', url: pageUrl },
+    { name: 'Структура и семантика', url: pageUrl },
   ]);
 
   const faqSchema = generateFAQPageSchema(faqList);
@@ -139,304 +425,115 @@ export const StructureAuditPage: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
-      {/* 1. Первый экран (Hero) */}
-      <section className="py-12 md:py-20 bg-slate-50 dark:bg-obsidian-950 border-b border-slate-200 dark:border-obsidian-850 grid-bg transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="max-w-4xl">
-            <div className="flex items-center gap-4 mb-6">
-              <Link
-                to="/uslugi/seo-audit/"
-                className="inline-flex items-center gap-2 text-growth-700 dark:text-growth-400 hover:text-growth-800 dark:hover:text-growth-300 text-xs font-mono transition-colors font-semibold"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Все виды аудитов</span>
-              </Link>
-              <span className="text-slate-300 dark:text-obsidian-700">/</span>
-              <span className="text-xs font-mono text-slate-500 dark:text-slate-400">Аудит структуры и семантики</span>
-            </div>
+      {/* 1. Первый экран (Hero) (Универсальный компонент) */}
+      <SubServiceHero
+        breadcrumbParentTitle="Комплексный SEO-аудит (все виды)"
+        breadcrumbParentUrl="/uslugi/seo-audit/"
+        breadcrumbCurrent="Структура и семантика"
+        badgeIcon={Network}
+        badgeText="Архитектура каталога • Сбор упущенного спроса • Устранение каннибализации"
+        title="Аудит структуры сайта и"
+        titleHighlight="семантического ядра"
+        description="Если вам требуется анализ архитектуры каталога сайта, поиск упущенного спроса SEO, проверка каннибализации поисковых запросов и анализ внутренней перелинковки сайта, мы проведем глубокое исследование семантики на фоне лидеров ниши. Вы получаете древовидную схему разделов в Excel и пошаговое ТЗ в Word для создания новых посадочных страниц."
+        specialOfferBanner={
+          <SpecialOfferBanner title="Специальное предложение: стоимость технического аудита засчитывается в тариф!">
+            При заказе технического аудита (от 10 000 до 20 000 ₽) 100% его стоимости вычитается из оплаты первого месяца регулярного SEO-продвижения (тарифы от 35 000 ₽/мес.), в рамках которого прорабатывается и структура разделов.
+          </SpecialOfferBanner>
+        }
+        price="от 30 000 ₽"
+        duration="4–6 рабочих дней"
+        pricingAnchor="#pricing"
+        pricingButtonText="Посмотреть тарифы"
+      />
 
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-growth-500/10 border border-growth-500/20 text-growth-600 dark:text-growth-400 text-xs font-mono font-medium mb-5">
-              <Network className="w-3.5 h-3.5 text-growth-500" />
-              <span>Охват поискового спроса</span>
-            </div>
+      {/* 2. Диагностика по симптомам и целевая аудитория (Универсальный компонент) */}
+      <DiagnosticScenariosSection
+        eyebrow="Симптомы и задачи"
+        title="В каких ситуациях аудит структуры нужен в первую очередь"
+        subtitle="Без правильной структуры даже качественные тексты и внешние ссылки не дают максимального эффекта, так как поисковый спрос рассеивается по случайным страницам."
+        scenarios={diagnosticScenarios}
+        whoNeedsTitle="Кому необходима структурная ревизия сайта:"
+        whoNeedsIcon={Network}
+        whoNeeds={whoNeeds}
+      />
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6 leading-tight">
-              Аудит структуры сайта и семантики
-            </h1>
+      {/* 3. Чек-лист проверки структуры по 3 направлениям (Универсальный компонент) */}
+      <ChecklistGroupsSection
+        eyebrow="Регламент аудита"
+        title="Что исследуется в ходе аудита структуры и семантики"
+        subtitle="Сквозной анализ сопоставляет архитектуру вашего каталога с реальной структурой поискового спроса в Яндекс и Google."
+        groups={checklistGroups}
+        columns={3}
+      />
 
-            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg font-sans leading-relaxed mb-8 max-w-3xl">
-              Если структура сайта не соответствует реальному спросу людей в поиске, сайт физически не может ранжироваться по тысячам целевых запросов. Аудит находит «белые пятна» в каталоге, ликвидирует каннибализацию страниц и выстраивает правильную архитектуру перелинковки.
-            </p>
+      {/* 4. Что входит в итоговый пакет документов (Универсальный компонент) */}
+      <AnimatedSection variant="slide-up">
+        <DeliverablesSection
+          eyebrow="Итоговый комплект"
+          title="Что входит в итоговый пакет документов аудита структуры"
+          subtitle="Вы получаете готовые материалы для внедрения новых посадочных страниц и оптимизации внутренней навигации."
+          items={deliverablesList}
+        />
+      </AnimatedSection>
 
-            {/* Специальное предложение: Стоимость засчитывается в тариф */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-growth-500/15 via-growth-500/10 to-transparent border-2 border-growth-500/30 mb-8">
-              <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-growth-600 text-obsidian-950 flex items-center justify-center shrink-0 mt-0.5">
-                  <BadgePercent className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-1">
-                    Стоимость аудита засчитывается в тариф продвижения!
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                    100% стоимости аудита структуры <strong>засчитываем в оплату первого месяца сотрудничества</strong>, если договор на комплексное SEO-продвижение подписан в течение 30 дней.
-                  </p>
-                </div>
-              </div>
-            </div>
+      {/* 5. Тарифная сетка и сравнительная матрица (Универсальный компонент) */}
+      <AnimatedSection variant="slide-up">
+        <TariffsSection
+          id="pricing"
+          eyebrow="Прозрачные тарифы"
+          title="Стоимость аудита структуры сайта и семантики"
+          subtitle="Фиксированная стоимость без скрытых доплат. Официальный договор с самозанятым / ИП (ЭДО, чеки в приложении ФНС «Мой налог»). Без НДС."
+          tariffs={structureTariffItems}
+          columns={2}
+          disclaimer={comparisonDisclaimer}
+        />
+      </AnimatedSection>
 
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-6 border-t border-slate-200 dark:border-obsidian-800">
-              <div className="p-3.5 px-5 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800">
-                <span className="text-xs font-mono text-slate-500 dark:text-slate-400 block mb-0.5">Стоимость</span>
-                <span className="text-xl font-bold text-slate-900 dark:text-white">от 30 000 ₽</span>
-              </div>
-              <div className="p-3.5 px-5 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800">
-                <span className="text-xs font-mono text-slate-500 dark:text-slate-400 block mb-0.5">Срок проведения</span>
-                <span className="text-xl font-bold text-growth-600 dark:text-growth-400">4–6 рабочих дней</span>
-              </div>
-              <a
-                href="#order-form"
-                className="px-6 py-4 rounded-xl bg-growth-600 hover:bg-growth-500 text-obsidian-950 font-bold text-sm transition-all duration-200 flex items-center gap-2 shadow-lg shadow-growth-600/20"
-              >
-                <span>Заказать аудит</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. Кому необходим этот аудит */}
-      <section className="py-16 md:py-20 bg-white dark:bg-obsidian-950 border-b border-slate-200 dark:border-obsidian-850 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="max-w-3xl mb-12">
-            <span className="text-growth-600 dark:text-growth-400 font-mono text-xs uppercase tracking-wider font-semibold block mb-2">
-              Целевая аудитория
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Кому и когда необходим аудит структуры и семантики
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {whoNeeds.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-slate-50 dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-9 h-9 rounded-lg bg-growth-500/10 text-growth-600 dark:text-growth-400 font-mono font-bold flex items-center justify-center text-sm mb-4">
-                    0{idx + 1}
-                  </div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Список проверок */}
-      <section className="py-16 md:py-24 bg-slate-50 dark:bg-obsidian-900/40 border-b border-slate-200 dark:border-obsidian-850 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="max-w-3xl mb-12">
-            <span className="text-growth-600 dark:text-growth-400 font-mono text-xs uppercase tracking-wider font-semibold block mb-2">
-              Глубокая методология
-            </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
-              Список проверок семантики и структуры каталога
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-              Анализируем поисковый спрос ниши, проектируем модель распределения ссылочного веса и выявляем слабые места в рубрикаторе.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {checklistGroups.map((group, gIdx) => (
-              <div
-                key={gIdx}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800"
-              >
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-growth-500"></span>
-                  <span>{group.groupName}</span>
-                </h3>
-
-                <div className="space-y-4">
-                  {group.items.map((item, iIdx) => (
-                    <div key={iIdx} className="p-3.5 rounded-xl bg-slate-50 dark:bg-obsidian-850 border border-slate-100 dark:border-obsidian-800/80">
-                      <div className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-growth-600 dark:text-growth-400 shrink-0 mt-0.5" />
-                        <div>
-                          <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white mb-0.5">
-                            {item.name}
-                          </h4>
-                          <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
-                            {item.desc}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Артефакты сдачи */}
-      <section className="py-16 md:py-20 bg-white dark:bg-obsidian-950 border-b border-slate-200 dark:border-obsidian-850 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="max-w-3xl mb-12">
-            <span className="text-growth-600 dark:text-growth-400 font-mono text-xs uppercase tracking-wider font-semibold block mb-2">
-              Итоговые материалы
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Формат отчетов и артефакты сдачи
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {deliverables.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-slate-50 dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800"
-              >
-                <div className="w-10 h-10 rounded-xl bg-growth-500/10 text-growth-600 dark:text-growth-400 flex items-center justify-center font-bold mb-4">
-                  0{idx + 1}
-                </div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-base mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Перелинковка: Основной раздел и смежные аудиты */}
-      <section className="py-16 md:py-24 bg-slate-50 dark:bg-obsidian-900/50 border-b border-slate-200 dark:border-obsidian-850 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-obsidian-900 to-obsidian-850 border border-growth-500/30 text-white mb-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-black/40">
-            <div className="max-w-2xl">
-              <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-growth-500/20 text-growth-300 border border-growth-500/30 mb-3 inline-block">
-                Максимальная выгода
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold mb-3 text-white">
-                Нужен полный анализ по всем 4 направлениям?
-              </h3>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                Закажите комплексный аудит сайта в основном разделе аудитов. Вы получите все 4 аудита (Технический + Коммерческий + Ссылочный + Семантику) единым пакетом со скидкой более 35% и видеоразбором от эксперта.
-              </p>
-            </div>
+      {/* 6. Правила зачета, границы услуги и подтверждение опыта (Универсальный компонент) */}
+      <AuditTrustAndRulesSection
+        rulesTitle="Условия зачета стоимости и границы услуги"
+        ruleDeductionText={
+          <>
+            при заключении договора на{' '}
             <Link
-              to="/uslugi/seo-audit/"
-              className="px-6 py-4 rounded-xl bg-growth-500 hover:bg-growth-400 text-obsidian-950 font-bold text-sm whitespace-nowrap transition-all duration-200 flex items-center gap-2 shadow-lg shadow-growth-500/20 shrink-0"
+              to="/uslugi/seo-prodvizhenie/"
+              className="text-growth-700 dark:text-growth-400 underline hover:no-underline font-medium"
             >
-              <span>К полному аудиту сайта</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+              комплексное SEO-продвижение
+            </Link>{' '}
+            в течение <strong>30 дней</strong> после передачи отчета — <strong>100% стоимости аудита структуры засчитывается в оплату первого месяца</strong>. Вся работа по сбору спроса и проектированию уже выполнена в полном объеме.
+          </>
+        }
+        ruleScopeText="услуга включает сбор семантического ядра, устранение каннибализации, построение архитектуры страниц и ТЗ для программистов. Программное создание новых шаблонов на CMS и наполнение их карточками товаров или текстами выполняется отдельно по готовому ТЗ."
+        trustTitle="Кейсы, отзывы заказчиков и официальные реквизиты"
+        trustText="Ознакомьтесь с реальными примерами роста видимости проектов, отзывами клиентов и юридическими данными специалиста:"
+      />
 
-          <div>
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-6">
-              Другие направления аудита:
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedAudits.map((rel) => {
-                const RelIcon = rel.icon;
-                return (
-                  <Link
-                    key={rel.slug}
-                    to={`/uslugi/seo-audit/${rel.slug}/`}
-                    className="p-6 rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 hover:border-growth-500/40 hover:shadow-lg transition-all duration-200 group flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="w-10 h-10 rounded-lg bg-growth-500/10 text-growth-600 dark:text-growth-400 flex items-center justify-center group-hover:scale-105 transition-transform">
-                          <RelIcon className="w-5 h-5" />
-                        </div>
-                        <span className="text-xs font-mono font-bold text-slate-900 dark:text-white">
-                          {rel.price}
-                        </span>
-                      </div>
-                      <h4 className="font-bold text-slate-900 dark:text-white text-base mb-2 group-hover:text-growth-600 dark:group-hover:text-growth-400 transition-colors">
-                        {rel.title}
-                      </h4>
-                      <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
-                        {rel.desc}
-                      </p>
-                    </div>
-                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-obsidian-800 flex items-center justify-between text-xs font-semibold text-growth-600 dark:text-growth-400">
-                      <span>Посмотреть список проверок</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
+      {/* 7. Перелинковка: Основной раздел и смежные аудиты (Универсальный компонент) */}
+      <AnimatedSection variant="slide-up">
+        <RelatedServicesSection
+          ctaBanner={hubCtaBanner}
+          title="Другие направления аудита сайта:"
+          services={relatedAudits}
+        />
+      </AnimatedSection>
+
+      {/* 8. Вопросы и ответы (Универсальный компонент) */}
+      <AnimatedSection variant="slide-up">
+        <FAQSection
+          id="faq"
+          eyebrow="Вопросы и ответы"
+          title="Частые вопросы по аудиту структуры"
+          items={faqList}
+        />
+      </AnimatedSection>
+
+      {/* 9. Заявка на аудит */}
+      <AnimatedSection variant="slide-up">
+        <div id="order-form">
+          <CTASection />
         </div>
-      </section>
-
-      {/* 6. FAQ */}
-      <section className="py-16 md:py-20 bg-white dark:bg-obsidian-950 border-b border-slate-200 dark:border-obsidian-850 transition-colors">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8">
-          <div className="text-center mb-10">
-            <span className="text-growth-600 dark:text-growth-400 font-mono text-xs uppercase tracking-wider font-semibold block mb-2">
-              FAQ
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Частые вопросы по аудиту структуры
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            {faqList.map((item, idx) => {
-              const isOpen = openFaqIndex === idx;
-              return (
-                <div
-                  key={idx}
-                  className="rounded-2xl border border-slate-200 dark:border-obsidian-800 bg-slate-50 dark:bg-obsidian-900 overflow-hidden"
-                >
-                  <button
-                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 transition-colors"
-                  >
-                    <span className="font-bold text-slate-900 dark:text-white text-base">
-                      {item.question}
-                    </span>
-                    <ChevronDown
-                      className={`w-5 h-5 text-growth-600 dark:text-growth-400 transition-transform duration-300 shrink-0 ${
-                        isOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  {isOpen && (
-                    <div className="px-5 pb-5 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-200/60 dark:border-obsidian-800 pt-3">
-                      {item.answer}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Заявка на аудит */}
-      <div id="order-form">
-        <CTASection />
-      </div>
+      </AnimatedSection>
     </>
   );
 };

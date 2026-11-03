@@ -1,22 +1,22 @@
-import { SITE_URL, SITE_NAME, PHONE, EMAIL } from './constants';
+import { SITE_URL, SITE_NAME, EXPERT_NAME, PHONE, EMAIL, ADDRESS, TELEGRAM } from './constants';
 
 export function generateLocalBusinessSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: SITE_NAME,
-    description: 'Частный SEO-специалист. Продвижение сайтов в ТОП Яндекс и Google.',
+    description: `Частный SEO-специалист ${EXPERT_NAME}. Продвижение сайтов в ТОП Яндекс и Google.`,
     url: `${SITE_URL}/`,
     telephone: PHONE,
     email: EMAIL,
     priceRange: 'от 35 000 ₽/мес',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Москва',
+      addressLocality: ADDRESS.replace(/^г\.\s*/i, ''),
       addressCountry: 'RU',
     },
-    openingHours: 'Mo-Fr 10:00-19:00',
-    sameAs: [],
+    openingHours: 'Mo-Fr 09:30-19:00',
+    sameAs: [`https://t.me/${TELEGRAM}`],
   };
 }
 
@@ -30,7 +30,7 @@ export function generateArticleSchema(title: string, description: string, datePu
     dateModified,
     author: {
       '@type': 'Person',
-      name: SITE_NAME,
+      name: EXPERT_NAME,
       url: SITE_URL,
     },
     publisher: {
@@ -105,7 +105,7 @@ export function generateServiceSchema(options: {
       email: EMAIL,
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'Москва',
+        addressLocality: ADDRESS.replace(/^г\.\s*/i, ''),
         addressCountry: 'RU',
       },
     },

@@ -15,10 +15,10 @@ export const RequisitesPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Реквизиты и условия сотрудничества для юридических лиц | Сергей Кошелев</title>
+        <title>Реквизиты и условия сотрудничества для юридических лиц | {contactInfo.expertName}</title>
         <meta
           name="description"
-          content="Официальные реквизиты самозанятого Кошелева Сергея Ивановича. Условия заключения договоров с юридическими лицами и ИП, чеки 'Мой налог', без НДФЛ и взносов."
+          content={`Официальные реквизиты исполнителя ${contactInfo.expertFullNameGenitive} (${contactInfo.legalStatusShort}, ИНН ${contactInfo.inn}). Условия заключения договоров с юридическими лицами и ИП, чеки «Мой налог», без НДФЛ и взносов.`}
         />
         <link rel="canonical" href={`${SITE_URL}/rekvizity/`} />
       </Helmet>
@@ -111,21 +111,21 @@ export const RequisitesPage: React.FC = () => {
                     <tbody className="divide-y divide-slate-200 dark:divide-obsidian-800 text-slate-700 dark:text-slate-300">
                       <tr className="hover:bg-slate-100/70 dark:hover:bg-obsidian-900/60 transition-colors">
                         <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-slate-400 w-1/3">ФИО исполнителя:</td>
-                        <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">Кошелев Сергей Иванович</td>
+                        <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">{contactInfo.expertFullName}</td>
                       </tr>
                       <tr className="hover:bg-slate-100/70 dark:hover:bg-obsidian-900/60 transition-colors">
                         <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-slate-400">Налоговый статус:</td>
                         <td className="py-3.5 px-4 text-growth-700 dark:text-growth-400 font-bold">
-                          Плательщик налога на профессиональный доход (НПД / самозанятый)
+                          {contactInfo.legalStatusFull}
                         </td>
                       </tr>
                       <tr className="hover:bg-slate-100/70 dark:hover:bg-obsidian-900/60 transition-colors">
                         <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-slate-400">ИНН:</td>
-                        <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">772839102948</td>
+                        <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">{contactInfo.inn}</td>
                       </tr>
                       <tr className="hover:bg-slate-100/70 dark:hover:bg-obsidian-900/60 transition-colors">
                         <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-slate-400">Регион постановки на учёт:</td>
-                        <td className="py-3.5 px-4 text-slate-700 dark:text-slate-300">г. Москва (ИФНС России)</td>
+                        <td className="py-3.5 px-4 text-slate-700 dark:text-slate-300">{contactInfo.taxRegion}</td>
                       </tr>
                       <tr className="hover:bg-slate-100/70 dark:hover:bg-obsidian-900/60 transition-colors">
                         <td className="py-3.5 px-4 font-semibold text-slate-500 dark:text-slate-400">Контактный телефон:</td>

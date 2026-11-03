@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, ArrowLeft } from 'lucide-react';
 import { services } from '@data/index';
+import { contactInfo } from '@data/contactInfo';
 import { getSeoData, generateOgMeta } from '@utils/helpers';
 import { SITE_URL } from '@utils/constants';
 import { AnimatedSection } from '@components/common';
@@ -28,7 +29,7 @@ export const ServicesPage: React.FC = () => {
     return (
       <>
         <Helmet>
-          <title>{currentService.title} — Сергей Кошелев | Частный SEO-специалист</title>
+          <title>{currentService.title} — {contactInfo.expertName} | Частный SEO-специалист</title>
           <meta name="description" content={currentService.description} />
           <link rel="canonical" href={`${SITE_URL}/uslugi/${currentService.slug}/`} />
           {Object.entries(ogMeta).map(([key, value]) => (
@@ -103,7 +104,7 @@ export const ServicesPage: React.FC = () => {
         {/* Шапка каталога услуг */}
         <section className="py-12 md:py-16 bg-slate-50 dark:bg-obsidian-950 border-b border-slate-200 dark:border-obsidian-850 grid-bg transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-growth-500/10 border border-growth-500/20 text-growth-700 dark:text-growth-400 font-mono text-xs uppercase tracking-wider mb-4 font-semibold">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-growth-500/10 border border-growth-500/20 text-growth-700 dark:text-growth-400 font-mono text-xs uppercase tracking-widest mb-4 font-semibold">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Регламентные задачи и персональное ведение</span>
             </div>

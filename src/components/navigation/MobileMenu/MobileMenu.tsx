@@ -48,7 +48,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ onClose }) => {
             className="flex items-center justify-center gap-2 py-2.5 rounded-lg bg-slate-100 dark:bg-obsidian-900 border border-slate-300 dark:border-obsidian-750 text-slate-800 dark:text-slate-200 text-xs font-mono transition-colors"
           >
             <Send className="w-4 h-4 text-sky-500 dark:text-sky-400" />
-            <span>Написать в Telegram @{contactInfo.telegram}</span>
+            <span>Написать в Telegram</span>
           </a>
 
           <a

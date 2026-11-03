@@ -20,9 +20,9 @@ export const AboutExpertSection: React.FC = () => {
                 <UserCheck className="w-20 h-20 text-growth-600 dark:text-growth-400" />
               </div>
               <div className="text-center font-mono">
-                <div className="font-bold text-slate-900 dark:text-white text-base">Сергей Кошелев</div>
+                <div className="font-bold text-slate-900 dark:text-white text-base">{contactInfo.expertName}</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400">Практикующий SEO-специалист</div>
-                <div className="text-[11px] text-growth-700 dark:text-growth-400 font-semibold mt-1">В поиске с 2012 года</div>
+                <div className="text-[11px] text-growth-700 dark:text-growth-400 font-semibold mt-1">В поиске с 2012 года • {contactInfo.legalStatusShort}</div>
               </div>
             </div>
           </div>

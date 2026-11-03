@@ -113,9 +113,13 @@ async function prerender() {
     resolveLastMod: (entry) => entry.lastmod || resolveFileLastMod(entry.sourceFile),
   });
 
-  fs.writeFileSync(path.resolve(rootDir, 'public/sitemap.xml'), sitemapXml, 'utf-8');
+  try {
+    fs.writeFileSync(path.resolve(rootDir, 'public/sitemap.xml'), sitemapXml, 'utf-8');
+  } catch (err) {
+    console.warn('  ⚠️ Предупреждение: Не удалось обновить public/sitemap.xml (файл занят сервером dev):', err.message);
+  }
   fs.writeFileSync(path.resolve(distDir, 'sitemap.xml'), sitemapXml, 'utf-8');
-  console.log('  ✓ Обновлен файл: public/sitemap.xml и dist/sitemap.xml');
+  console.log('  ✓ Обновлен файл: dist/sitemap.xml');
 
   // Синхронизируем директиву Sitemap в robots.txt
   for (const robotsFile of [
@@ -123,9 +127,13 @@ async function prerender() {
     path.resolve(distDir, 'robots.txt'),
   ]) {
     if (fs.existsSync(robotsFile)) {
-      const content = fs.readFileSync(robotsFile, 'utf-8');
-      const updated = content.replace(/^Sitemap:.*$/m, `Sitemap: ${siteUrl}/sitemap.xml`);
-      fs.writeFileSync(robotsFile, updated, 'utf-8');
+      try {
+        const content = fs.readFileSync(robotsFile, 'utf-8');
+        const updated = content.replace(/^Sitemap:.*$/m, `Sitemap: ${siteUrl}/sitemap.xml`);
+        fs.writeFileSync(robotsFile, updated, 'utf-8');
+      } catch (err) {
+        console.warn(`  ⚠️ Предупреждение: Не удалось обновить ${robotsFile}:`, err.message);
+      }
     }
   }
 

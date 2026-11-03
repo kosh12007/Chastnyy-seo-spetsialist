@@ -26,12 +26,12 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ type = 'privacy' }) =>
   return (
     <>
       <Helmet>
-        <title>{pageTitle} | Сергей Кошелев</title>
+        <title>{pageTitle} | {contactInfo.expertName}</title>
         <meta
           name="description"
           content={
             isPrivacy
-              ? 'Официальная политика обработки персональных данных самозанятого Павлова Михаила Васильевича в соответствии с Федеральным законом № 152-ФЗ.'
+              ? `Официальная политика обработки персональных данных оператора ${contactInfo.expertFullNameGenitive} (${contactInfo.legalStatusShort}, ИНН ${contactInfo.inn}) в соответствии с Федеральным законом № 152-ФЗ.`
               : 'Условия согласия пользователя на обработку персональных данных при отправке форм обратной связи на сайте.'
           }
         />
@@ -60,7 +60,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ type = 'privacy' }) =>
                   {pageTitle}
                 </h1>
                 <p className="text-slate-500 dark:text-slate-400 text-xs font-mono mt-2">
-                  Редакция от 22 октября 2026 г. • Оператор: Павлов Михаил Васильевич (плательщик НПД / самозанятый)
+                  Редакция от 22 октября 2026 г. • Оператор: {contactInfo.expertFullName} ({contactInfo.legalStatusShort})
                 </p>
               </div>
 
@@ -70,7 +70,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ type = 'privacy' }) =>
                   <section>
                     <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-2 font-mono">1. Общие положения</h2>
                     <p>
-                      1.1. Настоящая Политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок сбора, обработки и защиты персональных данных, предпринимаемые физическим лицом Павловым Михаилом Васильевичем (ИНН 772839102948, плательщик налога на профессиональный доход), далее — «Оператор».
+                      1.1. Настоящая Политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок сбора, обработки и защиты персональных данных, предпринимаемые физическим лицом {contactInfo.expertFullNameInstrumental} (ИНН {contactInfo.inn}, {contactInfo.legalStatusFull}), далее — «Оператор».
                     </p>
                     <p className="mt-2 text-slate-500 dark:text-slate-400">
                       1.2. Оператор ставит своей важнейшей целью и условием осуществления профессиональной деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, включая защиту прав на неприкосновенность частной жизни, личную и коммерческую тайну.
@@ -121,7 +121,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ type = 'privacy' }) =>
                   </section>
 
                   <section className="border-t border-slate-200 dark:border-obsidian-800 pt-6 font-mono text-xs text-slate-500 dark:text-slate-400">
-                    <div>Оператор: Павлов Михаил Васильевич • ИНН 772839102948</div>
+                    <div>Оператор: {contactInfo.expertFullName} ({contactInfo.legalStatusShort}) • ИНН {contactInfo.inn}</div>
                     <div>Телефон: {contactInfo.phone} • Email: {contactInfo.email}</div>
                   </section>
                 </div>
@@ -129,7 +129,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ type = 'privacy' }) =>
                 /* Полный текст Согласия на обработку ПДн */
                 <div className="space-y-6 text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
                   <p>
-                    Заполняя любую форму обратной связи на сайте и проставляя отметку (чекбокс) в поле «Я даю согласие на обработку персональных данных», Пользователь свободно, своей волей и в своем интересе дает согласие физическому лицу Павлову Михаилу Васильевичу (ИНН 772839102948, плательщик НПД / самозанятый), далее — «Оператор», на обработку своих персональных данных на следующих условиях:
+                    Заполняя любую форму обратной связи на сайте и проставляя отметку (чекбокс) в поле «Я даю согласие на обработку персональных данных», Пользователь свободно, своей волей и в своем интересе дает согласие физическому лицу {contactInfo.expertFullNameDative} (ИНН {contactInfo.inn}, {contactInfo.legalStatusShort}), далее — «Оператор», на обработку своих персональных данных на следующих условиях:
                   </p>
 
                   <div className="p-4 rounded-xl bg-slate-50 dark:bg-obsidian-950 border border-slate-200 dark:border-obsidian-800 space-y-2 transition-colors">
@@ -153,7 +153,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ type = 'privacy' }) =>
                   </div>
 
                   <div className="border-t border-slate-200 dark:border-obsidian-800 pt-6 font-mono text-xs text-slate-500 dark:text-slate-400">
-                    <div>Оператор: Павлов Михаил Васильевич • ИНН 772839102948</div>
+                    <div>Оператор: {contactInfo.expertFullName} ({contactInfo.legalStatusShort}) • ИНН {contactInfo.inn}</div>
                     <div>Телефон: {contactInfo.phone} • Email: {contactInfo.email}</div>
                   </div>
                 </div>

@@ -70,6 +70,26 @@ export interface FAQItem {
 }
 
 export interface ContactInfo {
+  /** Краткое имя и фамилия специалиста (например, «Сергей Кошелев») */
+  expertName: string;
+  /** Полное ФИО специалиста (например, «Кошелев Сергей Иванович») */
+  expertFullName: string;
+  /** Полное ФИО в родительном падеже (например, «Кошелева Сергея Ивановича») */
+  expertFullNameGenitive: string;
+  /** Полное ФИО в творительном падеже (например, «Кошелевым Сергеем Ивановичем») */
+  expertFullNameInstrumental: string;
+  /** Полное ФИО в дательном падеже (например, «Кошелеву Сергею Ивановичу») */
+  expertFullNameDative: string;
+  /** Инициалы для значка логотипа в шапке (например, «СК») */
+  expertInitials: string;
+  /** ИНН плательщика НПД / ИП */
+  inn: string;
+  /** Краткий юридический/налоговый статус (например, «Самозанятый (НПД)») */
+  legalStatusShort: string;
+  /** Полный юридический/налоговый статус для реквизитов и политики 152-ФЗ */
+  legalStatusFull: string;
+  /** Регион постановки на налоговый учёт */
+  taxRegion: string;
   phone: string;
   email: string;
   whatsapp: string;

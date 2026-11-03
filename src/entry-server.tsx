@@ -50,7 +50,10 @@ export function getSiteRoutes(customStaticPaths?: string[]): SitemapEntry[] {
       changefreq: 'monthly',
       priority: idx === 0 ? '0.9' : '0.8',
       indexable: true,
-      sourceFile: `src/data/services/${s.slug}.ts`,
+      sourceFile:
+        s.slug === 'seo-audit'
+          ? 'src/pages/services/seo-audit/index.tsx'
+          : `src/data/services/${s.slug}.ts`,
     })),
     // Кластер услуг: SEO-аудит (дочерние специализированные страницы)
     {

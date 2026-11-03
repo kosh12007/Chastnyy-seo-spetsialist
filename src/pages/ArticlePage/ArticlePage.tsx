@@ -49,7 +49,7 @@ export const ArticlePage: React.FC = () => {
       </Helmet>
 
       <AnimatedSection variant="fade" duration={0.8}>
-        <article className="py-12 md:py-16 bg-slate-50 dark:bg-obsidian-950 min-h-screen transition-colors">
+        <article className="py-12 md:py-16 bg-slate-50 dark:bg-obsidian-950 min-h-screen transition-colors grid-bg">
           <div className="max-w-4xl mx-auto px-4 sm:px-8">
             <AnimatedSection variant="slide-up">
               <Link
@@ -71,7 +71,7 @@ export const ArticlePage: React.FC = () => {
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
-                  <span>{article.readTime} мин чтения</span>
+                  <span>{String(article.readTime).replace(/\s*мин\.?$/i, '')} мин чтения</span>
                 </span>
               </div>
             </AnimatedSection>

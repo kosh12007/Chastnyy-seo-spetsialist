@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Home } from 'lucide-react';
 import { AnimatedSection } from '@components/common';
+import { contactInfo } from '@data/contactInfo';
 
 /**
  * Страница 404 — страница не найдена.
@@ -12,7 +13,7 @@ export const NotFoundPage: React.FC = () => {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-16 grid-bg">
       <Helmet>
-        <title>Страница не найдена (404) — Частный SEO-специалист Сергей Кошелев</title>
+        <title>Страница не найдена (404) — Частный SEO-специалист {contactInfo.expertName}</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <AnimatedSection variant="scale" duration={0.8}>

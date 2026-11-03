@@ -94,7 +94,7 @@ export const ContactsPage: React.FC = () => {
                       <div className="font-bold text-slate-900 dark:text-white group-hover:text-growth-600 dark:group-hover:text-growth-300 transition-colors">
                         {contactInfo.phone}
                       </div>
-                      <div className="text-slate-500 dark:text-slate-400 text-[11px] font-sans">Пн–Пт с 09:30 до 19:00 МСК</div>
+                      <div className="text-slate-500 dark:text-slate-400 text-[11px] font-sans">{contactInfo.workingHours}</div>
                     </div>
                   </a>
 
@@ -153,10 +153,10 @@ export const ContactsPage: React.FC = () => {
                 <div className="p-4 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 text-xs font-mono space-y-2 shadow-sm transition-colors">
                   <div className="text-slate-900 dark:text-white font-bold flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-growth-600 dark:text-growth-400" />
-                    <span>Для бухгалтерии юрлиц</span>
+                    <span>Для бухгалтерии юрлиц • {contactInfo.legalStatusShort}</span>
                   </div>
                   <p className="text-slate-600 dark:text-slate-400 font-sans leading-relaxed text-[11px]">
-                    Официальный договор с самозанятым, закрывающие акты и электронные чеки ФНС «Мой налог».
+                    Исполнитель: {contactInfo.expertFullName} (ИНН {contactInfo.inn}). Официальный договор, закрывающие акты и электронные чеки ФНС «Мой налог».
                   </p>
                   <Link
                     to="/rekvizity/"

@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import {
-  CheckCircle2,
-  ArrowRight,
-  ArrowLeft,
   Link2,
-  ChevronDown,
   FileCode2,
   ShoppingCart,
   Network,
-  BadgePercent,
+  ShieldAlert,
+  FileSpreadsheet,
+  FileText,
 } from 'lucide-react';
 import { SITE_URL } from '@/utils/constants';
 import { generateOgMeta } from '@/utils/helpers';
@@ -19,103 +17,397 @@ import {
   generateBreadcrumbSchema,
   generateFAQPageSchema,
 } from '@/utils/schemaGenerators';
-import { CTASection } from '@/components/sections';
+import {
+  CTASection,
+  TariffsSection,
+  FAQSection,
+  SpecialOfferBanner,
+  DeliverablesSection,
+  RelatedServicesSection,
+  SubServiceHero,
+  DiagnosticScenariosSection,
+  ChecklistGroupsSection,
+  AuditTrustAndRulesSection,
+  TariffComparisonTable,
+  type TariffItem,
+  type DeliverableItem,
+  type FAQItem,
+  type HubCtaBanner,
+} from '@/components/sections';
+import { AnimatedSection } from '@/components/common';
 
 /**
- * Страница «Аудит ссылочной массы и анкор-листа»
+ * Страница «Ссылочный аудит сайта: аудит ссылочной массы и анкор-листа»
  * Физический путь: src/pages/services/seo-audit/ssylochnyj/index.tsx
+ * Целевые запросы кластера: «ссылочный аудит сайта», «аудит ссылочной массы сайта»,
+ * «проверка профиля обратных ссылок», «анализ анкор-листа сайта»,
+ * «поиск токсичных ссылок и доноров», «проверка сайта на ссылочные фильтры».
  */
 export const LinksAuditPage: React.FC = () => {
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-
-  const pageTitle = 'Аудит ссылочной массы сайта — анализ входящих ссылок, анкоров и токсичности | Сергей Кошелев';
+  const pageTitle = 'Ссылочный аудит сайта — проверка ссылочной массы и анкоров от 20 000 ₽';
   const pageDescription =
-    'Глубокий аудит ссылочного профиля сайта: выявление спамных ссылок, анализ анкор-листа, защита от фильтров Минусинск/Penguin и ссылочная стратегия конкурентов.';
+    'Заказать ссылочный аудит сайта: аудит ссылочной массы, проверка профиля обратных ссылок, анализ анкор-листа, поиск токсичных доноров и защита от ссылочных фильтров.';
   const pageUrl = '/uslugi/seo-audit/ssylochnyj/';
 
   const ogMeta = generateOgMeta(pageUrl, pageTitle, pageDescription);
 
   const whoNeeds = [
     {
-      title: 'Сайтам, продвигавшимся недобросовестными подрядчиками',
-      desc: 'Выявление опасных автоматических прогонов, ссылочных сеток сомнительного качества и арендных бирж.',
+      title: 'Сайтам после автоматических закупок и арендных ссылок',
+      desc: 'Проводим поиск токсичных ссылок и доноров, выявляем следы массовых прогонов, нетематических каталогов и спамных площадок, снижающих доверие к домену.',
     },
     {
-      title: 'Проектам с планами активного роста в Google',
-      desc: 'Google крайне чувствителен к ссылочному авторитету (Domain Rating, PageRank). Без качественных доноров занять ТОП-3 невозможно.',
+      title: 'Проектам, планирующим системный рост в Google и Яндексе',
+      desc: 'Оцениваем текущий авторитет домена на фоне лидеров выдачи и рассчитываем, сколько и каких публикаций требуется для выхода на первые позиции.',
     },
     {
-      title: 'Сайтам с подозрением на ссылочные санкции',
-      desc: 'Диагностика резких просадок трафика после апдейтов Google Helpful Content, Spam Updates или Минусинска.',
+      title: 'Сайтам с подозрением на ссылочные ограничения',
+      desc: 'Выполняем проверку сайта на ссылочные фильтры при резком падении видимости после обновлений алгоритмов борьбы со ссылочным спамом в Google или Яндексе.',
+    },
+  ];
+
+  // 4 диагностических симптома, когда ссылочный аудит нужен в первую очередь
+  const diagnosticScenarios = [
+    {
+      title: 'Просадка видимости после обновления спам-алгоритмов',
+      desc: 'Позиции сайта резко снизились в Google или Яндексе, а в прошлом использовались арендные биржи, автоматические прогоны или массовая закупка ссылок с коммерческими текстами.',
+      result: 'Отделяем качественные упоминания от спама, формируем файл отклонения disavow.txt и план снятия алгоритмических ограничений.',
+    },
+    {
+      title: 'Подозрение на ссылочную атаку со стороны конкурентов',
+      desc: 'В отчетах Яндекс.Вебмастера или Google Search Console внезапно появились сотни входящих ссылок с взломанных, иноязычных или запрещенных ресурсов.',
+      result: 'Оперативно собираем полный реестр вредоносных доменов-доноров и блокируем их учет через панель вебмастера.',
+    },
+    {
+      title: 'Отставание от лидеров ТОП-10 при равном контенте',
+      desc: 'Сайт технически исправен и наполнен текстами, но не может обойти конкурентов первой десятки из-за нехватки авторитетных отраслевых упоминаний.',
+      result: 'Рассчитываем точный дефицит доноров по каждой приоритетной категории и составляем помесячный медиаплан размещений.',
+    },
+    {
+      title: 'Потеря внешнего веса после переезда или редизайна',
+      desc: 'После смены структуры URL старые авторитетные ссылки из СМИ, блогов и справочников начали вести на несуществующие страницы с ошибкой 404.',
+      result: 'Находим все потерянные входящие ссылки и составляем карту 301-редиректов для полного возврата ссылочного веса.',
     },
   ];
 
   const checklistGroups = [
     {
-      groupName: 'Количественные и качественные метрики доноров',
+      groupName: '1. Проверка профиля обратных ссылок и качества доноров',
       items: [
-        { name: 'Объем и динамика ссылочной массы', desc: 'График прироста доменов-доноров за 1–3 года (проверка на неестественные скачки)' },
-        { name: 'Качество доноров (Trust / Spam)', desc: 'Анализ показателей Domain Rating (Ahrefs), Trust Flow (Majestic), спамности по CheckTrust' },
-        { name: 'Тематическая релевантность', desc: 'Доля околоцелевых сайтов-доноров против общетематических каталогов и мусорных ресурсов' },
-        { name: 'География входящих ссылок', desc: 'Соответствие регионов доноров региону продвижения вашего бизнеса' },
+        {
+          name: 'Динамика ссылочной массы за 1–3 года',
+          desc: 'Анализ графика появления и отвала доменов-доноров: выявление резких неестественных скачков и потери авторитетных упоминаний',
+        },
+        {
+          name: 'Показатели авторитетности и заспамленности доноров',
+          desc: 'Проверка каждого ссылающегося сайта по метрикам авторитетности, посещаемости, соотношению входящих и исходящих ссылок',
+        },
+        {
+          name: 'Тематическое и региональное соответствие',
+          desc: 'Оценка доли профильных отраслевых ресурсов и региональных площадок против общетематических и иноязычных сайтов',
+        },
+        {
+          name: 'Поиск токсичных ссылок и доноров',
+          desc: 'Выявление взломанных сайтов, автоматически сгенерированных мусорных площадок, скрытых ссылочных сетей и страниц с запрещенной тематикой',
+        },
       ],
     },
     {
-      groupName: 'Структура анкор-листа',
+      groupName: '2. Анализ анкор-листа сайта и распределения веса',
       items: [
-        { name: 'Брендовый / Безанкорный хвост', desc: 'Доля названия бренда, URL сайта и общих слов (должна составлять не менее 60–75%)' },
-        { name: 'Прямые коммерческие вхождения', desc: 'Поиск переспама точными коммерческими запросами, грозящими санкциями' },
-        { name: 'Атрибуты ссылок (DoFollow vs NoFollow/UGC)', desc: 'Естественный баланс переходов веса и закрытых от индексации упоминаний' },
+        {
+          name: 'Баланс безанкорных и брендовых ссылок',
+          desc: 'Контроль естественной доли ссылок в виде адреса сайта, названия компании и нейтральных слов (рекомендуемая доля — не менее 60–75%)',
+        },
+        {
+          name: 'Диагностика переспама коммерческими фразами',
+          desc: 'Поиск избыточных точных вхождений со словами «купить», «цена», «заказать», которые служат основным сигналом для ссылочных санкций',
+        },
+        {
+          name: 'Соотношение типов и атрибутов ссылок',
+          desc: 'Проверка естественного распределения текстовых и графических ссылок, а также ссылок, передающих вес, и закрытых атрибутами nofollow / ugc / sponsored',
+        },
+        {
+          name: 'Распределение ссылок по посадочным страницам',
+          desc: 'Анализ того, какие разделы сайта получают внешний вес (только главная страница или также приоритетные категории и статьи)',
+        },
       ],
     },
     {
-      groupName: 'Сравнение с конкурентами и стратегия',
+      groupName: '3. Проверка сайта на ссылочные фильтры и сравнение с конкурентами',
       items: [
-        { name: 'Сравнительный анализ топ-3 конкурентов', desc: 'Где и какими темпами закупают ссылки лидеры вашей ниши' },
-        { name: 'Поиск качественных площадок-доноров', desc: 'Формирование белого списка трастовых СМИ и отраслевых порталов для будущих размещений' },
-        { name: 'Подготовка Disavow Tool (для Google)', desc: 'Список токсичных ссылок для отклонения через официальный инструмент Google Search Console' },
+        {
+          name: 'Диагностика алгоритмических и ручных ограничений',
+          desc: 'Сопоставление дат просадки трафика с обновлениями алгоритмов Google против ссылочного спама и фильтрами Яндекса (включая «Минусинск»)',
+        },
+        {
+          name: 'Сравнительный анализ 3–5 лидеров поисковой выдачи',
+          desc: 'Сопоставление числа уникальных доменов-доноров, возраста ссылок, структуры анкор-листа и темпов прироста у сайтов из первой десятки',
+        },
+        {
+          name: 'Подготовка файла отклонения (disavow.txt)',
+          desc: 'Формирование выверенного списка вредоносных доменов и страниц для загрузки в инструмент отклонения ссылок Google Search Console',
+        },
       ],
     },
   ];
 
-  const deliverables = [
-    { title: 'Реестр токсичных ссылок для отклонения', desc: 'Сформированный и проверенный файл disavow.txt для загрузки в Google Search Console.' },
-    { title: 'Анализ ссылочной структуры лидеров ниши', desc: 'Понятные графики и таблицы: сколько доноров в месяц нужно привлекать для обгона конкурентов.' },
-    { title: 'Пошаговый план ссылочного продвижения', desc: 'Рекомендации по распределению бюджета: публикации в СМИ, партнерские статьи, упоминания на тематических порталах, справочники и пресс-релизы.' },
+  // Тарифная сетка ссылочного аудита
+  const linksTariffItems: TariffItem[] = [
+    {
+      id: 'upTo300',
+      name: 'До 300 доменов-доноров',
+      badge: 'Для молодых и средних сайтов',
+      price: '20 000 ₽',
+      duration: 'разово',
+      description: 'Срок проведения: 2–3 рабочих дня. Для сферы услуг и небольших каталогов.',
+      features: [
+        'Полная выгрузка и слияние баз обратных ссылок из нескольких источников',
+        'Анализ анкор-листа сайта и проверка на коммерческий переспам',
+        'Поиск токсичных ссылок и доноров, составление списка на отклонение',
+        'Формирование готового файла disavow.txt для Google Search Console',
+        'Сравнительный анализ ссылочного профиля с 3 прямыми конкурентами',
+        'Сводная таблица в Excel и рекомендации в Word по безопасным ссылкам',
+      ],
+      link: '#order-form',
+      linkText: 'Заказать ссылочный аудит',
+      isInternalRoute: false,
+    },
+    {
+      id: 'over300',
+      name: 'Свыше 300 доменов-доноров',
+      badge: 'Хит • Для крупных проектов',
+      popular: true,
+      price: '30 000 ₽',
+      duration: 'разово',
+      description: 'Срок проведения: 3–5 рабочих дней. Для интернет-магазинов и масштабных порталов.',
+      features: [
+        'Все работы базового пакета с углубленной ручной фильтрацией площадок',
+        'Сегментация входящих ссылок по разделам и посадочным страницам',
+        'Карта 301-редиректов для восстановления веса с битых внешних ссылок (404)',
+        'Глубокий разбор ссылочной стратегии 5 лидеров поисковой выдачи',
+        'Помесячный медиаплан безопасных размещений на 6 месяцев',
+        'Формирование файла disavow.txt и сопровождение при снятии ограничений',
+      ],
+      link: '#order-form',
+      linkText: 'Заказать ссылочный аудит',
+      isInternalRoute: false,
+    },
   ];
 
-  const faqList = [
+  // Сравнительная матрица тарифов
+  const comparisonMatrixRows = [
     {
-      question: 'Засчитывается ли стоимость ссылочного аудита в дальнейшее продвижение?',
-      answer: 'Да! Если в течение 30 дней после получения результатов аудита вы заключаете договор на регулярное ежемесячное SEO-продвижение, 100% стоимости аудита вычитается из оплаты первого месяца ведения проекта.',
+      param: 'Объем доменов-доноров в анализе',
+      upTo300: 'До 300 ссылающихся доменов',
+      over300: 'Неограниченный объем (крупные базы)',
+      complex: 'До 1 000 ссылающихся доменов',
     },
     {
-      question: 'Опасны ли ссылки сегодня?',
-      answer: 'Опасны только некачественные, покупные арендные и переспамленные ссылки без контроля доноров. Естественные тематические ссылки из авторитетных СМИ и отраслевых порталов — один из самых мощных факторов ранжирования.',
+      param: 'Срок проведения и подготовки документов',
+      upTo300: '2–3 рабочих дня',
+      over300: '3–5 рабочих дней',
+      complex: '5–7 рабочих дней',
     },
     {
-      question: 'Что делать, если конкуренты заспамили мой сайт плохими ссылками?',
-      answer: 'В аудит входит процедура выявления негативного SEO. Для Google мы подготовим файл Disavow Tool, а для Яндекса — рекомендации по нивелированию спама.',
+      param: 'Сводная база ссылок из нескольких источников',
+      upTo300: 'Включено полностью',
+      over300: 'Включено полностью (с очисткой дублей и зеркал)',
+      complex: 'Включено полностью',
     },
     {
-      question: 'Сколько времени занимает ссылочный аудит?',
-      answer: 'Стандартный срок проведения анализа ссылочного профиля — 2–3 рабочих дня.',
+      param: 'Анализ анкор-листа на коммерческий переспам',
+      upTo300: 'Полная классификация всех текстов ссылок',
+      over300: 'Полная классификация по типам и посадочным URL',
+      complex: 'Полная классификация + связка с семантикой',
+    },
+    {
+      param: 'Поиск токсичных доноров и файл disavow.txt',
+      upTo300: 'Готовый файл disavow.txt + инструкция по загрузке',
+      over300: 'Расширенная фильтрация спама + готовый disavow.txt',
+      complex: 'Готовый файл disavow.txt + инструкция',
+    },
+    {
+      param: 'Карта 301-редиректов для битых внешних ссылок (404)',
+      upTo300: 'Базовая проверка целевых страниц',
+      over300: 'Полный список редиректов для возврата веса',
+      complex: 'Полный список редиректов + техническая ревизия',
+    },
+    {
+      param: 'Сравнение с конкурентами и стратегия на 6 месяцев',
+      upTo300: 'Сопоставление с 3 лидерами + план прироста',
+      over300: 'Сопоставление с 3–5 лидерами + медиаплан по разделам',
+      complex: 'Сводная стратегия роста по всем 4 направлениям',
+    },
+    {
+      param: 'Технический, коммерческий и структурный аудит',
+      upTo300: 'Не входит (заказывается отдельно)',
+      over300: 'Не входит (заказывается отдельно)',
+      complex: 'Включены все 4 направления диагностики',
+    },
+    {
+      param: 'Онлайн-встреча для защиты отчета',
+      upTo300: 'Таблица Excel + disavow.txt + отчет в Word',
+      over300: 'Таблица Excel + disavow.txt + отчет в Word',
+      complex: 'Включена дистанционная встреча',
+    },
+    {
+      param: 'Стоимость услуги',
+      upTo300: '20 000 ₽',
+      over300: '30 000 ₽',
+      complex: 'от 35 000 ₽',
+    },
+  ];
+
+  // Итоговые документы
+  const deliverablesList: DeliverableItem[] = [
+    {
+      icon: FileSpreadsheet,
+      badge: 'Таблица Excel',
+      title: 'Сводный реестр доноров и анкоров',
+      description:
+        'Полная таблица всех внешних ссылок на сайт с оценкой качества каждого донора, типами анкоров и статусами целевых страниц.',
+    },
+    {
+      icon: ShieldAlert,
+      badge: 'Google Disavow',
+      title: 'Готовый файл disavow.txt для Google',
+      description:
+        'Проверенный список спамных и токсичных доменов в формате, готовом для загрузки в панель Google Search Console.',
+    },
+    {
+      icon: FileText,
+      badge: 'Документ Word',
+      badgeType: 'accent',
+      title: 'Отчет в Word и ссылочная стратегия на 6 месяцев',
+      description:
+        'Сравнительные таблицы с конкурентами, безопасные пропорции анкор-листа и план размещений (отраслевые порталы, СМИ, партнерские материалы, справочники).',
+    },
+  ];
+
+  // Дисклеймер с детальным сопоставлением тарифов
+  const comparisonDisclaimer = (
+    <TariffComparisonTable
+      eyebrow="Детальное сопоставление форматов"
+      title="Сравнение тарифов ссылочного и комплексного SEO-аудита"
+      subtitle={
+        <>
+          Таблица помогает выбрать подходящий тариф ссылочной ревизии или объединить все четыре направления в рамках{' '}
+          <Link
+            to="/uslugi/seo-audit/"
+            className="text-growth-700 dark:text-growth-400 underline hover:no-underline font-medium"
+          >
+            комплексного SEO-аудита сайта
+          </Link>
+          .
+        </>
+      }
+      columns={[
+        { key: 'upTo300', label: 'До 300 доменов-доноров' },
+        { key: 'over300', label: 'Свыше 300 доменов-доноров', isHighlighted: true },
+        { key: 'complex', label: 'Комплексный аудит (4 оси)' },
+      ]}
+      rows={comparisonMatrixRows}
+    />
+  );
+
+  const faqList: FAQItem[] = [
+    {
+      question: 'Когда нужен ссылочный аудит сайта?',
+      answer:
+        'Проверка профиля обратных ссылок необходима в трех случаях: 1) Перед стартом продвижения сайта с историей, чтобы убедиться в отсутствии старых арендных или спамных ссылок; 2) При застое позиций в Google или Яндексе, когда нужно понять, насколько ваш ссылочный профиль уступает лидерам выдачи; 3) При резком падении трафика или появлении подозрений на ссылочный спам со стороны прежних подрядчиков или недоброжелателей.',
+    },
+    {
+      question: 'Опасны ли внешние ссылки для продвижения сегодня?',
+      answer:
+        'Риск несут только автоматические прогоны, сквозные арендные ссылки, нетематические доноры и переспам коммерческими анкорами («купить недорого»). Естественные упоминания на профильных ресурсах, в отраслевых СМИ, рейтингах и справочниках с преобладанием брендовых и безанкорных ссылок остаются важнейшим фактором авторитетности домена.',
+    },
+    {
+      question: 'Что делать, если на сайт ведут спамные ссылки, которые нельзя удалить вручную?',
+      answer:
+        'По итогам аудита формируется файл disavow.txt со списком токсичных доменов для загрузки в официальный инструмент отклонения ссылок Google Search Console. Кроме того, если качественные внешние ссылки ведут на удаленные страницы вашего сайта (ошибка 404), мы составляем список 301-редиректов, чтобы вернуть этот ссылочный вес рабочим разделам.',
+    },
+    {
+      question: 'Как соотносятся ссылочный аудит и зачет в тариф продвижения?',
+      answer:
+        'При заключении договора на регулярное ежемесячное SEO-продвижение сайта в течение 30 дней после сдачи аудита — 100% стоимости ссылочного аудита засчитывается в оплату первого месяца продвижения. Ссылочная ревизия и стратегия уже готовы в полном объеме, поэтому оплачивать эту работу повторно в рамках первого месяца не требуется.',
+    },
+    {
+      question: 'Какие доступы нужны для проведения аудита ссылочной массы?',
+      answer:
+        'Анализ может быть выполнен полностью по внешним аналитическим базам, для этого достаточно только адреса вашего сайта. Однако предоставление гостевого доступа к Яндекс.Вебмастеру и Google Search Console позволяет увидеть полный список ссылок, которые реально учитываются поисковыми роботами.',
     },
   ];
 
   const relatedAudits = [
-    { slug: 'tehnicheskij', title: 'Технический аудит', price: 'от 10 000 ₽', icon: FileCode2, desc: 'Диагностика по ключевым техническим направлениям, отчет в Excel и Word с ТЗ для разработчиков за 24 часа.' },
-    { slug: 'kommercheskij', title: 'Коммерческий аудит', price: 'от 25 000 ₽', icon: ShoppingCart, desc: 'Анализ факторов доверия Яндекса, удобства корзины, форм и 152-ФЗ.' },
-    { slug: 'struktury-i-semantiki', title: 'Аудит структуры и семантики', price: 'от 30 000 ₽', icon: Network, desc: 'Полнота семантического ядра, упущенный спрос и внутренняя перелинковка.' },
+    {
+      slug: 'tehnicheskij',
+      title: 'Технический SEO-аудит',
+      price: 'от 10 000 ₽',
+      icon: FileCode2,
+      desc: 'Диагностика по 8 техническим направлениям, выгрузка ошибок в Excel и ТЗ в Word за 24 часа. 100% зачет в тариф продвижения.',
+      anchor: 'Перейти к техническому аудиту',
+    },
+    {
+      slug: 'kommercheskij',
+      title: 'Коммерческий аудит сайта',
+      price: 'от 25 000 ₽',
+      icon: ShoppingCart,
+      desc: 'Проверка коммерческих факторов доверия Яндекса, удобства корзины, форм заявки, реквизитов и соблюдения 152-ФЗ.',
+      anchor: 'Перейти к коммерческому аудиту',
+    },
+    {
+      slug: 'struktury-i-semantiki',
+      title: 'Аудит структуры и семантики',
+      price: 'от 30 000 ₽',
+      icon: Network,
+      desc: 'Анализ полноты семантического ядра, поиск упущенного спроса, архитектура каталога и схема внутренней перелинковки.',
+      anchor: 'Перейти к аудиту структуры',
+    },
   ];
 
-  const serviceSchema = generateServiceSchema({
-    name: 'Аудит ссылочной массы и анкор-листа',
+  const hubCtaBanner: HubCtaBanner = {
+    badge: 'Комплексный подход',
+    title: 'Нужна не только ссылочная ревизия, но и аудит ошибок и коммерции?',
+    description:
+      'Закажите комплексный SEO-аудит сайта в основном разделе (от 35 000 ₽). Он объединяет все ключевые направления диагностики: техническую базу, коммерческие факторы, семантику и ссылки.',
+    buttonText: 'Комплексный SEO-аудит сайта',
+    buttonLink: '/uslugi/seo-audit/',
+  };
+
+  const baseServiceSchema = generateServiceSchema({
+    name: 'Ссылочный аудит сайта: аудит ссылочной массы и анкор-листа',
     description: pageDescription,
     url: pageUrl,
     price: 20000,
     serviceType: 'Аудит ссылочного профиля сайта',
   });
+
+  const serviceSchema = {
+    ...baseServiceSchema,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Тарифы на аудит ссылочной массы сайта',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          name: 'Ссылочный аудит сайта (до 300 доменов-доноров)',
+          price: '20000',
+          priceCurrency: 'RUB',
+          availability: 'https://schema.org/InStock',
+          url: `${SITE_URL}${pageUrl}#pricing`,
+        },
+        {
+          '@type': 'Offer',
+          name: 'Ссылочный аудит сайта (свыше 300 доменов-доноров)',
+          price: '30000',
+          priceCurrency: 'RUB',
+          availability: 'https://schema.org/InStock',
+          url: `${SITE_URL}${pageUrl}#pricing`,
+        },
+      ],
+    },
+  };
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Главная', url: '/' },
@@ -140,304 +432,119 @@ export const LinksAuditPage: React.FC = () => {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
-      {/* 1. Первый экран (Hero) */}
-      <section className="py-12 md:py-20 bg-slate-50 dark:bg-obsidian-950 border-b border-slate-200 dark:border-obsidian-850 grid-bg transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="max-w-4xl">
-            <div className="flex items-center gap-4 mb-6">
-              <Link
-                to="/uslugi/seo-audit/"
-                className="inline-flex items-center gap-2 text-growth-700 dark:text-growth-400 hover:text-growth-800 dark:hover:text-growth-300 text-xs font-mono transition-colors font-semibold"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Все виды аудитов</span>
-              </Link>
-              <span className="text-slate-300 dark:text-obsidian-700">/</span>
-              <span className="text-xs font-mono text-slate-500 dark:text-slate-400">Ссылочный аудит</span>
-            </div>
+      {/* 1. Первый экран (Hero) (Универсальный компонент) */}
+      <SubServiceHero
+        breadcrumbParentTitle="Комплексный SEO-аудит (все виды)"
+        breadcrumbParentUrl="/uslugi/seo-audit/"
+        breadcrumbCurrent="Ссылочный аудит"
+        badgeIcon={Link2}
+        badgeText="Анализ профиля ссылок • Анкор-лист • Поиск спамных доноров • disavow.txt"
+        title="Ссылочный аудит сайта: профиль и"
+        titleHighlight="анкор-лист"
+        description={
+          <>
+            Если вам требуется аудит ссылочной массы сайта и проверка профиля обратных ссылок, мы проведем глубокий анализ анкор-листа, поиск токсичных ссылок и доноров, а также проверку сайта на ссылочные фильтры Яндекса и Google. Вы получаете реестр ссылок в Excel, готовый файл <code>disavow.txt</code> и пошаговый план безопасного ссылочного роста на 6 месяцев.
+          </>
+        }
+        specialOfferBanner={
+          <SpecialOfferBanner title="Специальное предложение: стоимость технического аудита засчитывается в тариф!">
+            При заказе технического аудита (от 10 000 до 20 000 ₽) 100% его стоимости вычитается из оплаты первого месяца комплексного SEO-продвижения (тарифы от 35 000 ₽/мес.), в рамках которого проводится и ссылочное усиление проекта.
+          </SpecialOfferBanner>
+        }
+        price="от 20 000 ₽"
+        duration="2–3 рабочих дня"
+        pricingAnchor="#pricing"
+        pricingButtonText="Посмотреть тарифы"
+      />
 
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-growth-500/10 border border-growth-500/20 text-growth-600 dark:text-growth-400 text-xs font-mono font-medium mb-5">
-              <Link2 className="w-3.5 h-3.5 text-growth-500" />
-              <span>Внешняя оптимизация</span>
-            </div>
+      {/* 2. Диагностика по симптомам и целевая аудитория (Универсальный компонент) */}
+      <DiagnosticScenariosSection
+        eyebrow="Симптомы и задачи"
+        title="В каких ситуациях ссылочный аудит нужен в первую очередь"
+        subtitle="Ссылки могут быть мощным драйвером роста позиций в Google и Яндексе, но токсичные доноры или переспам анкоров способны привести к санкциям."
+        scenarios={diagnosticScenarios}
+        whoNeedsTitle="Кому необходима ссылочная диагностика:"
+        whoNeedsIcon={Link2}
+        whoNeeds={whoNeeds}
+      />
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6 leading-tight">
-              Аудит ссылочной массы и анкор-листа
-            </h1>
+      {/* 3. Чек-лист проверки ссылочной массы по 3 направлениям (Универсальный компонент) */}
+      <ChecklistGroupsSection
+        eyebrow="Регламент аудита"
+        title="Что исследуется в ходе ссылочного аудита сайта"
+        subtitle="Сквозная диагностика объединяет выгрузки из ведущих баз ссылочных данных и панелей вебмастеров для получения полной картины ссылочного веса."
+        groups={checklistGroups}
+        columns={3}
+      />
 
-            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg font-sans leading-relaxed mb-8 max-w-3xl">
-              Ссылки остаются одним из ключевых факторов ранжирования в Google и важным фактором доверия в Яндексе. Некачественные, спамные или резкие неестественные закупки могут привести к попаданию под фильтры. Аудит выявит токсичные входящие ссылки и даст безопасную стратегию наращивания массы.
-            </p>
+      {/* 4. Что входит в итоговый пакет документов (Универсальный компонент) */}
+      <AnimatedSection variant="slide-up">
+        <DeliverablesSection
+          eyebrow="Итоговый комплект"
+          title="Что входит в итоговый пакет документов ссылочного аудита"
+          subtitle="Вы получаете готовые материалы для устранения спамных рисков и пошаговый план безопасных публикаций."
+          items={deliverablesList}
+        />
+      </AnimatedSection>
 
-            {/* Специальное предложение: Стоимость засчитывается в тариф */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-growth-500/15 via-growth-500/10 to-transparent border-2 border-growth-500/30 mb-8">
-              <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-growth-600 text-obsidian-950 flex items-center justify-center shrink-0 mt-0.5">
-                  <BadgePercent className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-1">
-                    Стоимость аудита засчитывается в тариф продвижения!
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                    100% стоимости ссылочного аудита <strong>засчитываем в оплату первого месяца сотрудничества</strong>, если договор на комплексное SEO-продвижение подписан в течение 30 дней.
-                  </p>
-                </div>
-              </div>
-            </div>
+      {/* 5. Тарифная сетка и сравнительная матрица (Универсальный компонент) */}
+      <AnimatedSection variant="slide-up">
+        <TariffsSection
+          id="pricing"
+          eyebrow="Прозрачные тарифы"
+          title="Стоимость ссылочного аудита сайта"
+          subtitle="Фиксированная стоимость без скрытых доплат. Официальный договор с самозанятым / ИП (ЭДО, чеки в приложении ФНС «Мой налог»). Без НДС."
+          tariffs={linksTariffItems}
+          columns={2}
+          disclaimer={comparisonDisclaimer}
+        />
+      </AnimatedSection>
 
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-6 border-t border-slate-200 dark:border-obsidian-800">
-              <div className="p-3.5 px-5 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800">
-                <span className="text-xs font-mono text-slate-500 dark:text-slate-400 block mb-0.5">Стоимость</span>
-                <span className="text-xl font-bold text-slate-900 dark:text-white">от 20 000 ₽</span>
-              </div>
-              <div className="p-3.5 px-5 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800">
-                <span className="text-xs font-mono text-slate-500 dark:text-slate-400 block mb-0.5">Срок проведения</span>
-                <span className="text-xl font-bold text-growth-600 dark:text-growth-400">2–3 рабочих дня</span>
-              </div>
-              <a
-                href="#order-form"
-                className="px-6 py-4 rounded-xl bg-growth-600 hover:bg-growth-500 text-obsidian-950 font-bold text-sm transition-all duration-200 flex items-center gap-2 shadow-lg shadow-growth-600/20"
-              >
-                <span>Заказать аудит</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. Кому необходим этот аудит */}
-      <section className="py-16 md:py-20 bg-white dark:bg-obsidian-950 border-b border-slate-200 dark:border-obsidian-850 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="max-w-3xl mb-12">
-            <span className="text-growth-600 dark:text-growth-400 font-mono text-xs uppercase tracking-wider font-semibold block mb-2">
-              Целевая аудитория
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Кому и когда необходим ссылочный аудит
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {whoNeeds.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-slate-50 dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-9 h-9 rounded-lg bg-growth-500/10 text-growth-600 dark:text-growth-400 font-mono font-bold flex items-center justify-center text-sm mb-4">
-                    0{idx + 1}
-                  </div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Список проверок */}
-      <section className="py-16 md:py-24 bg-slate-50 dark:bg-obsidian-900/40 border-b border-slate-200 dark:border-obsidian-850 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="max-w-3xl mb-12">
-            <span className="text-growth-600 dark:text-growth-400 font-mono text-xs uppercase tracking-wider font-semibold block mb-2">
-              Глубокая методология
-            </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
-              Список проверок ссылочного профиля
-            </h2>
-            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-              Анализируем базу входящих ссылок через Ahrefs, MegaIndex и Google Search Console для выявления угроз и точек роста.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {checklistGroups.map((group, gIdx) => (
-              <div
-                key={gIdx}
-                className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800"
-              >
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-growth-500"></span>
-                  <span>{group.groupName}</span>
-                </h3>
-
-                <div className="space-y-4">
-                  {group.items.map((item, iIdx) => (
-                    <div key={iIdx} className="p-3.5 rounded-xl bg-slate-50 dark:bg-obsidian-850 border border-slate-100 dark:border-obsidian-800/80">
-                      <div className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-growth-600 dark:text-growth-400 shrink-0 mt-0.5" />
-                        <div>
-                          <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white mb-0.5">
-                            {item.name}
-                          </h4>
-                          <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
-                            {item.desc}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Артефакты сдачи */}
-      <section className="py-16 md:py-20 bg-white dark:bg-obsidian-950 border-b border-slate-200 dark:border-obsidian-850 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="max-w-3xl mb-12">
-            <span className="text-growth-600 dark:text-growth-400 font-mono text-xs uppercase tracking-wider font-semibold block mb-2">
-              Итоговые материалы
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Формат отчетов и артефакты сдачи
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {deliverables.map((item, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-slate-50 dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800"
-              >
-                <div className="w-10 h-10 rounded-xl bg-growth-500/10 text-growth-600 dark:text-growth-400 flex items-center justify-center font-bold mb-4">
-                  0{idx + 1}
-                </div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-base mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Перелинковка: Основной раздел и смежные аудиты */}
-      <section className="py-16 md:py-24 bg-slate-50 dark:bg-obsidian-900/50 border-b border-slate-200 dark:border-obsidian-850 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-obsidian-900 to-obsidian-850 border border-growth-500/30 text-white mb-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl shadow-black/40">
-            <div className="max-w-2xl">
-              <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-growth-500/20 text-growth-300 border border-growth-500/30 mb-3 inline-block">
-                Максимальная выгода
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold mb-3 text-white">
-                Нужен полный анализ по всем 4 направлениям?
-              </h3>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                Закажите комплексный аудит сайта в основном разделе аудитов. Вы получите все 4 аудита (Технический + Коммерческий + Ссылочный + Семантику) единым пакетом со скидкой более 35% и видеоразбором от эксперта.
-              </p>
-            </div>
+      {/* 6. Правила зачета, границы услуги и подтверждение опыта (Универсальный компонент) */}
+      <AuditTrustAndRulesSection
+        rulesTitle="Условия зачета стоимости и границы услуги"
+        ruleDeductionText={
+          <>
+            при заключении договора на{' '}
             <Link
-              to="/uslugi/seo-audit/"
-              className="px-6 py-4 rounded-xl bg-growth-500 hover:bg-growth-400 text-obsidian-950 font-bold text-sm whitespace-nowrap transition-all duration-200 flex items-center gap-2 shadow-lg shadow-growth-500/20 shrink-0"
+              to="/uslugi/seo-prodvizhenie/"
+              className="text-growth-700 dark:text-growth-400 underline hover:no-underline font-medium"
             >
-              <span>К полному аудиту сайта</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+              комплексное SEO-продвижение
+            </Link>{' '}
+            в течение <strong>30 дней</strong> после передачи отчета — <strong>100% стоимости ссылочного аудита засчитывается в оплату первого месяца</strong>. Вся ссылочная диагностика и стратегия уже готовы, повторно оплачивать их не требуется.
+          </>
+        }
+        ruleScopeText="услуга включает аудит ссылочной массы, подготовку файла disavow.txt и составление медиаплана. Прямая закупка публикаций на сторонних площадках или написание PR-статей оплачиваются отдельно в рамках ежемесячного ссылочного бюджета."
+        trustTitle="Кейсы, отзывы заказчиков и официальные реквизиты"
+        trustText="Ознакомьтесь с реальными примерами роста видимости проектов, отзывами клиентов и юридическими данными специалиста:"
+      />
 
-          <div>
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-6">
-              Другие направления аудита:
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedAudits.map((rel) => {
-                const RelIcon = rel.icon;
-                return (
-                  <Link
-                    key={rel.slug}
-                    to={`/uslugi/seo-audit/${rel.slug}/`}
-                    className="p-6 rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 hover:border-growth-500/40 hover:shadow-lg transition-all duration-200 group flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="w-10 h-10 rounded-lg bg-growth-500/10 text-growth-600 dark:text-growth-400 flex items-center justify-center group-hover:scale-105 transition-transform">
-                          <RelIcon className="w-5 h-5" />
-                        </div>
-                        <span className="text-xs font-mono font-bold text-slate-900 dark:text-white">
-                          {rel.price}
-                        </span>
-                      </div>
-                      <h4 className="font-bold text-slate-900 dark:text-white text-base mb-2 group-hover:text-growth-600 dark:group-hover:text-growth-400 transition-colors">
-                        {rel.title}
-                      </h4>
-                      <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
-                        {rel.desc}
-                      </p>
-                    </div>
-                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-obsidian-800 flex items-center justify-between text-xs font-semibold text-growth-600 dark:text-growth-400">
-                      <span>Посмотреть список проверок</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
+      {/* 7. Перелинковка: Основной раздел и смежные аудиты (Универсальный компонент) */}
+      <AnimatedSection variant="slide-up">
+        <RelatedServicesSection
+          ctaBanner={hubCtaBanner}
+          title="Другие направления аудита сайта:"
+          services={relatedAudits}
+        />
+      </AnimatedSection>
+
+      {/* 8. Вопросы и ответы (Универсальный компонент) */}
+      <AnimatedSection variant="slide-up">
+        <FAQSection
+          id="faq"
+          eyebrow="Вопросы и ответы"
+          title="Частые вопросы по ссылочному аудиту"
+          items={faqList}
+        />
+      </AnimatedSection>
+
+      {/* 9. Заявка на аудит */}
+      <AnimatedSection variant="slide-up">
+        <div id="order-form">
+          <CTASection />
         </div>
-      </section>
-
-      {/* 6. FAQ */}
-      <section className="py-16 md:py-20 bg-white dark:bg-obsidian-950 border-b border-slate-200 dark:border-obsidian-850 transition-colors">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8">
-          <div className="text-center mb-10">
-            <span className="text-growth-600 dark:text-growth-400 font-mono text-xs uppercase tracking-wider font-semibold block mb-2">
-              FAQ
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Частые вопросы по ссылочному аудиту
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            {faqList.map((item, idx) => {
-              const isOpen = openFaqIndex === idx;
-              return (
-                <div
-                  key={idx}
-                  className="rounded-2xl border border-slate-200 dark:border-obsidian-800 bg-slate-50 dark:bg-obsidian-900 overflow-hidden"
-                >
-                  <button
-                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 transition-colors"
-                  >
-                    <span className="font-bold text-slate-900 dark:text-white text-base">
-                      {item.question}
-                    </span>
-                    <ChevronDown
-                      className={`w-5 h-5 text-growth-600 dark:text-growth-400 transition-transform duration-300 shrink-0 ${
-                        isOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  {isOpen && (
-                    <div className="px-5 pb-5 text-slate-600 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-200/60 dark:border-obsidian-800 pt-3">
-                      {item.answer}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Заявка на аудит */}
-      <div id="order-form">
-        <CTASection />
-      </div>
+      </AnimatedSection>
     </>
   );
 };

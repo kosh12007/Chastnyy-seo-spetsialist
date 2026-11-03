@@ -65,3 +65,13 @@
 - Ответы пользователю в чате — **на русском языке**.
 - Принцип DRY: избегать дублирования логики.
 - Чистота TypeScript: `noUnusedLocals: true`, отсутствие `any`, проверка `npm run type-check`.
+
+---
+
+# 🛑 5. КРИТИЧЕСКОЕ ПРАВИЛО: Стандарты UI, анимаций и верстки (UI Style Guide)
+- Любое изменение или добавление страниц в `src/pages` **ОБЯЗАНО** строго следовать документу [`internal-docs/UI_STYLE_GUIDE.md`](internal-docs/UI_STYLE_GUIDE.md):
+  * **Анимации:** каждая секция страницы обязана быть обернута в `<AnimatedSection>` (`variant="fade"` для Hero, `variant="slide-up"` для остальных блоков).
+  * **Фон Hero:** первый экран (`<section>` с `<h1>`) обязан содержать класс `grid-bg`.
+  * **Шрифты и заголовки:** заголовки обязаны использовать `font-extrabold tracking-tight` (семейство Plus Jakarta Sans), а бейджи и метрики — `font-mono` (JetBrains Mono).
+  * **Интерактивность:** интерактивные карточки должны иметь hover-эффекты (`hover:-translate-y-1 hover:shadow-xl hover:border-growth-500/50 transition-all duration-300`), а акцентные бейджи — пульсирующий индикатор `<span className="w-2 h-2 rounded-full bg-growth-500 animate-pulse shrink-0" />`.
+- **Автоматическая проверка:** перед сдачей любой задачи и перед сборкой обязательно выполнение проверки `npm run test:ui` (скрипт `scripts/verify-ui-standards.mjs`). При наличии ошибок сборка блокируется.

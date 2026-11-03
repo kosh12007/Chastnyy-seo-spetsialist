@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc && vite build && vite build --ssr src/entry-server.tsx && node scripts/prerender.mjs",
+    "test:ui": "node scripts/verify-ui-standards.mjs",
+    "build": "node scripts/verify-ui-standards.mjs && tsc && vite build && vite build --ssr src/entry-server.tsx && node scripts/prerender.mjs",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
     "lint:fix": "eslint . --ext ts,tsx --fix",

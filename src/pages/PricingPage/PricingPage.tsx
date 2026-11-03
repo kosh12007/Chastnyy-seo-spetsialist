@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { getSeoData, generateOgMeta } from '@utils/helpers';
 import { SITE_URL } from '@utils/constants';
+import { contactInfo } from '@data/contactInfo';
 import { TariffsSection, BudgetCalculatorSection, ModelComparisonSection, CTASection } from '@components/sections';
 import { AnimatedSection } from '@components/common';
 import { ShieldCheck } from 'lucide-react';
@@ -31,7 +32,7 @@ export const PricingPage: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-growth-500/10 border border-growth-500/20 text-growth-700 dark:text-growth-400 font-mono text-xs uppercase tracking-wider mb-4 font-semibold">
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Фиксация условий в договоре с самозанятым</span>
+              <span>Фиксация условий в договоре ({contactInfo.legalStatusShort})</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
               Тарифы и стоимость SEO-продвижения

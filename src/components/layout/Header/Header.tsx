@@ -75,11 +75,13 @@ export const Header: React.FC = () => {
           {/* Логотип и имя специалиста */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-300 dark:bg-obsidian-850 dark:border-obsidian-700 flex items-center justify-center group-hover:border-growth-500/50 transition-colors">
-              <span className="font-mono font-bold text-growth-600 dark:text-growth-400 text-base">МП</span>
+              <span className="font-mono font-bold text-growth-600 dark:text-growth-400 text-base">
+                {contactInfo.expertInitials}
+              </span>
             </div>
             <div>
               <span className="font-bold text-slate-900 dark:text-white tracking-tight text-sm flex items-center gap-1.5">
-                Сергей Кошелев
+                {contactInfo.expertName}
               </span>
               <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono block">
                 Поисковая оптимизация сайтов
@@ -110,16 +112,17 @@ export const Header: React.FC = () => {
           {/* Панель действий: переключатель темы, контакты, CTA-кнопка и гамбургер */}
           <div className="flex items-center justify-between xs:justify-end space-x-2 sm:space-x-3 w-full xs:w-auto">
             {/* Переключатель светлой / тёмной темы */}
-            <ThemeToggle />
+            <ThemeToggle className="w-9 h-9" />
 
             <a
               href={`https://t.me/${contactInfo.telegram}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 hover:text-slate-900 dark:bg-obsidian-850 dark:hover:bg-obsidian-800 dark:border-obsidian-750 text-xs font-mono dark:text-slate-200 transition-all"
+              aria-label="Написать в Telegram"
+              title="Написать в Telegram"
+              className="hidden sm:inline-flex items-center justify-center w-9 h-9 rounded-lg border transition-all duration-300 select-none group focus:outline-none focus:ring-2 focus:ring-growth-500/50 bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-700 hover:text-slate-900 dark:bg-obsidian-850 dark:hover:bg-obsidian-800 dark:border-obsidian-750 dark:text-slate-200"
             >
-              <Send className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
-              <span>@{contactInfo.telegram}</span>
+              <Send className="w-4 h-4 text-sky-500 dark:text-sky-400 transition-transform duration-300 group-hover:scale-110 group-active:scale-90" />
             </a>
 
             <a

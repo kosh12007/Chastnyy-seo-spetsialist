@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
           {/* Колонка 1: Эксперт и статус */}
           <div className="space-y-4">
             <Link to="/" className="text-xl font-bold font-heading text-slate-900 dark:text-white block">
-              Сергей Кошелев
+              {contactInfo.expertName}
             </Link>
             <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed font-sans">
               Частное поисковое продвижение коммерческих сайтов и интернет-магазинов в Яндекс и Google. Персональное ведение проектов без конвейера.
@@ -25,10 +25,10 @@ export const Footer: React.FC = () => {
             <div className="p-3.5 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-obsidian-800 text-[11px] font-mono text-slate-600 dark:text-slate-300 space-y-1 shadow-sm">
               <div className="text-slate-900 dark:text-white font-medium flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-growth-600 dark:text-growth-400" />
-                <span>Самозанятый (НПД)</span>
+                <span>{contactInfo.legalStatusShort}</span>
               </div>
-              <div className="text-slate-700 dark:text-slate-300">Павлов Михаил Васильевич</div>
-              <div className="text-slate-500 dark:text-slate-400">ИНН: 772839102948 • г. Москва</div>
+              <div className="text-slate-700 dark:text-slate-300">{contactInfo.expertFullName}</div>
+              <div className="text-slate-500 dark:text-slate-400">ИНН: {contactInfo.inn} • {contactInfo.address}</div>
               <div className="text-slate-500 dark:text-slate-400 pt-1 border-t border-slate-200 dark:border-obsidian-800 text-[10px]">
                 Официальный договор, чеки ФНС «Мой налог», без НДС
               </div>
@@ -42,7 +42,8 @@ export const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2.5 text-xs font-sans">
               <li><Link to="/uslugi/seo-prodvizhenie/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Комплексное SEO-продвижение</Link></li>
-              <li><Link to="/uslugi/seo-audit/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Технический SEO-аудит</Link></li>
+              <li><Link to="/uslugi/seo-audit/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Комплексный SEO-аудит сайта</Link></li>
+              <li><Link to="/uslugi/seo-audit/tehnicheskij/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Технический SEO-аудит за 24 часа</Link></li>
               <li><Link to="/uslugi/yandex/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Продвижение в Яндекс</Link></li>
               <li><Link to="/uslugi/google/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Продвижение в Google</Link></li>
               <li><Link to="/uslugi/content-marketing/" className="hover:text-growth-600 dark:hover:text-growth-400 transition-colors">Коммерческий контент-маркетинг</Link></li>
@@ -106,7 +107,7 @@ export const Footer: React.FC = () => {
 
         {/* Нижняя полоса с 152-ФЗ и реквизитами */}
         <div className="mt-12 pt-8 border-t border-slate-200 dark:border-obsidian-850 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
-          <p>© {new Date().getFullYear()} Сергей Кошелев. Частное продвижение сайтов.</p>
+          <p>© {new Date().getFullYear()} {contactInfo.expertName}. Частное продвижение сайтов.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center">
             <Link to="/rekvizity/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               Реквизиты и условия для юрлиц

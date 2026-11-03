@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { getSeoData, generateOgMeta, generateBreadcrumbSchema } from '@utils/helpers';
 import { SITE_URL, SITE_NAME } from '@utils/constants';
+import { contactInfo } from '@data/contactInfo';
 import { AnimatedSection } from '@components/common';
 import { CasesSection, CTASection } from '@components/sections';
 import { cases } from '@data/index';
@@ -41,7 +42,7 @@ export const CasesPage: React.FC = () => {
 
   // 1. Детальная страница конкретного кейса (/portfolio/:slug/)
   if (currentCase) {
-    const pageTitle = `${currentCase.title} — Кейс SEO-продвижения | Сергей Кошелев`;
+    const pageTitle = `${currentCase.title} — Кейс SEO-продвижения | ${contactInfo.expertName}`;
     const pageDesc = `${currentCase.niche} (${currentCase.region}): ${currentCase.result}`;
     const canonicalUrl = `${SITE_URL}/portfolio/${currentCase.slug}/`;
     const cleanImage = currentCase.image?.trim();
